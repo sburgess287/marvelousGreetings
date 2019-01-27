@@ -9,7 +9,8 @@ var MOCK_CARD = {
       "bodyText": "With Great Power Comes Great Responsibility",
       "character": "Spider-Gwen",
       "characterImage": "Image placeholder",
-      "signature": "Love, Joe"  // added this because a card should have a signature
+      "signature": "Love, Joe",  // added this because a card should have a signature
+      "publishedAt": 1470011976609 // added in case I want to order cards chronologically per account
 
     }
   ]
@@ -34,6 +35,7 @@ function displayDefaultCard(data) {
   }
 }
 
+// function to get the card and display the card
 function getAndDisplayCard() {
   getDefaultCard(displayDefaultCard);
 }
