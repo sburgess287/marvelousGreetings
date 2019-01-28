@@ -1,21 +1,28 @@
 // create mock data of json array
 // default card
 
-var MOCK_CARD = {
+const MOCK_CARD = {
   "cardStructure" : [
     {
       "id": "1234567", 
       "headline": "Happy Valentine's Day", 
       "bodyText": "With Great Power Comes Great Responsibility",
-      "character": "Spider-Gwen",
-      "characterImage": "Image placeholder",
-      "signature": "Love, Joe",  // added this because a card should have a signature
-      "publishedAt": 1470011976609 // added in case I want to order cards chronologically per account
+      "character": "Spider-Gwen", // references the array I need to write
+     // "signature": "Love, Joe",  // added this because a card should have a signature
+     // "publishedAt": 1470011976609 // added in case I want to order cards chronologically per account
 
     }
   ]
 }
 
+
+// for each card reference the object in the array with character/image
+const CHARACTER_LIST = [
+  {
+    "character": "Spider-Gwen", 
+    "characterImage": "Image placeholder",
+  }
+]
 
 // create function that returns mock data (to verify update in browser)
 function getDefaultCard(callbackFn) {
