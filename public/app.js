@@ -6,11 +6,11 @@ const MOCK_CARD = {
     {
       "id": "1234567", 
       "headline": "Happy Valentine's Day", 
-      "bodyText": "With Great Power Comes Great Responsibility",
-      "character": "Spider-Gwen", // references the array I need to write
+      "bodyText": "Always Bring the Thunder",
+      "character": "Storm", // references the array I need to write
      // "signature": "Love, Joe",  // added this because a card should have a signature
      // "publishedAt": 1470011976609 // added in case I want to order cards chronologically per account
-
+      "image": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg"
     }
   ]
 }
@@ -19,8 +19,8 @@ const MOCK_CARD = {
 // for each card reference the object in the array with character/image
 const CHARACTER_LIST = [
   {
-    "character": "Spider-Gwen", 
-    "characterImage": "Image placeholder",
+    "character": "Storm", 
+    "characterImage": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg",
   }
 ]
 
@@ -36,8 +36,8 @@ function displayDefaultCard(data) {
     $('body').append(
       '<p>' + data.cardStructure[index].headline + '</p>',
       '<p>' + data.cardStructure[index].bodyText+ '</p>',
-      '<p>' + data.cardStructure[index].characterImage + '</p>',
-      '<p>' + data.cardStructure[index].signature + '</p>'
+      '<p>' + data.cardStructure[index].character + '</p>',
+      `<img src="`+ data.cardStructure[index].image + `">`
     )
   }
 }
