@@ -37,7 +37,8 @@ function displayDefaultCard(data) {
       '<p>' + data.cardStructure[index].headline + '</p>',
       '<p>' + data.cardStructure[index].bodyText+ '</p>',
       '<p>' + data.cardStructure[index].character + '</p>',
-      `<img src="`+ data.cardStructure[index].image + `">`
+      `<img src="`+ data.cardStructure[index].image + `">`, 
+      '<p>"Data provided by Marvel. © 2014 Marvel"</p>'  // link to image, later
     )
   }
 }
