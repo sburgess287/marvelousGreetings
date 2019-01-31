@@ -37,10 +37,12 @@ function displayDefaultCard(data) {
       $('.contentContainer').append(
       '<p>' + data.cardStructure[index].headline + '</p>',
       '<p>' + data.cardStructure[index].bodyText+ '</p>',
-      '<p>' + data.cardStructure[index].character + '</p>',
+      
       `<img src="`+ data.cardStructure[index].image + `">`, 
+      '<p>Inspired by ' + data.cardStructure[index].character + '</p>',
       '<p>"Data provided by Marvel. © 2014 Marvel"</p>',  // link to image, later
-      '<button class="test">Click to screenshot</button>' // add option to ignore this css class
+      // added data-html2canvas-ignore="true" so button is not copied in screenshot
+      '<button class="test" data-html2canvas-ignore="true">Click to screenshot</button>'
 
     )
   }
@@ -51,28 +53,15 @@ function getAndDisplayCard() {
   getDefaultCard(displayDefaultCard);
 }
 
-// function to take screenshot using library
-// function takeScreenShot() {
-//   // html2canvas(document.querySelector(".contentContainer")).then(canvas => {
-//   //   document.body.appendChild(canvas)
-//   // });
-//     html2canvas(document.body).then(function(canvas) {
-//     // Export the canvas to its data URI representation
-//     var base64image = canvas.toDataURL("image/png");
-
-//     // Open the image in a new window
-//     window.open(base64image , "_blank");
-// });
-
-// }
-
-
-// function to get called on page load: display default card: BOOM!!!
+// function to get called on page load: display default card
 $(function() {
   getAndDisplayCard();
+
+
   $('.contentContainer').on('click', '.test', event => {
-    //takeScreenShot();
+    
     console.log('button clicked');
+   
     // interesting because when using this function below with 
     // allowTaint: true option set, error appears that tainted canvases cannot be exported
     // html2canvas(document.body).then(function(canvas) {
