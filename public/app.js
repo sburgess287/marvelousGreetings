@@ -19,7 +19,7 @@ const MOCK_CARD = {
 // for each card reference the object in the array with character/image
 const CHARACTER_LIST = [
   {
-    "character": "Storm", 
+    "characterName": "Storm", 
     "characterImage": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg",
   }
 ]
