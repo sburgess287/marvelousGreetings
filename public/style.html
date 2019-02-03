@@ -13,30 +13,57 @@
         <h1 class="css-h1">Marvel-ous Greetings</h1>
     </header>
     <main role="main" aria-live="polite">
-      <div class="contentContainer css-container" id="screenshot-card" >
-      </div>
+      
       <!-- Page 1: fill in card -->
-      <div class="contentContainer css-container">
-
+      <div class="css-container"></div>
+      <!-- <div class="contentContainer css-container"> -->
+        <h2 class="css-h2" >Create Marvel-Ous greetings by filling in headline, message, and choosing a character!</h2>
+        <img class="css-header-image" src="http://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55/landscape_medium.jpg">
+          <form class="css-form">
+              
+              <label for="headline">Headline</label>
+              <input id="headline" type="text" name="textfield" class="css-headline-field" required>
+              <label for="message">Message</label>
+              <input id="message" type="text" name="textfield" class="css-message-field" required>
+              <fieldset>
+                <legend>Select Character</legend>
+                <div class="css-radio">
+                  <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
+                  <label for="ironman">Iron Man</label>
+                  <input type="radio" name="character" id="storm" value="Storm">
+                  <label for="storm">Storm</label>
+                  <input type="radio" name="character" id="wolverine" value="Wolverine">
+                  <label for="wolverine">Wolverine</label>
+                  <input type="radio" name="character" id="jean-grey" value="JeanGrey">
+                  <label for="jean-grey">Jean Grey</label>
+                  <input type="radio" name="character" id="thor" value="Thor">
+                  <label for="thor">Thor</label>
+                </div>
+              </fieldset>
+            <input type="submit" class="test css-submit" data-html2canvas-ignore="true" value="Save">     
+          </form>
       </div> 
 
       <!-- Page 2: save/preview card -->
-      <div class="contentContainer css-container">
-        
+      <div class="contentContainer css-container" id="screenshot-card">
+        <h2>Page 2 save/preview card</h2>
       </div>
 
       <!-- Page 3: Saved Cards List -->
-      <div class="contentContainer css-container">
+      <div class="css-container">
+        <h2>Page 3 Saved cards list</h2>
         
       </div>
 
       <!-- Login -->
-      <div class="contentContainer css-container">
+      <div class="css-container">
+        <h2>Login Page</h2>
         
       </div>
 
       <!-- Sign Up -->
-      <div class="contentContainer css-container">
+      <div class="css-container">
+          <h2>Sign Up Page</h2>
         
       </div>
       

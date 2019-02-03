@@ -12,17 +12,51 @@ body {
   margin: auto;
 }
 
+.css-header-image{
+  margin: auto;
+  display: inherit;
+}
+
 .css-container {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  min-height: 600px;
+  /* min-height: 600px; */
   width:100%;
 }
 
-.css-h1 {
+.css-h1, .css-h2 {
   text-align: center;
 }
+
+.css-headline-field, .css-message-field {
+  width: 100%;
+  padding: .75em;
+  
+}
+
+.css-form {
+  width: 80%;
+  margin: auto;
+}
+
+.css-radio{
+  display: inline;
+  
+}
+
+.css-submit {
+  margin: auto;
+  display: inline-block;
+  width:100%;
+  margin-top: 2em;
+}
+
+/* input {
+  width: 75%;
+  display: inline-block;
+  
+} */
 
 p {
   font-size: 16pt;

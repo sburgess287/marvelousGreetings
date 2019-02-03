@@ -10,7 +10,8 @@ const MOCK_CARD = {
       "character": "Storm", // references the array I need to write
      // "signature": "Love, Joe",  // added this because a card should have a signature
      // "publishedAt": 1470011976609 // added in case I want to order cards chronologically per account
-      "image": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg"
+      // "image": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg"
+      "image": "http://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55/portrait_uncanny.jpg"
     }
   ]
 }
