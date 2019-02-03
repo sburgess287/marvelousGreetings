@@ -40,14 +40,21 @@ body {
   margin: auto;
 }
 
+/* Experimenting with radio button and form alignment
 .css-radio {
-  /* display: inline; */
+  display: inline; */ 
   /* float: left;
-  clear: none; */
+  clear: none;
   
 }
 
-
+/* Proof of concept for style.html, can be removed later */
+.savedCardContainer {
+  border: solid green 10px;
+  margin: auto;
+  width:100%;
+  
+}
 .css-submit {
   margin: auto;
   display: inline-block;
