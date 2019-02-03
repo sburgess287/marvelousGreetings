@@ -46,10 +46,16 @@ body {
   /* float: left;
   clear: none;
   
+}*/
+
+.css-preview-content-container {
+  border: solid rgb(160, 142, 160) 10px;
+  margin: auto;
+  width:100%;
 }
 
 /* Proof of concept for style.html, can be removed later */
-.savedCardContainer {
+.css-saved-card-container {
   border: solid green 10px;
   margin: auto;
   width:100%;
