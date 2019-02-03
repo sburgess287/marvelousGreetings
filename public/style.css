@@ -1,4 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  margin: auto;
+}
+
+.css-header {
+  width:100%;
+  margin: auto;
+}
+
+.css-container {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  min-height: 600px;
+  width:100%;
+}
+
+.css-h1 {
+  text-align: center;
+}
+
+
 canvas {
   border: solid green 20px;
-  
+  margin: auto;
+  width:100%;
+}
+
+.css-footer {
+  text-align: center;
 }
