@@ -77,6 +77,10 @@
       font-size: 24pt;
   }
 
+  .css-submit {
+    background: lightgray;
+  }
+
   canvas {
     border: solid green 2px;
     padding-left: 0;
@@ -86,6 +90,10 @@
     display: block;
 
   }
+  
+  /* .css-radio label {
+    display: block;
+  } */
 
   /*h2 {
     padding-top: 0;

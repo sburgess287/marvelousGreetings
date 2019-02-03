@@ -40,10 +40,13 @@ body {
   margin: auto;
 }
 
-.css-radio{
-  display: inline;
+.css-radio {
+  /* display: inline; */
+  /* float: left;
+  clear: none; */
   
 }
+
 
 .css-submit {
   margin: auto;

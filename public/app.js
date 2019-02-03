@@ -35,7 +35,7 @@ function getDefaultCard(callbackFn) {
 function displayDefaultCard(data) {
   for (index in data.cardStructure) { // adapt for showing list of cards? currently only 1 item in array
     // $('body').append(
-      $('.contentContainer').append(
+      $('.contentContainer').append(  // I will have to change this to update html inside .contentContainer
       '<p>' + data.cardStructure[index].headline + '</p>',
       '<p>' + data.cardStructure[index].bodyText+ '</p>',
       
