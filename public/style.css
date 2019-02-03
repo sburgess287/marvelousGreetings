@@ -24,6 +24,9 @@ body {
   text-align: center;
 }
 
+p {
+  font-size: 16pt;
+}
 
 canvas {
   border: solid green 20px;
