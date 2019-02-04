@@ -11,7 +11,7 @@ const MOCK_CARD = {
      // "signature": "Love, Joe",  // added this because a card should have a signature
      // "publishedAt": 1470011976609 // added in case I want to order cards chronologically per account
       // "image": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg"
-      "image": "http://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55/portrait_uncanny.jpg"
+     // "image": "http://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55/portrait_uncanny.jpg"
     }
   ]
 }
@@ -27,20 +27,24 @@ const CHARACTER_LIST = [
 
 // create function that returns mock data (to verify update in browser)
 function getDefaultCard(callbackFn) {
-  setTimeout(function(){ callbackFn(MOCK_CARD)}, 1);
+  setTimeout(function(){ callbackFn(MOCK_CARD.cardStructure)}, 1);
 }
 
-
+// change data to helpful word : characterArray
 // function to display default card
 function displayDefaultCard(data) {
-  for (index in data.cardStructure) { // adapt for showing list of cards? currently only 1 item in array
+  // put into own function for findCharacter()
+  for (index in data) { // adapt for showing list of cards? currently only 1 item in array
+    let character = CHARACTER_LIST.find(function(character) {
+      return character.characterName === data[index].character
+    });
     // $('body').append(
-      $('.contentContainer').append(  // I will have to change this to update html inside .contentContainer
-      '<p>' + data.cardStructure[index].headline + '</p>',
-      '<p>' + data.cardStructure[index].bodyText+ '</p>',
+    $('.contentContainer').append(  // I will have to change this to update html inside .contentContainer
+      '<p>' + data[index].headline + '</p>',
+      '<p>' + data[index].bodyText+ '</p>',
       
-      `<img src="`+ data.cardStructure[index].image + `">`, 
-      '<p>Inspired by ' + data.cardStructure[index].character + '</p>',
+      `<img src="`+ character.characterImage + `">`, 
+      '<p>Inspired by ' + character.characterName + '</p>',
       '<p>"Data provided by Marvel. © 2014 Marvel"</p>',  // link to image, later
       // added data-html2canvas-ignore="true" so button is not copied in screenshot
       '<button class="test" data-html2canvas-ignore="true">Click to screenshot</button>'

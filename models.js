@@ -7,5 +7,5 @@ mongoose.Promise = global.Promise;
 const cardSchema = mongoose.Schema({
     headline: { type: String, required: true},
     bodyText: { type: String, required: true},
-    character: { type: String, required: true} // ?
+    character: { type: String, required: true}
 })
