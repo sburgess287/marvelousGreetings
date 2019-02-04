@@ -41,6 +41,13 @@ body {
   font-size: 14pt;
 }
 
+/* Fix this for larger viewports, currently taking up entire width */
+.css-create-card-button, .css-saved-card-button, 
+.css-delete-card-button, .css-all-saved-cards-button {
+  display: inline;
+  margin: auto;
+  font-size: 14pt;
+}
 
 /* Experimenting with radio button and form alignment
 .css-radio {

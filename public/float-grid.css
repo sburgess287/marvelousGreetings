@@ -84,6 +84,12 @@
     
   }
 
+.css-create-card-button, .css-saved-card-button, 
+.css-delete-card-button {
+  width: 80%;
+  margin: auto;
+  font-size: 14pt;
+}
   .css-go-to-signup-form {
     max-width: 80%;
   }
