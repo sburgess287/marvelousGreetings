@@ -35,10 +35,12 @@ body {
   
 }
 
-.css-form {
+.css-form, .css-login-form, .css-signup-form {
   width: 80%;
   margin: auto;
+  font-size: 14pt;
 }
+
 
 /* Experimenting with radio button and form alignment
 .css-radio {
@@ -51,7 +53,7 @@ body {
 .css-preview-content-container {
   border: solid rgb(160, 142, 160) 10px;
   margin: auto;
-  width:100%;
+  width: 100%;
 }
 
 /* Proof of concept for style.html, can be removed later */
@@ -61,11 +63,13 @@ body {
   width:100%;
   
 }
-.css-submit {
+
+.css-submit, .css-go-to-signup-form {
   margin: auto;
   display: inline-block;
   width:100%;
   margin-top: 2em;
+  font-size: 16pt;
 }
 
 .css-all-saved-cards-button {
@@ -74,6 +78,7 @@ body {
   /* margin: auto; */
   margin: auto;
   display: inherit;
+  font-size: 16pt;
 
 }
 /* input {

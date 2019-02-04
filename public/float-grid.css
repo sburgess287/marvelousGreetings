@@ -78,10 +78,15 @@
   }
 
   .css-submit, .css-saved-card-button, .css-delete-card-button, 
-  .css-create-card-button, .css-all-saved-cards-button {
+  .css-create-card-button, .css-all-saved-cards-button, 
+  .css-go-to-signup-form {
     background: rgb(218, 228, 222);
+    
   }
 
+  .css-go-to-signup-form {
+    max-width: 80%;
+  }
   canvas {
     border: solid green 2px;
     padding-left: 0;
@@ -98,6 +103,15 @@
   
   }
   
+  .css-login-input {
+    width: 80%;
+  }
+  
+  .css-pw-input {
+    width: 70%;
+  }  
+
+
   /* .css-radio label {
     display: block;
   } */
