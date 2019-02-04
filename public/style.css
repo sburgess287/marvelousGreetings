@@ -68,11 +68,26 @@ body {
   margin-top: 2em;
 }
 
+.css-all-saved-cards-button {
+  width: 80%;
+  /* display: block; */
+  /* margin: auto; */
+  margin: auto;
+  display: inherit;
+
+}
 /* input {
   width: 75%;
   display: inline-block;
   
 } */
+
+.css-previous-saved-card-container {
+  border: solid rgb(187, 143, 187) 10px;
+  max-width: 50%;
+  margin: auto;
+
+}
 
 p {
   font-size: 16pt;

@@ -43,11 +43,15 @@
             <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
             <input type="submit" class="test css-submit" data-html2canvas-ignore="true" value="Save">     
           </form>
+          <!-- Move to top of page?  -->
+         <button class="css-all-saved-cards-button">Go to Saved Cards</button> 
       </div> 
       <!-- Page 2: Preview/Edit card -->
       <div class="newContentContainer css-container">
         <h2>Page 2: Card Preview</h2>
         <h3>Click to Edit or save</h3>
+        <!-- Move to top of page?  -->
+        <button class="css-all-saved-cards-button">Go to Saved Cards</button>
         <!-- Note: the below image will be a canvas element -->
         <div class="css-preview-content-container">
           <p>Preview: Headline Here!</p>
@@ -62,8 +66,10 @@
 
       <!-- Page 3: save/download card () -->
       <div class="newContentContainer css-container">
-        <h2>Page 2: Download your card.</h2>
+        <h2>Page 3: Download your card.</h2>
         <h3>Right-click and save on the image</h3>
+        <!-- Move to top of page?  -->
+        <button class="css-all-saved-cards-button">Go to Saved Cards</button>
         <!-- Note: the below image will be a canvas element -->
         <div class="css-saved-card-container">
           <p>Saved Headline Here!</p>
@@ -82,7 +88,30 @@
 
       <!-- Page 4: Saved Cards List -->
       <div class="newContentContainer css-container">
-        <h2>Page 3 Saved cards list</h2>
+        <h2>Page 4: Saved Cards</h2>
+        <button class="css-create-card-button">Go to Create Page</button>
+        <p></p>
+        <div class="css-previous-saved-card-container">
+          <h3>Headline1</h3>
+          <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+          <button class="css-saved-card-button">Go to Card</button>
+          <button class="css-delete-card-button">Delete</button>
+          
+        </div>
+        <div class="css-previous-saved-card-container">
+          <h3>Headline2</h3>
+          <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+          <button class="css-saved-card-button">Go to Card</button>
+          <button class="css-delete-card-button">Delete</button>
+          
+        </div>
+        <div class="css-previous-saved-card-container">
+            <h3>Headline3</h3>
+            <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+            <button class="css-saved-card-button">Go to Card</button>
+            <button class="css-delete-card-button">Delete</button>
+            
+          </div>
 
         
       </div>
@@ -102,7 +131,7 @@
     </main>
     <footer class="css-footer" role="contentinfo">
         <p>Developed by Sarah Burgess</p>
-        <p>"Data provided by Marvel. © 2014 Marvel"</p>
+        <!-- <p>"Data provided by Marvel. © 2014 Marvel"</p> -->
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
