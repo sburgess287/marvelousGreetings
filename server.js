@@ -4,9 +4,22 @@ const express = require('express');
 const morgan = require('morgan');
 
 const app = express();
+app.use(express.json());
+
+// add routers here: ie const cardRouter = require("./cards/router.js")
 
 app.use(express.static('public'));
 app.use(morgan('common'));
+
+app.get('/', (req, res) => {
+  res.sendFile('/index.html');
+})
+
+app.use('/cards', cardsRouter);
+
+
+
+// let server; 
 
 // function runServer() {
 //   const port = process.env.PORT || 8080;

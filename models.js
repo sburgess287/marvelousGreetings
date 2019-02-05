@@ -9,3 +9,7 @@ const cardSchema = mongoose.Schema({
     bodyText: { type: String, required: true},
     character: { type: String, required: true}
 })
+
+const Cards = mongoose.model("card", cardSchema);
+
+module.exports = { Cards };
