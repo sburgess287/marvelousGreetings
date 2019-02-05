@@ -12,7 +12,7 @@ const { Cards } = require('./cards/router');
 app.use(express.static('public'));
 app.use(morgan('common'));
 
-// Tried to create test data but this failed
+// Tried to create test data but this failed; skip and go to db modeling
 // Cards.create("Hello", "This is BodyText", "Wolverine");
 
 
