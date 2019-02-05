@@ -15,7 +15,8 @@ app.get('/', (req, res) => {
   res.sendFile('/index.html');
 })
 
-app.use('/cards', cardsRouter);
+// not sure if this line is correct
+// app.use('/cards', cardsRouter);
 
 
 
