@@ -2,6 +2,9 @@
 
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
 
 const app = express();
 app.use(express.json());
@@ -20,10 +23,28 @@ app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
 })
 
+
 // GET endpoint for cards
-// When I hit this endpoint in postman, says undefined, I will come back to this
-// app.get("/cards", (req, res) => {
-//   res.json(Cards.get());
+app.get("/cards", (req, res) => {
+  Cards.find()
+  .then(cards => {
+    res.json(cards.map(card => {
+      return {
+        id: body.id,
+        headline: body.headline,
+        character: body.character
+      }
+    }))
+  })
+  //.then(card => res.json(card.serialize()))
+  .catch(err => {
+    console.err(err);
+    res.status(500).json({ error: 'something went wrong'});
+  })
+})
+
+// app.get('/cards', (req, res) => {
+//   res.json(Card.get());
 // })
 
 // POST endpoint for cards
@@ -43,12 +64,17 @@ app.post('/cards', (req, res) => {
     character: req.body.character
   })
   .then(card => res.status(201).json(card.serialize()))
+  // .then(card => res.status(201))
   .catch(err => {
     console.error(err);
     res.status(500).json({ error: `Internal Server Error`});
   })
 })
 
+// catch all endpoint if client makes request to non-existent endpoint
+app.use("*", function(req, res){
+  res.status(404).json({ message: "Hello Sarah, happy to see you! Also, Not found"})
+})
 
 let server; 
 
@@ -57,7 +83,7 @@ function runServer() {
   return new Promise((resolve, reject) => {
     server = app 
       .listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
+        console.log(`Your app is listening on port ${port} WOO`);
         resolve(server);
       })
       .on("error", err => {
