@@ -10,6 +10,17 @@ const cardSchema = mongoose.Schema({
     character: { type: String, required: true}
 })
 
-const Cards = mongoose.model("card", cardSchema);
 
+// Card instance method to create card object to return
+cardSchema.methods.serialize = function() {
+    return {
+        id: this.id, 
+        headline: this.headline, 
+        bodyText: this.bodyText, 
+        character: this.character
+    }
+}
+
+const Cards = mongoose.model("card", cardSchema);
+  
 module.exports = { Cards };
