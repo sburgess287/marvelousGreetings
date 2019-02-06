@@ -30,9 +30,10 @@ app.get("/cards", (req, res) => {
   .then(cards => {
     res.json(cards.map(card => {
       return {
-        id: body.id,
-        headline: body.headline,
-        character: body.character
+        id: req.body.id,
+        headline: req.body.headline,
+        bodyText: req.body.bodyText,
+        character: req.body.character
       }
     }))
   })
