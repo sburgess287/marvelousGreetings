@@ -89,7 +89,7 @@ function runServer() {
         console.log(`Your app is listening on port ${port} WOO`);
         resolve(server);
       })
-      .on("error", err => {
+      .on('error', err => {
         reject(err);
       });
   });
