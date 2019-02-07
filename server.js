@@ -10,14 +10,10 @@ const app = express();
 app.use(express.json());
 
 const { PORT, DATABASE_URL } = require('./config');
-const { Cards } = require('./models.js');
+const { Card } = require('./models');
 
 app.use(express.static('public'));
 app.use(morgan('common'));
-
-// Tried to create test data but this failed; skip and go to db modeling
-// Cards.create("Hello", "This is BodyText", "Wolverine");
-
 
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
@@ -26,26 +22,30 @@ app.get('/', (req, res) => {
 
 // GET endpoint for cards
 app.get("/cards", (req, res) => {
-  Cards.find()
-  .then(cards => {
-    res.json(cards.map(card => {
-      return {
-        id: req.body.id,
-        headline: req.body.headline,
-        bodyText: req.body.bodyText,
-        character: req.body.character
-      }
-    }))
+  console.log("hello 1st line of get endpoint");
+  Card
+    .find()
+    .then(cards => {
+      console.log("got past cards.find line of get endpoint: does not get here");
+      res.json(cards.map(card => card.serialize()))
+    // res.json(cards.map(card => {
+    //   return {
+    //     id: req.body.id,
+    //     headline: req.body.headline,
+    //     bodyText: req.body.bodyText,
+    //     character: req.body.character
+    //   }
+    // }))
   })
-  //.then(card => res.json(card.serialize()))
-  .catch(err => {
-    console.err(err);
-    res.status(500).json({ error: 'something went wrong'});
-  })
+    .catch(err => {
+      console.err(err);
+      res.status(500).json({ error: 'something went wrong'});
+    })
 })
 
+// experiment, remove later
 // app.get('/cards', (req, res) => {
-//   res.json(Card.get());
+//   res.send("hello");
 // })
 
 // POST endpoint for cards
@@ -59,17 +59,19 @@ app.post('/cards', (req, res) => {
       return res.status(400).send(message);
     }
   }
-  return Cards.create({
-    headline: req.body.headline,
-    bodyText: req.body.bodyText, 
-    character: req.body.character
-  })
-  .then(card => res.status(201).json(card.serialize()))
-  // .then(card => res.status(201))
-  .catch(err => {
-    console.error(err);
-    res.status(500).json({ error: `Internal Server Error`});
-  })
+  console.log('past required fields');
+  Card
+    .create({
+      headline: req.body.headline,
+      bodyText: req.body.bodyText, 
+      character: req.body.character
+    })
+    .then(card => res.status(201).json(card.serialize()))
+// .then(card => res.status(201))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: `Internal Server Error`});
+    })
 })
 
 // catch all endpoint if client makes request to non-existent endpoint

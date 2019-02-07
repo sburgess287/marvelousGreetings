@@ -1,6 +1,6 @@
 "use strict"
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 // Schema for cards
@@ -14,13 +14,13 @@ const cardSchema = mongoose.Schema({
 // Card instance method to create card object to return
 cardSchema.methods.serialize = function() {
     return {
-        id: this.id, 
+        id: this._id, 
         headline: this.headline, 
         bodyText: this.bodyText, 
         character: this.character
     }
 }
 
-const Cards = mongoose.model("card", cardSchema);
+const Card = mongoose.model("card", cardSchema);
   
-module.exports = { Cards };
+module.exports = { Card };
