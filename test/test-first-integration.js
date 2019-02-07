@@ -3,21 +3,21 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
-//const {app, runServer, closeServer } = require('../server');
-const { app } = require('../server');
+const {app, runServer, closeServer } = require('../server');
+const { TEST_DATABASE_URL } = require('../config');
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
 describe('First Example test', function() {
-  // before(function() {
-  //   return runServer();
-  // })
+  before(function() {
+    return runServer(TEST_DATABASE_URL);
+  })
 
-  // after(function() {
-  //   return closeServer();
-  // })
+  after(function() {
+    return closeServer();
+  })
 
   it('page exists', function() {
     return chai
