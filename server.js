@@ -43,7 +43,7 @@ app.get("/cards", (req, res) => {
     })
 })
 
-// experiment, remove later
+// remove later
 // app.get('/cards', (req, res) => {
 //   res.send("hello");
 // })
