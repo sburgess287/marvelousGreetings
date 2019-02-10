@@ -25,6 +25,32 @@ const CHARACTER_LIST = [
   }
 ]
 
+// Function to Post Card to Api
+function postCardToApi(headlineInput, messageInput, characterInput, callback){
+  const params = {
+    headline : headlineInput, 
+    bodyText : messageInput, 
+    character : characterInput
+  }
+  $.ajax(
+    {
+      url : '/cards',
+      data : params, 
+      method : 'POST', 
+      headers : {
+        "application-type": "json"
+      }, 
+      success : callback,
+      error : function (a,b,c) {
+        console.log("Error message: ", c);
+      }
+
+    }
+  )
+
+}
+
+
 // create function that returns mock data (to verify update in browser)
 function getDefaultCard(callbackFn) {
   setTimeout(function(){ callbackFn(MOCK_CARD.cardStructure)}, 1);
@@ -38,7 +64,7 @@ function generateCardFormString() {
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Page 1: Fill in the headline, message, and choose a character!</h2>
       <img class="css-header-image" src="http://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55/landscape_medium.jpg" alt="Iron Man">
-        <form class="css-form">
+        <form class="card-submit-form css-form">
             
             <label for="headline">Headline</label>
             <input id="headline" type="text" name="textfield" class="css-headline-field" required>
@@ -60,7 +86,7 @@ function generateCardFormString() {
               </div>
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
-          <input type="submit" class="test css-submit" data-html2canvas-ignore="true" value="Save">     
+          <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Save">     
         </form>
         <!-- Move to top of page?  -->
       <button class="css-all-saved-cards-button">Go to Saved Cards</button> 
@@ -73,6 +99,13 @@ function generateCardFormString() {
 function getAndDisplayCardForm() {
   const cardForm = generateCardFormString();
   $('.contentContainer').html(cardForm);
+
+}
+
+// need to add function to go to card preview
+// Function to show the new card submitted on the create card form
+function createNewCard(){
+  
 
 }
 
@@ -110,6 +143,19 @@ $(function() {
 
   // Display Card Form Page
   getAndDisplayCardForm();
+
+  // Listen for form submit on '.card-submit-form' and pass to POST API endpoint
+  $('.contentContainer').on('submit', '.card-submit-form', event => {
+    console.log('card submit form success!');
+    const headlineInput = $('#headline').val();
+    const messageInput = $('#message').val();
+    const characterInput = $('input[name="character"]:checked').val();
+    console.log(headlineInput);
+    console.log(messageInput);
+    console.log(characterInput);
+    postCardToApi(headlineInput, messageInput, characterInput, createNewCard()) // need to add function to go to card preview
+
+  })
 
 
   // // Proof of concept for Card Preview
