@@ -74,7 +74,7 @@ app.post('/cards', (req, res) => {
 
 // catch all endpoint if client makes request to non-existent endpoint
 app.use("*", function(req, res){
-  res.status(404).json({ message: "Hello Sarah, happy to see you! Also, Not found"})
+  res.status(404).json({ message: "Page not found"})
 })
 
 let server; 
