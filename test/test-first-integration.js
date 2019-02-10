@@ -84,6 +84,7 @@ describe('Card API resource', function() {
     return closeServer();
   })
 
+  // Test GET endpoint
   describe('GET endpoint', function(){
     it('should return all existing cards', function() {
       // strategy get all cards
@@ -138,5 +139,33 @@ describe('Card API resource', function() {
     })
   })
 
+  // Test POST endpoint
+  describe('POST endpoint', function() {
+    // Make a POST request with data
+    // prove the response object has correct keys
+    // verify ID is returned as well
+
+    it('should add a new Card', function() {
+      const newCard = {
+        headline: faker.lorem.words(),
+        bodyText: faker.lorem.text(),
+        character: faker.lorem.text(),
+      }
+
+      return chai.request(app)
+        .post('/cards')
+        .send(newCard)
+        .then(function(res) {
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys(
+            'id', 'headline', 'bodyText', 'character');
+          expect(res.body.headline).to.equal(newCard.headline);
+          expect(res.body.bodyText).to.equal(newCard.bodyText);
+          expect(res.body.character).to.equal(newCard.character);
+        })
+    })
+  })
 
 })

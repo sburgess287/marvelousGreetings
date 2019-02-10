@@ -59,7 +59,6 @@ app.post('/cards', (req, res) => {
       return res.status(400).send(message);
     }
   }
-  console.log('past required fields');
   Card
     .create({
       headline: req.body.headline,
@@ -67,7 +66,6 @@ app.post('/cards', (req, res) => {
       character: req.body.character
     })
     .then(card => res.status(201).json(card.serialize()))
-// .then(card => res.status(201))
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: `Internal Server Error`});
