@@ -26,7 +26,7 @@ app.get("/cards", (req, res) => {
   Card
     .find()
     .then(cards => {
-      console.log("got past cards.find line of get endpoint: does not get here");
+      console.log("got past cards.find line of get endpoint");
       res.json(cards.map(card => card.serialize()))
     // res.json(cards.map(card => {
     //   return {

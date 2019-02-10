@@ -66,3 +66,77 @@ describe('First Example test', function() {
 
 
 })
+
+describe('Card API resource', function() {
+  before(function() {
+    return runServer(TEST_DATABASE_URL);
+  })
+
+  beforeEach(function(){
+    return seedCardData();
+  })
+
+  afterEach(function() {
+    return tearDownDb();
+  })
+
+  after(function() {
+    return closeServer();
+  })
+
+  describe('GET endpoint', function(){
+    it('should return all existing cards', function() {
+      // strategy get all cards
+      // verify status and data type
+      // prove number cards is equal to number in db
+      let res;
+      return chai.request(app)
+        .get('/cards')
+        .then(function(_res) {
+          res = _res;
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.lengthOf.at.least(1);
+          return Card.count();
+      })
+      .then(function(count) {
+        expect(res.body).to.have.lengthOf(count);
+      });
+    });
+
+    it('should return cards with correct fields', function() {
+      
+      // Inspect response for correct keys
+      let resCard;
+      return chai.request(app)
+        .get('/cards')
+        .then(function(res) {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('array');
+          expect(res.body).to.have.lengthOf.at.least(1);
+
+          res.body.forEach(function(card) {
+            expect(card).to.be.a('object');
+            expect(card).to.include.keys(
+              'id', 'headline', 'bodyText', 'character');
+          })
+
+          // set resCard to 1st card in array
+          resCard = res.body[0];
+          // console.log(resCard);
+          return Card.findById(resCard.id);
+        })
+        // verify the id of the response is same as 1st in database
+        .then(function(card) {
+          //console.log(resCard.headline);
+          //console.log(card.headline);
+          expect(resCard.id).to.equal(card.id);
+          expect(resCard.headline).to.equal(card.headline);
+          expect(resCard.bodyText).to.equal(card.bodyText);
+          expect(resCard.character).to.equal(card.character);
+        })
+    })
+  })
+
+
+})
