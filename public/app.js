@@ -22,7 +22,13 @@ const CHARACTER_LIST = [
   {
     "characterName": "Storm", 
     "characterImage": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg",
-  }
+  },
+  {
+    "characterName": "Jean Grey", 
+    "characterImage": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg",
+  },
+
+
 ]
 
 // Function to Post Card to Api
@@ -34,11 +40,11 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
   }
   $.ajax(
     {
-      url : '/cards', // is this endpoint correct?
-      data : params, 
+      url : '/cards',
+      data : JSON.stringify(params), 
       method : 'POST', 
       headers : {
-        "application-type": "json"
+        "content-type": "application/json"
       }, 
       success : callback,
       error : function (a,b,c) {
@@ -79,7 +85,7 @@ function generateCardFormString() {
                 <label for="storm">Storm</label>
                 <input type="radio" name="character" id="wolverine" value="Wolverine">
                 <label for="wolverine">Wolverine</label>
-                <input type="radio" name="character" id="jean-grey" value="JeanGrey">
+                <input type="radio" name="character" id="jean-grey" value="Jean Grey">
                 <label for="jean-grey">Jean Grey</label>
                 <input type="radio" name="character" id="thor" value="Thor">
                 <label for="thor">Thor</label>
@@ -106,12 +112,13 @@ function getAndDisplayCardForm() {
 // Function to show the new card submitted on the create card form
 function displayNewCard(data){
 
-  for (index in data) { // adapt for showing list of cards? currently only 1 item in array
+   // adapt for showing list of cards? currently only 1 item in array
     let character = CHARACTER_LIST.find(function(character) {
-      return character.characterName === data[index].character
+      return character.characterName === data.character
     });
-  }
-  
+  // rename data to cardResponse...
+  // 
+  // make data-attribute
   $('.contentContainer').html(
     
     `
@@ -122,10 +129,10 @@ function displayNewCard(data){
        <!-- Move to top of page?  -->
        <button class="css-all-saved-cards-button">Go to Saved Cards</button>
        <!-- Note: the below image will be a canvas element -->
-       <div class="css-preview-content-container">
-         <p>${body.headline}</p>
-         <p>${body.bodyText}</p> 
-         <img src=${body.character}> 
+       <div class="css-preview-content-container card" data-card-id="${data.id}">
+         <p>${data.headline}</p>
+         <p>${data.bodyText}</p> 
+         <img src=${character.characterImage}> 
          <img src="http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg" alt="Iron Man">
          <p>"Data provided by Marvel. © 2014 Marvel"</p>
          <!-- Should this be a button? -->
@@ -179,6 +186,7 @@ $(function() {
 
   // Listen for form submit on '.card-submit-form' and pass to POST API endpoint
   $('.contentContainer').on('submit', '.card-submit-form', event => {
+    event.preventDefault();
     console.log('card submit form success!');
     const headlineInput = $('#headline').val();
     const messageInput = $('#message').val();
@@ -187,7 +195,7 @@ $(function() {
     console.log(messageInput);
     console.log(characterInput);
     // post not making it to database and also not showing up on displayNewCard()
-    postCardToApi(headlineInput, messageInput, characterInput, displayNewCard())
+    postCardToApi(headlineInput, messageInput, characterInput, displayNewCard)
 
   })
 
