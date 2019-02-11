@@ -34,7 +34,7 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
   }
   $.ajax(
     {
-      url : '/cards',
+      url : '/cards', // is this endpoint correct?
       data : params, 
       method : 'POST', 
       headers : {
@@ -96,20 +96,53 @@ function generateCardFormString() {
 
 }
 
+// Function to display create card form (1st page of app)
 function getAndDisplayCardForm() {
   const cardForm = generateCardFormString();
   $('.contentContainer').html(cardForm);
 
 }
 
-// need to add function to go to card preview
 // Function to show the new card submitted on the create card form
-function createNewCard(){
+function displayNewCard(data){
+
+  for (index in data) { // adapt for showing list of cards? currently only 1 item in array
+    let character = CHARACTER_LIST.find(function(character) {
+      return character.characterName === data[index].character
+    });
+  }
   
+  $('.contentContainer').html(
+    
+    `
+     <!-- Page 2: Preview/Edit card -->
+     <div class="newContentContainer css-container">
+       <h2>Page 2: Card Preview</h2>
+       <h3>Click to Edit or save</h3>
+       <!-- Move to top of page?  -->
+       <button class="css-all-saved-cards-button">Go to Saved Cards</button>
+       <!-- Note: the below image will be a canvas element -->
+       <div class="css-preview-content-container">
+         <p>${body.headline}</p>
+         <p>${body.bodyText}</p> 
+         <img src=${body.character}> 
+         <img src="http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg" alt="Iron Man">
+         <p>"Data provided by Marvel. © 2014 Marvel"</p>
+         <!-- Should this be a button? -->
+         <input type="submit" class="test css-submit" data-html2canvas-ignore="true" value="Save">
+ 
+       </div>
+     </div>
+     
+ 
+   `
+  )  
+  
+    
 
 }
 
-// PROOF of concept, most likely this will be the Preview card after refactor
+// PROOF of concept, most likely this will be the Display of Card after refactor
 // change data to helpful word : characterArray
 // function to display default card
 function displayDefaultCard(data) {
@@ -153,7 +186,8 @@ $(function() {
     console.log(headlineInput);
     console.log(messageInput);
     console.log(characterInput);
-    postCardToApi(headlineInput, messageInput, characterInput, createNewCard()) // need to add function to go to card preview
+    // post not making it to database and also not showing up on displayNewCard()
+    postCardToApi(headlineInput, messageInput, characterInput, displayNewCard())
 
   })
 
