@@ -21,11 +21,23 @@ const MOCK_CARD = {
 const CHARACTER_LIST = [
   {
     "characterName": "Storm", 
-    "characterImage": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg",
+    "characterImage": "../images/storm_portrait_uncanny.jpg",
   },
   {
     "characterName": "Jean Grey", 
-    "characterImage": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg",
+    "characterImage": "../images/jean_grey_portrait_uncanny.jpg",
+  },
+  {
+    "characterName": "Iron Man", 
+    "characterImage": "../images/iron_man_portrait_uncanny.jpg",
+  },
+  {
+    "characterName": "Thor", 
+    "characterImage": "../images/thor_portrait_uncanny.jpg",
+  },
+  {
+    "characterName": "Wolverine", 
+    "characterImage": "../images/wolverine_portrait_uncanny.jpg",
   },
 
 
@@ -79,16 +91,26 @@ function generateCardFormString() {
             <fieldset>
               <legend>Select Character</legend>
               <div class="css-radio">
-                <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
-                <label for="ironman">Iron Man</label>
-                <input type="radio" name="character" id="storm" value="Storm">
-                <label for="storm">Storm</label>
-                <input type="radio" name="character" id="wolverine" value="Wolverine">
-                <label for="wolverine">Wolverine</label>
-                <input type="radio" name="character" id="jean-grey" value="Jean Grey">
-                <label for="jean-grey">Jean Grey</label>
-                <input type="radio" name="character" id="thor" value="Thor">
-                <label for="thor">Thor</label>
+                <div>
+                  <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
+                  <label for="ironman">Iron Man</label>
+                </div>
+                <div>
+                  <input type="radio" name="character" id="storm" value="Storm">
+                  <label for="storm">Storm</label>
+                </div>
+                <div>
+                  <input type="radio" name="character" id="wolverine" value="Wolverine">
+                  <label for="wolverine">Wolverine</label>
+                </div>
+                <div>
+                  <input type="radio" name="character" id="jean-grey" value="Jean Grey">
+                  <label for="jean-grey">Jean Grey</label>
+                </div>
+                <div>
+                  <input type="radio" name="character" id="thor" value="Thor">
+                  <label for="thor">Thor</label>
+                </div>
               </div>
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
@@ -132,7 +154,7 @@ function displayNewCard(data){
        <div class="css-preview-content-container card" data-card-id="${data.id}">
          <p>${data.headline}</p>
          <p>${data.bodyText}</p> 
-         <img src=${character.characterImage}> 
+         <img src=${character.characterImage} alt="image of ${character}> 
          <img src="http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg" alt="Iron Man">
          <p>"Data provided by Marvel. © 2014 Marvel"</p>
          <!-- Should this be a button? -->
