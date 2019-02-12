@@ -151,10 +151,10 @@ function displayNewCard(data){
        <!-- Move to top of page?  -->
        <button class="css-all-saved-cards-button">Go to Saved Cards</button>
        <!-- Note: the below image will be a canvas element -->
-       <div class="css-preview-content-container card" data-card-id="${data.id}">
+       <div class="css-preview-content-container card" id="screenshot-card" data-card-id="${data.id}">
          <p>${data.headline}</p>
          <p>${data.bodyText}</p> 
-         <img src=${character.characterImage} alt="image of ${character}> 
+         <img src=${character.characterImage} alt="image of ${data.character}> 
          <img src="http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg" alt="Iron Man">
          <p>"Data provided by Marvel. © 2014 Marvel"</p>
          <!-- Should this be a button? -->
@@ -221,30 +221,32 @@ $(function() {
 
   })
 
+  // Listen for form submit on 
+
 
   // // Proof of concept for Card Preview
   // getAndDisplayCard();
-
-  // $('.contentContainer').on('click', '.test', event => {
+  // Note: rename "test" to something more descriptive
+  $('.contentContainer').on('click', '.test', event => {
     
-  //   console.log('button clicked');
+    console.log('button clicked');
+   // note: right click option not available on phone size
    
-  //   // interesting because when using this function below with: remove 122-130 if I don't need it
-  //   // allowTaint: true option set, error appears that tainted canvases cannot be exported
-  //   // html2canvas(document.body).then(function(canvas) {
-  //   //       // Export the canvas to its data URI representation
-  //   //       var base64image = canvas.toDataURL("image/png");
+    // interesting because when using this function below with: remove 122-130 if I don't need it
+    // allowTaint: true option set, error appears that tainted canvases cannot be exported
+    // html2canvas(document.body).then(function(canvas) {
+    //       // Export the canvas to its data URI representation
+    //       var base64image = canvas.toDataURL("image/png");
       
-  //   //       // Open the image in a new window
-  //   //       window.open(base64image , "_blank");
-  //   //   });
+    //       // Open the image in a new window
+    //       window.open(base64image , "_blank");
+    //   });
 
-  //   let x = this.getElementById('screenshot-card');
-  //   html2canvas(x, { allowTaint: true}).then(canvas => {
-  //     document.body.appendChild(canvas);
-     
-  //   })
-  // })
+    let x = this.getElementById('screenshot-card');
+    html2canvas(x, { allowTaint: true}).then(canvas => {
+      document.body.appendChild(canvas);
+    })
+  })
   // end proof of concept
 
   
