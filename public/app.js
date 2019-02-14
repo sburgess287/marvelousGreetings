@@ -230,24 +230,20 @@ $(function() {
   $('.contentContainer').on('click', '.test', event => {
     
     console.log('button clicked');
-   // note: right click option not available on phone size
-   
-    // interesting because when using this function below with: remove 122-130 if I don't need it
-    // allowTaint: true option set, error appears that tainted canvases cannot be exported
-    // html2canvas(document.body).then(function(canvas) {
-    //       // Export the canvas to its data URI representation
-    //       var base64image = canvas.toDataURL("image/png");
-      
-    //       // Open the image in a new window
-    //       window.open(base64image , "_blank");
-    //   });
-
+  
+    // Move this into a separate function; this downloads the card to user machine on preview screen
     let x = this.getElementById('screenshot-card');
     html2canvas(x, { allowTaint: true}).then(canvas => {
-      document.body.appendChild(canvas);
+      // document.body.appendChild(canvas);
+      var a = document.createElement('a');
+      a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+      a.download = 'somefilename.jpg';
+      a.click();
+
     })
+
   })
-  // end proof of concept
+  
 
   
 });
