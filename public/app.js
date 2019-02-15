@@ -230,6 +230,8 @@ function generateCardListPageString() {
       <div class="css-previous-saved-card-container">
         <h3>Headline2</h3>
         <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+        <!-- update css selector and do I need an edit card for the project requirements? -->
+        <button class="css-saved-card-button">Edit card?</button>
         <button class="css-saved-card-button">Go to Card</button>
         <button class="css-delete-card-button">Delete</button>
         
