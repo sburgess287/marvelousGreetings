@@ -114,7 +114,7 @@ function generateCardFormString() {
               </div>
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
-          <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Save">     
+          <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Go to Card Preview">     
         </form>
         <!-- Move to top of page?  -->
       <button class="css-all-saved-cards-button">Go to Saved Cards</button> 
@@ -124,14 +124,14 @@ function generateCardFormString() {
 
 }
 
-// Function to display create card form (1st page of app)
+// Function to display Create card form (Page 1)
 function getAndDisplayCardForm() {
   const cardForm = generateCardFormString();
   $('.contentContainer').html(cardForm);
 
 }
 
-// Function to show the new card submitted on the create card form
+// Function to show Card Preview (Page 2)
 function displayNewCard(data){
 
    // adapt for showing list of cards? currently only 1 item in array
@@ -147,28 +147,22 @@ function displayNewCard(data){
      <!-- Page 2: Preview/Edit card -->
      <div class="newContentContainer css-container">
        <h2>Page 2: Card Preview</h2>
-       <h3>Click to Edit or save</h3>
+       <!--<h3>Click to Edit or save (not sure I need this text)</h3> -->
        <!-- Move to top of page?  -->
        <button class="css-all-saved-cards-button">Go to Saved Cards</button>
        <!-- Note: the below image will be a canvas element -->
        <div class="css-preview-content-container card" id="screenshot-card" data-card-id="${data.id}">
          <p>${data.headline}</p>
          <p>${data.bodyText}</p> 
-         <img src=${character.characterImage} alt="image of ${data.character}> 
-         <img src="http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg" alt="Iron Man">
+         <img src=${character.characterImage} alt="image of ${data.character}>
          <p>"Data provided by Marvel. © 2014 Marvel"</p>
          <!-- Should this be a button? -->
-         <input type="submit" class="test css-submit" data-html2canvas-ignore="true" value="Save">
+         <input type="submit" class="test download-card-btn css-submit" data-html2canvas-ignore="true" value="Save">
  
        </div>
      </div>
-     
- 
    `
-  )  
-  
-    
-
+  )
 }
 
 // PROOF of concept, most likely this will be the Display of Card after refactor
@@ -200,7 +194,65 @@ function getAndDisplayCard() {
   getDefaultCard(displayDefaultCard);
 }
 
-// function to get called on page load: display default card
+// function to convert html image to canvas and download it (come back to this)
+// function convertCardAndDownload(data) {
+//   // Move this into a separate function; this downloads the card to user machine on preview screen
+//   let x = this.getElementById('screenshot-card');
+//   // html2canvas(x, { allowTaint: true}).then(canvas => {
+//   html2canvas(x).then(canvas => {
+//     // document.body.appendChild(canvas);
+//     var a = document.createElement('a');
+//     a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+//     // a.download = 'somefilename.jpg';
+//     a.download = `${data.headline}`;  
+//     a.click();
+
+//   })
+
+// }
+
+// Function returns hmtl for generating card List (currently hardcoded, 
+// needs to be updated with list of cards by ID and also connected to user)
+function generateCardListPageString() {
+  return `
+    <!-- Page 4: Saved Cards List -->
+    <div class="newContentContainer css-container">
+      <h2>Page 4: Saved Cards</h2>
+      <button class="css-create-card-button">Go to Create Page</button>
+      <p></p>
+      <div class="css-previous-saved-card-container">
+        <h3>Headline1</h3>
+        <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+        <button class="css-saved-card-button">Go to Card</button>
+        <button class="css-delete-card-button">Delete</button>
+        
+      </div>
+      <div class="css-previous-saved-card-container">
+        <h3>Headline2</h3>
+        <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+        <button class="css-saved-card-button">Go to Card</button>
+        <button class="css-delete-card-button">Delete</button>
+        
+      </div>
+      <div class="css-previous-saved-card-container">
+          <h3>Headline3</h3>
+          <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+          <button class="css-saved-card-button">Go to Card</button>
+          <button class="css-delete-card-button">Delete</button>
+          
+      </div> 
+    </div>
+
+  `
+}
+
+function getAndDisplayCardList() {
+  const cardList = generateCardListPageString();
+  $('.contentContainer').html(cardList);
+  
+
+}
+
 $(function() {
 
   // Display Card Form Page
@@ -221,28 +273,30 @@ $(function() {
 
   })
 
-  // Listen for form submit on 
 
-
-  // // Proof of concept for Card Preview
-  // getAndDisplayCard();
-  // Note: rename "test" to something more descriptive
-  $('.contentContainer').on('click', '.test', event => {
-    
-    console.log('button clicked');
-  
+  // Listen for click on '.download-card-btn' then convert html image to canvas and download it
+  $('.contentContainer').on('click', '.download-card-btn', event => { 
+    console.log('download card button clicked');
     // Move this into a separate function; this downloads the card to user machine on preview screen
+    // convertCardAndDownload();
     let x = this.getElementById('screenshot-card');
-    html2canvas(x, { allowTaint: true}).then(canvas => {
+    // html2canvas(x, { allowTaint: true}).then(canvas => {
+    html2canvas(x).then(canvas => {
       // document.body.appendChild(canvas);
       var a = document.createElement('a');
       a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
       a.download = 'somefilename.jpg';
+      // a.download = `${data.headline}`; update the filename later, 
       a.click();
 
     })
-
+      .then(() => {
+        // After downloading card, navigates to Cards List page (Page 3)
+        getAndDisplayCardList();
+      })
   })
+
+  
   
 
   
