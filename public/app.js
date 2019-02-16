@@ -208,6 +208,17 @@ function getAndDisplayCard() {
 
 // }
 
+
+// Function which returns no cards found on Card list page
+// Note: add this to style.html and update here as well
+function generateNoCardsFoundPageString() {
+  return `
+    <div>
+      <h2>No Cards Found! More buttons needed!!!</h2>
+    </div>
+  `
+}
+
 // Function returns hmtl for generating card List (currently hardcoded, 
 // needs to be updated with list of cards by ID and also connected to user)
 function generateCardListPageString() {
@@ -245,12 +256,21 @@ function generateCardListPageString() {
   `
 }
 
-function getAndDisplayCardList() {
+function getAndDisplayCardList(cardResponse) {
+  // const cardArrayofObjects = JSON.parse(cardResponse);
+  // console.log(cardArrayofObjects);
 
   // Handle no cards/results found (do I have that designed in style.html?)
+  // error says property length of undefined; may need to transform the string => json object?
+  // if (cardResponse.collection.items.length === 0) {
+  //   const noCardsFoundPage = generateNoCardsFoundPageString();
+  //   $('.contentContainer').html(noCardsFoundPage);
+  // } else {
+  // }
 
   const cardList = generateCardListPageString();
   $('.contentContainer').html(cardList);
+
   
 
 }
