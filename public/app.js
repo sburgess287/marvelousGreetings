@@ -68,6 +68,32 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
 
 }
 
+// Function to Get all cards from API
+function getCardListFromApi(data, callback) {
+  console.log('getCardListFromAPI success');
+  // const params = {
+  //   headline : headlineInput, 
+  //   bodyText : messageInput, 
+  //   character : characterInput, 
+    
+  // }
+  $.ajax(
+    {
+      url : '/cards',
+      data : data, 
+      method : 'GET', 
+      headers : {
+        "content-type": "application/json"
+      }, 
+      success : callback,
+      error : function(a,b,c) {
+        console.log("Error message: ", c);
+      }
+
+    }
+  )
+}
+
 
 // create function that returns mock data (to verify update in browser)
 function getDefaultCard(callbackFn) {
@@ -117,7 +143,7 @@ function generateCardFormString() {
           <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Go to Card Preview">     
         </form>
         <!-- Move to top of page?  -->
-      <button class="css-all-saved-cards-button">Go to Saved Cards</button> 
+      <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button> 
     </div> 
 
   `;
@@ -256,7 +282,7 @@ function generateCardListPageString() {
   `
 }
 
-function getAndDisplayCardList(cardResponse) {
+function getAndDisplayCardList(data) {
   // const cardArrayofObjects = JSON.parse(cardResponse);
   // console.log(cardArrayofObjects);
 
@@ -267,6 +293,8 @@ function getAndDisplayCardList(cardResponse) {
   //   $('.contentContainer').html(noCardsFoundPage);
   // } else {
   // }
+  getCardListFromApi(data);
+  console.log(data);
 
   const cardList = generateCardListPageString();
   $('.contentContainer').html(cardList);
@@ -279,6 +307,12 @@ $(function() {
 
   // Display Card Form Page
   getAndDisplayCardForm();
+
+  // Listen for Go to Saved cards button
+  $('.contentContainer').on('click', '.js-saved-cards-button', event => {
+    console.log('go to saved cards button clicked');
+    getAndDisplayCardList();
+  })
 
   // Listen for form submit on '.card-submit-form' and pass to POST API endpoint
   $('.contentContainer').on('submit', '.card-submit-form', event => {
