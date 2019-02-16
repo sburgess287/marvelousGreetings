@@ -132,15 +132,12 @@ function getAndDisplayCardForm() {
 }
 
 // Function to show Card Preview (Page 2)
-function displayNewCard(data){
+function displayNewCard(cardResponse){
 
-   // adapt for showing list of cards? currently only 1 item in array
-    let character = CHARACTER_LIST.find(function(character) {
-      return character.characterName === data.character
-    });
-  // rename data to cardResponse...
-  // 
-  // make data-attribute
+  let character = CHARACTER_LIST.find(function(character) {
+    return character.characterName === cardResponse.character
+  });
+  
   $('.contentContainer').html(
     
     `
@@ -151,10 +148,10 @@ function displayNewCard(data){
        <!-- Move to top of page?  -->
        <button class="css-all-saved-cards-button">Go to Saved Cards</button>
        <!-- Note: the below image will be a canvas element -->
-       <div class="css-preview-content-container card" id="screenshot-card" data-card-id="${data.id}">
-         <p>${data.headline}</p>
-         <p>${data.bodyText}</p> 
-         <img src=${character.characterImage} alt="image of ${data.character}>
+       <div class="css-preview-content-container card" id="screenshot-card" data-card-id="${cardResponse.id}">
+         <p>${cardResponse.headline}</p>
+         <p>${cardResponse.bodyText}</p> 
+         <img src=${character.characterImage} alt="image of ${cardResponse.character}>
          <p>"Data provided by Marvel. © 2014 Marvel"</p>
          <!-- Should this be a button? -->
          <input type="submit" class="test download-card-btn css-submit" data-html2canvas-ignore="true" value="Save">
@@ -249,6 +246,9 @@ function generateCardListPageString() {
 }
 
 function getAndDisplayCardList() {
+
+  // Handle no cards/results found (do I have that designed in style.html?)
+
   const cardList = generateCardListPageString();
   $('.contentContainer').html(cardList);
   
