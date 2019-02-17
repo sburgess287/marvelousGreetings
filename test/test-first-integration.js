@@ -168,4 +168,28 @@ describe('Card API resource', function() {
     })
   })
 
+  // Test DELETE endpoint
+  describe('DELETE endpoint', function() {
+    // Get card by id
+    // Make DELETE request for that id
+    // assert response code
+    // Verify post with that ID is no longer in the DB
+    it('deletes a card by id', function() {
+      let savedcard;
+      return Card
+        .findOne()
+        .then(function(_savedcard) {
+          savedcard = _savedcard;
+          return chai.request(app).delete(`/cards/${savedcard.id}`);
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+          return Card.findById(savedcard.id);
+        })
+        .then(function(_savedcard) {
+          expect(_savedcard).to.be.null;
+        })
+    })
+  })
+
 })
