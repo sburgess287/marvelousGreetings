@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 })
 
 
-// GET endpoint for cards
+// GET endpoint for all cards
 app.get("/cards", (req, res) => {
   console.log("hello 1st line of get endpoint");
   Card
@@ -48,6 +48,9 @@ app.get("/cards", (req, res) => {
 //   res.send("hello");
 // })
 
+// GET endpoint for retrieving specific card
+
+
 // POST endpoint for cards
 app.post('/cards', (req, res) => {
   const requiredFields = ["headline", "bodyText", "character"]
@@ -71,6 +74,20 @@ app.post('/cards', (req, res) => {
       res.status(500).json({ error: `Internal Server Error`});
     })
 })
+
+// DELETE endpoint for deleting specific card
+app.delete('/cards/:id', (req, res) => {
+  Card
+    .findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).json({ message: 'success'});
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: '500 server error' });
+    })
+})
+
 
 // catch all endpoint if client makes request to non-existent endpoint
 app.use("*", function(req, res){
