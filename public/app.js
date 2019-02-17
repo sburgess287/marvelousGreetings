@@ -280,18 +280,53 @@ function getAndDisplayCardList(cardListResponse) {
   
   // console.log(cardArrayofObjects);
 
-  // Handle no cards/results found (do I have that designed in style.html?)
-  // error says property length of undefined
-  // if (cardResponse.collection.items.length === 0) {
-  //   const noCardsFoundPage = generateNoCardsFoundPageString();
-  //   $('.contentContainer').html(noCardsFoundPage);
-  // } else {
-  // }
+  
   
   console.log(cardListResponse);
+  console.log(cardListResponse.length);
 
-  const cardList = generateCardListPageString();
-  $('.contentContainer').html(cardList);
+
+  // Handle no cards/results found
+  if (cardListResponse.length === 0) {
+    const noCardsFoundPage = generateNoCardsFoundPageString();
+    $('.contentContainer').html(noCardsFoundPage);
+  } else {
+    const cardList = []
+    const resultArrayLength = cardListResponse.length;
+
+    for (let i = 0; i < resultArrayLength; i++) {
+      cardList.push(
+        ` 
+        <div class="css-previous-saved-card-container">
+        <h3>${cardListResponse[i].headline}</h3>
+        <!-- change this to first 30 characters -->
+        <p>${cardListResponse[i].bodyText}</p>
+        <!-- update css selector and do I need an edit card for the project requirements? -->
+        <button class="css-saved-card-button">Edit card?</button>
+        <button class="css-saved-card-button">Go to Card</button>
+        <button class="css-delete-card-button">Delete</button>
+        
+      </div>
+
+        `
+      )
+    }
+  
+    const cardListPage = generateCardListPageString();
+    $('.contentContainer').html(
+      `
+      <!-- Page 4: Saved Cards List -->
+      <div class="newContentContainer css-container">
+        <h2>Page 4: Saved Cards</h2>
+        <button class="css-create-card-button">Go to Create Page</button>
+        <p>Do I need more buttons?</p>
+          ${cardList.join('')}
+      </div>
+
+      `
+    );
+  }
+
 
   
 
@@ -302,8 +337,8 @@ $(function() {
   // Display Card Form Page
   getAndDisplayCardForm();
 
-  // Listen for Go to Saved cards button. 
-  //Then get the card list from the GET endpoint, display the Card list.
+  // Listen for click of "Go to Saved Cards" button. 
+  // Then get the card list from the GET endpoint, display the Card list.
   $('.contentContainer').on('click', '.js-saved-cards-button', event => {
     console.log('go to saved cards button clicked');
     getCardListFromApi(getAndDisplayCardList)
