@@ -314,7 +314,7 @@ function getAndDisplayCardList(cardListResponse) {
       <!-- Page 4: Saved Cards List -->
       <div class="newContentContainer css-container">
         <h2>Page 4: Saved Cards</h2>
-        <button class="css-create-card-button">Go to Create Page</button>
+        <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
         <p>Do I need more buttons?</p>
           ${cardList.join('')}
       </div>
@@ -377,6 +377,12 @@ $(function() {
         // After downloading card, navigates to Cards List page (Page 3)
         getAndDisplayCardList();
       })
+  })
+
+  // Listen for click on '.create-card-btn' and load Create page
+  $('.contentContainer').on('click', '.js-create-card-btn', event => {
+    console.log('Go to create page button clicked');
+    getAndDisplayCardForm();
   })
 
   
