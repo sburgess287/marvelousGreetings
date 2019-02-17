@@ -79,13 +79,15 @@
 
   .css-submit, .css-saved-card-button, .css-delete-card-button, 
   .css-create-card-button, .css-all-saved-cards-button, 
-  .css-go-to-signup-form {
+  .css-go-to-signup-form,.css-edit-card-button, 
+  .css-view-card-button {
     background: rgb(218, 228, 222);
     
   }
 
 .css-create-card-button, .css-saved-card-button, 
-.css-delete-card-button {
+.css-delete-card-button,.css-edit-card-button, 
+.css-view-card-button {
   width: 80%;
   margin: auto;
   font-size: 14pt;

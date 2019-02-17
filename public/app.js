@@ -70,7 +70,7 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
 
 // Function to Get all cards from API
 function getCardListFromApi(callback) {
-  console.log('getCardListFromAPI success');
+  console.log('getCardListFromAPI ran');
 
   $.ajax(
     {
@@ -79,6 +79,25 @@ function getCardListFromApi(callback) {
       headers : {
         "content-type": "application/json"
       }, 
+      success : callback,
+      error : function(a,b,c) {
+        console.log("Error message: ", c);
+      }
+    }
+  )
+}
+
+// Function to Delete card by id from API
+function deleteCardById() {
+  console.log('deleteCardbyID ran');
+
+  $.ajax(
+    {
+      url: 'cards/:id',
+      method : 'DELETE',
+      headers : {
+        "content-type": "application/json"
+      },
       success : callback,
       error : function(a,b,c) {
         console.log("Error message: ", c);
@@ -233,48 +252,48 @@ function getAndDisplayCard() {
 function generateNoCardsFoundPageString() {
   return `
     <div>
-      <h2>No Cards Found! More buttons needed!!!</h2>
+      <h2>No Cards Found! Update this page!!!</h2>
     </div>
   `
 }
 
-// Note: could delete this function because the card list is dynamically generated.
-// Function returns hmtl for generating card List (currently hardcoded, 
-// needs to be updated with list of cards by ID and also connected to user)
-function generateCardListPageString() {
-  return `
-    <!-- Page 4: Saved Cards List -->
-    <div class="newContentContainer css-container">
-      <h2>Page 4: Saved Cards</h2>
-      <button class="css-create-card-button">Go to Create Page</button>
-      <p></p>
-      <div class="css-previous-saved-card-container">
-        <h3>Headline1</h3>
-        <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
-        <button class="css-saved-card-button">Go to Card</button>
-        <button class="css-delete-card-button">Delete</button>
+// // Note: could delete this function because the card list is dynamically generated.
+// // Function returns hmtl for generating card List (currently hardcoded, 
+// // needs to be updated with list of cards by ID and also connected to user)
+// function generateCardListPageString() {
+//   return `
+//     <!-- Page 4: Saved Cards List -->
+//     <div class="newContentContainer css-container">
+//       <h2>Page 4: Saved Cards</h2>
+//       <button class="css-create-card-button">Go to Create Page</button>
+//       <p></p>
+//       <div class="css-previous-saved-card-container">
+//         <h3>Headline1</h3>
+//         <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+//         <button class="css-saved-card-button">Go to Card</button>
+//         <button class="css-delete-card-button">Delete</button>
         
-      </div>
-      <div class="css-previous-saved-card-container">
-        <h3>Headline2</h3>
-        <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
-        <!-- update css selector and do I need an edit card for the project requirements? -->
-        <button class="css-saved-card-button">Edit card?</button>
-        <button class="css-saved-card-button">Go to Card</button>
-        <button class="css-delete-card-button">Delete</button>
+//       </div>
+//       <div class="css-previous-saved-card-container">
+//         <h3>Headline2</h3>
+//         <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+//         <!-- update css selector and do I need an edit card for the project requirements? -->
+//         <button class="css-saved-card-button">Edit card?</button>
+//         <button class="css-saved-card-button">Go to Card</button>
+//         <button class="css-delete-card-button">Delete</button>
         
-      </div>
-      <div class="css-previous-saved-card-container">
-          <h3>Headline3</h3>
-          <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
-          <button class="css-saved-card-button">Go to Card</button>
-          <button class="css-delete-card-button">Delete</button>
+//       </div>
+//       <div class="css-previous-saved-card-container">
+//           <h3>Headline3</h3>
+//           <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
+//           <button class="css-saved-card-button">Go to Card</button>
+//           <button class="css-delete-card-button">Delete</button>
           
-      </div> 
-    </div>
+//       </div> 
+//     </div>
 
-  `
-}
+//   `
+// }
 
 function getAndDisplayCardList(cardListResponse) {
   
@@ -299,16 +318,15 @@ function getAndDisplayCardList(cardListResponse) {
         <!-- change this to first 30 characters -->
         <p>${cardListResponse[i].bodyText}</p>
         <!-- update css selector and do I need an edit card for the project requirements? -->
-        <button class="css-saved-card-button">Edit</button>
-        <button class="css-saved-card-button">View</button>
-        <button class="css-delete-card-button">Delete</button> 
+        <button class="css-edit-card-button">Edit</button>
+        <button class="css-view-card-button">View</button>
+        <button class="css-delete-card-button js-delete-card-button">Delete</button> 
       </div>
 
         `
       )
     }
   
-    const cardListPage = generateCardListPageString();
     $('.contentContainer').html(
       `
       <!-- Page 4: Saved Cards List -->
@@ -385,7 +403,11 @@ $(function() {
     getAndDisplayCardForm();
   })
 
-  
+  // Listen for click on '.js-delete-card-button and Delete card
+  $('.contentContainer').on('click', '.js-delete-card-button', event => {
+    console.log('Delete button clicked');
+    // deleteCardById();
+  })
   
 
   

@@ -43,7 +43,8 @@ body {
 
 /* Fix this for larger viewports, currently taking up entire width */
 .css-create-card-button, .css-saved-card-button, 
-.css-delete-card-button, .css-all-saved-cards-button {
+.css-delete-card-button, .css-all-saved-cards-button, 
+.css-edit-card-button, .css-view-card-button {
   display: inline;
   margin: auto;
   font-size: 14pt;
