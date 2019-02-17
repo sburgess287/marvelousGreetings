@@ -69,18 +69,12 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
 }
 
 // Function to Get all cards from API
-function getCardListFromApi(data, callback) {
+function getCardListFromApi(callback) {
   console.log('getCardListFromAPI success');
-  // const params = {
-  //   headline : headlineInput, 
-  //   bodyText : messageInput, 
-  //   character : characterInput, 
-    
-  // }
+
   $.ajax(
     {
-      url : '/cards',
-      data : data, 
+      url : '/cards', 
       method : 'GET', 
       headers : {
         "content-type": "application/json"
@@ -89,7 +83,6 @@ function getCardListFromApi(data, callback) {
       error : function(a,b,c) {
         console.log("Error message: ", c);
       }
-
     }
   )
 }
@@ -163,7 +156,7 @@ function displayNewCard(cardResponse){
   let character = CHARACTER_LIST.find(function(character) {
     return character.characterName === cardResponse.character
   });
-  
+  console.log(cardResponse);
   $('.contentContainer').html(
     
     `
@@ -172,7 +165,7 @@ function displayNewCard(cardResponse){
        <h2>Page 2: Card Preview</h2>
        <!--<h3>Click to Edit or save (not sure I need this text)</h3> -->
        <!-- Move to top of page?  -->
-       <button class="css-all-saved-cards-button">Go to Saved Cards</button>
+       <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
        <!-- Note: the below image will be a canvas element -->
        <div class="css-preview-content-container card" id="screenshot-card" data-card-id="${cardResponse.id}">
          <p>${cardResponse.headline}</p>
@@ -282,19 +275,20 @@ function generateCardListPageString() {
   `
 }
 
-function getAndDisplayCardList(data) {
-  // const cardArrayofObjects = JSON.parse(cardResponse);
+function getAndDisplayCardList(cardListResponse) {
+  // note the list of cards is appearing in the preview but the value of data is undefined
+  
   // console.log(cardArrayofObjects);
 
   // Handle no cards/results found (do I have that designed in style.html?)
-  // error says property length of undefined; may need to transform the string => json object?
+  // error says property length of undefined
   // if (cardResponse.collection.items.length === 0) {
   //   const noCardsFoundPage = generateNoCardsFoundPageString();
   //   $('.contentContainer').html(noCardsFoundPage);
   // } else {
   // }
-  getCardListFromApi(data);
-  console.log(data);
+  
+  console.log(cardListResponse);
 
   const cardList = generateCardListPageString();
   $('.contentContainer').html(cardList);
@@ -308,10 +302,12 @@ $(function() {
   // Display Card Form Page
   getAndDisplayCardForm();
 
-  // Listen for Go to Saved cards button
+  // Listen for Go to Saved cards button. 
+  //Then get the card list from the GET endpoint, display the Card list.
   $('.contentContainer').on('click', '.js-saved-cards-button', event => {
     console.log('go to saved cards button clicked');
-    getAndDisplayCardList();
+    getCardListFromApi(getAndDisplayCardList)
+    
   })
 
   // Listen for form submit on '.card-submit-form' and pass to POST API endpoint
