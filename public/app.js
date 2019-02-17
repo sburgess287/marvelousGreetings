@@ -238,6 +238,7 @@ function generateNoCardsFoundPageString() {
   `
 }
 
+// Note: could delete this function because the card list is dynamically generated.
 // Function returns hmtl for generating card List (currently hardcoded, 
 // needs to be updated with list of cards by ID and also connected to user)
 function generateCardListPageString() {
@@ -276,14 +277,10 @@ function generateCardListPageString() {
 }
 
 function getAndDisplayCardList(cardListResponse) {
-  // note the list of cards is appearing in the preview but the value of data is undefined
-  
-  // console.log(cardArrayofObjects);
-
-  
   
   console.log(cardListResponse);
   console.log(cardListResponse.length);
+  // Note: How should I defend against max number of cards to load?
 
 
   // Handle no cards/results found
@@ -302,10 +299,9 @@ function getAndDisplayCardList(cardListResponse) {
         <!-- change this to first 30 characters -->
         <p>${cardListResponse[i].bodyText}</p>
         <!-- update css selector and do I need an edit card for the project requirements? -->
-        <button class="css-saved-card-button">Edit card?</button>
-        <button class="css-saved-card-button">Go to Card</button>
-        <button class="css-delete-card-button">Delete</button>
-        
+        <button class="css-saved-card-button">Edit</button>
+        <button class="css-saved-card-button">View</button>
+        <button class="css-delete-card-button">Delete</button> 
       </div>
 
         `
