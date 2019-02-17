@@ -88,12 +88,16 @@ function getCardListFromApi(callback) {
 }
 
 // Function to Delete card by id from API
-function deleteCardById() {
+// need to pass in the id of the card to go to correct endpoint and delete
+// error says cardListResponse is undefined
+// attempted to get card ID value a different way
+function deleteCardById(callback, cardIdValue) {
   console.log('deleteCardbyID ran');
 
   $.ajax(
     {
-      url: 'cards/:id',
+      url: `cards/${cardIdValue}`,
+      // url: `cards/:id`,
       method : 'DELETE',
       headers : {
         "content-type": "application/json"
@@ -203,31 +207,31 @@ function displayNewCard(cardResponse){
 // PROOF of concept, most likely this will be the Display of Card after refactor
 // change data to helpful word : characterArray
 // function to display default card
-function displayDefaultCard(data) {
-  // put into own function for findCharacter()
-  for (index in data) { // adapt for showing list of cards? currently only 1 item in array
-    let character = CHARACTER_LIST.find(function(character) {
-      return character.characterName === data[index].character
-    });
-    // $('body').append(
-    $('.contentContainer').append(  // I will have to change this to update html inside .contentContainer
-      '<p>' + data[index].headline + '</p>',
-      '<p>' + data[index].bodyText+ '</p>',
+// function displayDefaultCard(data) {
+//   // put into own function for findCharacter()
+//   for (index in data) { // adapt for showing list of cards? currently only 1 item in array
+//     let character = CHARACTER_LIST.find(function(character) {
+//       return character.characterName === data[index].character
+//     });
+//     // $('body').append(
+//     $('.contentContainer').append(  // I will have to change this to update html inside .contentContainer
+//       '<p>' + data[index].headline + '</p>',
+//       '<p>' + data[index].bodyText+ '</p>',
       
-      `<img src="`+ character.characterImage + `">`, 
-      '<p>Inspired by ' + character.characterName + '</p>',
-      '<p>"Data provided by Marvel. © 2014 Marvel"</p>',  // link to image, later
-      // added data-html2canvas-ignore="true" so button is not copied in screenshot
-      '<button class="test" data-html2canvas-ignore="true">Click to screenshot</button>'
+//       `<img src="`+ character.characterImage + `">`, 
+//       '<p>Inspired by ' + character.characterName + '</p>',
+//       '<p>"Data provided by Marvel. © 2014 Marvel"</p>',  // link to image, later
+//       // added data-html2canvas-ignore="true" so button is not copied in screenshot
+//       '<button class="test" data-html2canvas-ignore="true">Click to screenshot</button>'
 
-    )
-  }
-}
+//     )
+//   }
+// }
 
-// function to get the card and display the card
-function getAndDisplayCard() {
-  getDefaultCard(displayDefaultCard);
-}
+// // function to get the card and display the card
+// function getAndDisplayCard() {
+//   getDefaultCard(displayDefaultCard);
+// }
 
 // function to convert html image to canvas and download it (come back to this)
 // function convertCardAndDownload(data) {
@@ -299,10 +303,12 @@ function getAndDisplayCardList(cardListResponse) {
   
   console.log(cardListResponse);
   console.log(cardListResponse.length);
+  
   // Note: How should I defend against max number of cards to load?
 
 
   // Handle no cards/results found
+  // Note need to update: data-card-id="${cardResponse[i].id}
   if (cardListResponse.length === 0) {
     const noCardsFoundPage = generateNoCardsFoundPageString();
     $('.contentContainer').html(noCardsFoundPage);
@@ -317,6 +323,9 @@ function getAndDisplayCardList(cardListResponse) {
         <h3>${cardListResponse[i].headline}</h3>
         <!-- change this to first 30 characters -->
         <p>${cardListResponse[i].bodyText}</p>
+        <p #card-id>${cardListResponse[i].id}</p>
+        <p>${cardListResponse[i].character}</p>
+        
         <!-- update css selector and do I need an edit card for the project requirements? -->
         <button class="css-edit-card-button">Edit</button>
         <button class="css-view-card-button">View</button>
@@ -341,8 +350,6 @@ function getAndDisplayCardList(cardListResponse) {
     );
   }
 
-
-  
 
 }
 
@@ -393,7 +400,7 @@ $(function() {
     })
       .then(() => {
         // After downloading card, navigates to Cards List page (Page 3)
-        getAndDisplayCardList();
+        getCardListFromApi(getAndDisplayCardList);
       })
   })
 
@@ -406,7 +413,10 @@ $(function() {
   // Listen for click on '.js-delete-card-button and Delete card
   $('.contentContainer').on('click', '.js-delete-card-button', event => {
     console.log('Delete button clicked');
-    // deleteCardById();
+    
+    const cardIdValue = $('#data-card-id-two').val();
+    console.log(cardIdValue);
+    deleteCardById(cardIdValue);
   })
   
 
