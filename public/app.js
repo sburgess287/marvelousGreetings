@@ -91,7 +91,7 @@ function getCardListFromApi(callback) {
 // need to pass in the id of the card to go to correct endpoint and delete
 // error says cardListResponse is undefined
 // attempted to get card ID value a different way
-function deleteCardById(callback, cardIdValue) {
+function deleteCardById(cardIdValue, callback) {
   console.log('deleteCardbyID ran');
 
   $.ajax(
@@ -174,7 +174,7 @@ function getAndDisplayCardForm() {
 }
 
 // Function to show Card Preview (Page 2)
-function displayNewCard(cardResponse){
+function displayCard(cardResponse){
 
   let character = CHARACTER_LIST.find(function(character) {
     return character.characterName === cardResponse.character
@@ -319,11 +319,11 @@ function getAndDisplayCardList(cardListResponse) {
     for (let i = 0; i < resultArrayLength; i++) {
       cardList.push(
         ` 
-        <div class="css-previous-saved-card-container">
+        <div class="css-previous-saved-card-container card-container" data-card-id="${cardListResponse[i].id}"'>
         <h3>${cardListResponse[i].headline}</h3>
         <!-- change this to first 30 characters -->
         <p>${cardListResponse[i].bodyText}</p>
-        <p #card-id>${cardListResponse[i].id}</p>
+        <p>${cardListResponse[i].id}</p>
         <p>${cardListResponse[i].character}</p>
         
         <!-- update css selector and do I need an edit card for the project requirements? -->
@@ -377,7 +377,7 @@ $(function() {
     console.log(messageInput);
     console.log(characterInput);
     // post not making it to database and also not showing up on displayNewCard()
-    postCardToApi(headlineInput, messageInput, characterInput, displayNewCard)
+    postCardToApi(headlineInput, messageInput, characterInput, displayCard)
 
   })
 
@@ -412,11 +412,14 @@ $(function() {
 
   // Listen for click on '.js-delete-card-button and Delete card
   $('.contentContainer').on('click', '.js-delete-card-button', event => {
+  
     console.log('Delete button clicked');
     
-    const cardIdValue = $('#data-card-id-two').val();
-    console.log(cardIdValue);
-    deleteCardById(cardIdValue);
+    const card = $(event.currentTarget).closest(".card-container")
+    
+    deleteCardById(card.data("card-id"), function(){
+      card.remove()
+    });
   })
   
 
