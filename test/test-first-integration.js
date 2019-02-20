@@ -192,4 +192,39 @@ describe('Card API resource', function() {
     })
   })
 
+  // Test PUT endpoint
+  describe('PUT endpoint', function () {
+    // get existing card from the db
+    // make PUT request to update the card
+    // verify the response
+    // verify the post in the db is updated correctly
+    it('should update the expected fields of the card', function() {
+      const updateCard = {
+        headline: "New Headline", 
+        bodyText: "Lorem Ipsem Dolores Fundee",
+        character: "Wolverine"
+      }
+
+      return Card
+        .findOne()
+        .then(function(card) {
+          updateCard.id = card.id;
+
+          // make request and inspect response and data
+          return chai.request(app)
+            .put(`/cards/${card.id}`)
+            .send(updateCard);
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+          return Card.findById(updateCard.id);
+        })
+        .then(function(card) {
+          expect(card.headline).to.equal(updateCard.headline);
+          expect(card.bodyText).to.equal(updateCard.bodyText);
+          expect(card.character).to.equal(updateCard.character);
+        })
+    })
+  })
+
 })

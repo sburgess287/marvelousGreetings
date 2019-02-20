@@ -88,6 +88,26 @@ app.delete('/cards/:id', (req, res) => {
     })
 })
 
+// PUT endpoint for editing specific card
+app.put('/cards/:id', (req, res) => {
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    res.status(400).json({
+      error: 'Request path id and request body id values must match'
+    })
+  }
+  const updated = {};
+  const updateableFields = ['headline', 'bodyText', 'character'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field]
+    }
+  })
+
+  Card
+    .findByIdAndUpdate(req.params.id, { $set: updated}, { new: true })
+    .then(updatedCard => res.status(204).end())
+    .catch(err => res.status(500).json({ message: '500 server error' }));
+});
 
 // catch all endpoint if client makes request to non-existent endpoint
 app.use("*", function(req, res){

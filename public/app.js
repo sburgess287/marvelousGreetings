@@ -327,8 +327,8 @@ function getAndDisplayCardList(cardListResponse) {
         <p>${cardListResponse[i].character}</p>
         
         <!-- update css selector and do I need an edit card for the project requirements? -->
-        <button class="css-edit-card-button">Edit</button>
-        <button class="css-view-card-button">View</button>
+        <button class="css-edit-card-button js-edit-card-button">Edit</button>
+        <button class="css-view-card-button js-preview-card-button">View</button>
         <button class="css-delete-card-button js-delete-card-button">Delete</button> 
       </div>
 
@@ -413,15 +413,21 @@ $(function() {
   // Listen for click on '.js-delete-card-button and Delete card
   $('.contentContainer').on('click', '.js-delete-card-button', event => {
   
-    console.log('Delete button clicked');
-    
+    console.log('Delete button clicked');  
     const card = $(event.currentTarget).closest(".card-container")
-    
     deleteCardById(card.data("card-id"), function(){
       card.remove()
     });
   })
   
+  // Listen for click on '.js-edit-card-button'
+  $('.contentContainer').on('click', '.js-edit-card-button', event => {
+    console.log('edit button clicked');
+    
+
+  })
+
+  // Listen for click on '.js-view-card-button'
 
   
 });
