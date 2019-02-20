@@ -92,7 +92,7 @@ app.delete('/cards/:id', (req, res) => {
 app.put('/cards/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
-      error: 'Request path id and request body id values must match'
+      error: `Request path id and request body id values must match req.params.id: ${req.params.id}, req.body.id: ${req.body.id}`
     })
   }
   const updated = {};

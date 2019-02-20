@@ -110,6 +110,28 @@ function deleteCardById(cardIdValue, callback) {
   )
 }
 
+// Function to Edit card by id from API
+// need to pass in the id of the card to go to correct endpoint and delete
+// error says cardListResponse is undefined
+// attempted to get card ID value a different way
+function editCardById(cardIdValue, callback) {
+  console.log('editCardbyID ran');
+
+  $.ajax(
+    {
+      url: `cards/${cardIdValue}`,
+      // url: `cards/:id`,
+      method : 'PUT',
+      headers : {
+        "content-type": "application/json"
+      },
+      success : callback,
+      error : function(a,b,c) {
+        console.log("Error message: ", c);
+      }
+    }
+  )
+}
 
 // create function that returns mock data (to verify update in browser)
 function getDefaultCard(callbackFn) {
@@ -353,6 +375,64 @@ function getAndDisplayCardList(cardListResponse) {
 
 }
 
+
+// Returns the html for generating the card form on Edit
+function generateCardFormStringEdit(card) {
+  return `
+    <!-- Page 1: fill in card -->
+    <div class="newContentContainer css-container"></div>
+    <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
+      <h2 class="css-h2" >Edit your card</h2>
+      
+        <form class="card-submit-form css-form">
+            
+            <label for="headline">Headline</label>
+            <input placeholder="foo" id="headline" type="text" name="textfield" class="css-headline-field" required>
+            <label for="message">Message</label>
+            <input placeholder="bar" id="message" type="text" name="textfield" class="css-message-field" required>
+            <fieldset>
+              <legend>Select Character</legend>
+              <div class="css-radio">
+                <div>
+                  <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
+                  <label for="ironman">Iron Man</label>
+                </div>
+                <div>
+                  <input type="radio" name="character" id="storm" value="Storm">
+                  <label for="storm">Storm</label>
+                </div>
+                <div>
+                  <input type="radio" name="character" id="wolverine" value="Wolverine">
+                  <label for="wolverine">Wolverine</label>
+                </div>
+                <div>
+                  <input type="radio" name="character" id="jean-grey" value="Jean Grey">
+                  <label for="jean-grey">Jean Grey</label>
+                </div>
+                <div>
+                  <input type="radio" name="character" id="thor" value="Thor">
+                  <label for="thor">Thor</label>
+                </div>
+              </div>
+            </fieldset>
+          <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
+          <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Go to Card Preview">     
+        </form>
+        <!-- Move to top of page?  -->
+      <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button> 
+    </div> 
+
+  `;
+
+}
+
+// Function to display Edit card form (Page 1)
+function getAndDisplayCardFormEdit() {
+  const cardForm = generateCardFormStringEdit();
+  $('.contentContainer').html(cardForm);
+}
+
+
 $(function() {
 
   // Display Card Form Page
@@ -423,8 +503,10 @@ $(function() {
   // Listen for click on '.js-edit-card-button'
   $('.contentContainer').on('click', '.js-edit-card-button', event => {
     console.log('edit button clicked');
+    // use edit endpoint
+    const card = $(event.currentTarget).closest(".card-container")
+    editCardById(card.data("card-id"), getAndDisplayCardFormEdit());
     
-
   })
 
   // Listen for click on '.js-view-card-button'

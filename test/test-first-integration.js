@@ -198,7 +198,7 @@ describe('Card API resource', function() {
     // make PUT request to update the card
     // verify the response
     // verify the post in the db is updated correctly
-    it('should update the expected fields of the card', function() {
+    it('should update/edit the expected fields of the card', function() {
       const updateCard = {
         headline: "New Headline", 
         bodyText: "Lorem Ipsem Dolores Fundee",
