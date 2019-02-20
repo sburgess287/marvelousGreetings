@@ -87,7 +87,7 @@ function getCardListFromApi(callback) {
   )
 }
 
-// Function to Delete card by id from API
+// Function to Delete card by id from API using '/cards/:id' endpoint
 // need to pass in the id of the card to go to correct endpoint and delete
 // error says cardListResponse is undefined
 // attempted to get card ID value a different way
@@ -110,7 +110,25 @@ function deleteCardById(cardIdValue, callback) {
   )
 }
 
-// Function to Edit card by id from API
+// Function to Retrieve card by ID (GET) using '/cards/:id' endpoint
+function getCardById(cardIdValue, callback) {
+  $.ajax(
+    {
+      url : `/cards/${cardIdValue}`, 
+      method : 'GET', 
+      headers : {
+        "content-type": "application/json"
+      }, 
+      success : callback,
+      error : function(a,b,c) {
+        console.log("Error message: ", c);
+      }
+    }
+  )
+
+}
+
+// Function to Edit card by id (PUT) using '/cards/:id' endpoint
 // need to pass in the id of the card to go to correct endpoint and delete
 // error says cardListResponse is undefined
 // attempted to get card ID value a different way
@@ -377,14 +395,14 @@ function getAndDisplayCardList(cardListResponse) {
 
 
 // Returns the html for generating the card form on Edit
-function generateCardFormStringEdit(card) {
+function generateCardFormStringEdit(cardResponse) {
   return `
     <!-- Page 1: fill in card -->
     <div class="newContentContainer css-container"></div>
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Edit your card</h2>
       
-        <form class="card-submit-form css-form">
+        <form class="card-update-form css-form">
             
             <label for="headline">Headline</label>
             <input placeholder="foo" id="headline" type="text" name="textfield" class="css-headline-field" required>
@@ -416,7 +434,7 @@ function generateCardFormStringEdit(card) {
               </div>
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
-          <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Go to Card Preview">     
+          <input type="submit" class="js-update-card-button css-submit" data-html2canvas-ignore="true" value="View Updated Card">     
         </form>
         <!-- Move to top of page?  -->
       <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button> 
@@ -461,6 +479,21 @@ $(function() {
 
   })
 
+  // Listen for form submit on '.card-update-form' and pass to POST API endpoint
+  
+  $('.contentContainer').on('submit', '.card-update-form', event => {
+    event.preventDefault();
+    console.log('card update form success!');
+    const headlineInput = $('#headline').val();
+    const messageInput = $('#message').val();
+    const characterInput = $('input[name="character"]:checked').val();
+    console.log(headlineInput);
+    console.log(messageInput);
+    console.log(characterInput);
+    // Do I need to pass in the card id value? the put is showing wrong endpoint
+    editCardById(headlineInput, messageInput, characterInput, displayCard)
+
+  })
 
   // Listen for click on '.download-card-btn' then convert html image to canvas and download it
   $('.contentContainer').on('click', '.download-card-btn', event => { 
@@ -500,16 +533,14 @@ $(function() {
     });
   })
   
-  // Listen for click on '.js-edit-card-button'
+  // Listen for click on '.js-edit-card-button' to go to Edit the card
   $('.contentContainer').on('click', '.js-edit-card-button', event => {
     console.log('edit button clicked');
-    // use edit endpoint
+    // retrieve the card by id
     const card = $(event.currentTarget).closest(".card-container")
-    editCardById(card.data("card-id"), getAndDisplayCardFormEdit());
+    getCardById(card.data("card-id"), getAndDisplayCardFormEdit);
     
   })
 
-  // Listen for click on '.js-view-card-button'
 
-  
 });

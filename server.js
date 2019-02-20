@@ -48,7 +48,17 @@ app.get("/cards", (req, res) => {
 //   res.send("hello");
 // })
 
-// GET endpoint for retrieving specific card
+// GET endpoint for retrieving specific card by id
+app.get('/cards/:id', (req, res) => {
+  console.log("get cards by id endpoint ran");
+  Card 
+    .findById(req.params.id)
+    .then(card => res.json(card.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: '500 server error' });
+    })
+})
 
 
 // POST endpoint for cards
