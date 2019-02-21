@@ -139,7 +139,6 @@ function editCardById(id, headline, bodyText, character, callback) {
   $.ajax(
     {
       url: `cards/${id}`,
-      // url: `cards/:id`,
       method : 'PUT',
       data: JSON.stringify({ headline, bodyText, character, id, }),
       headers : {
@@ -237,7 +236,6 @@ function displayCard(cardResponse){
          <p>${cardResponse.bodyText}</p> 
          <img src=${character.characterImage} alt="image of ${cardResponse.character}>
          <p>"Data provided by Marvel. © 2014 Marvel"</p>
-         <!-- Should this be a button? -->
          <input type="submit" class="test download-card-btn css-submit" data-html2canvas-ignore="true" value="Save">
  
        </div>
@@ -395,6 +393,13 @@ function getAndDisplayCardList(cardListResponse) {
 
 }
 
+// Function which iterates through the array of characters
+// if the cardResponse.character is = name of the character in the array
+// then set checked="checked"
+function setCharacterChecked(cardResponse) {
+  const characterList = []
+  
+}
 
 // Returns the html for generating the card form on Edit
 function generateCardFormStringEdit(cardResponse) {
