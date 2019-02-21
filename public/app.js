@@ -134,6 +134,7 @@ function getCardById(cardIdValue, callback) {
 // attempted to get card ID value a different way
 function editCardById(cardIdValue, callback) {
   console.log('editCardbyID ran');
+  console.log(cardIdValue);
 
   $.ajax(
     {
@@ -396,6 +397,7 @@ function getAndDisplayCardList(cardListResponse) {
 
 // Returns the html for generating the card form on Edit
 function generateCardFormStringEdit(cardResponse) {
+  console.log(cardResponse);
   return `
     <!-- Page 1: fill in card -->
     <div class="newContentContainer css-container"></div>
@@ -445,7 +447,8 @@ function generateCardFormStringEdit(cardResponse) {
 }
 
 // Function to display Edit card form (Page 1)
-function getAndDisplayCardFormEdit() {
+function getAndDisplayCardFormEdit(cardResponse) {
+  console.log(cardResponse)
   const cardForm = generateCardFormStringEdit();
   $('.contentContainer').html(cardForm);
 }
@@ -479,7 +482,7 @@ $(function() {
 
   })
 
-  // Listen for form submit on '.card-update-form' and pass to POST API endpoint
+  // Listen for form submit on '.card-update-form' and pass to PUT API endpoint
   
   $('.contentContainer').on('submit', '.card-update-form', event => {
     event.preventDefault();
@@ -487,9 +490,11 @@ $(function() {
     const headlineInput = $('#headline').val();
     const messageInput = $('#message').val();
     const characterInput = $('input[name="character"]:checked').val();
+    const pageId = $('id').val();
     console.log(headlineInput);
     console.log(messageInput);
     console.log(characterInput);
+    console.log(pageId); // this is showing undefined
     // Do I need to pass in the card id value? the put is showing wrong endpoint
     editCardById(headlineInput, messageInput, characterInput, displayCard)
 
@@ -539,6 +544,15 @@ $(function() {
     // retrieve the card by id
     const card = $(event.currentTarget).closest(".card-container")
     getCardById(card.data("card-id"), getAndDisplayCardFormEdit);
+    
+  })
+
+  // Listent for click on '.js-preview-card-button' to view card from cards list
+  $('.contentContainer').on('click', '.js-preview-card-button', event => {
+    console.log('view button clicked on cards list');
+    // retreive the card by id
+    const card = $(event.currentTarget).closest(".card-container")
+    getCardById(card.data("card-id"), displayCard);
     
   })
 
