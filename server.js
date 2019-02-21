@@ -100,6 +100,7 @@ app.delete('/cards/:id', (req, res) => {
 
 // PUT endpoint for editing specific card
 app.put('/cards/:id', (req, res) => {
+  // remove the req.body.id and verify test
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: `Request path id and request body id values must match req.params.id: ${req.params.id}, req.body.id: ${req.body.id}`

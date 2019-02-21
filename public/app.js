@@ -132,15 +132,16 @@ function getCardById(cardIdValue, callback) {
 // need to pass in the id of the card to go to correct endpoint and delete
 // error says cardListResponse is undefined
 // attempted to get card ID value a different way
-function editCardById(cardIdValue, callback) {
+function editCardById(id, headline, bodyText, character, callback) {
   console.log('editCardbyID ran');
-  console.log(cardIdValue);
+  console.log(id);
 
   $.ajax(
     {
-      url: `cards/${cardIdValue}`,
+      url: `cards/${id}`,
       // url: `cards/:id`,
       method : 'PUT',
+      data: JSON.stringify({ headline, bodyText, character, id, }),
       headers : {
         "content-type": "application/json"
       },
@@ -400,16 +401,16 @@ function generateCardFormStringEdit(cardResponse) {
   console.log(cardResponse);
   return `
     <!-- Page 1: fill in card -->
-    <div class="newContentContainer css-container"></div>
+    <div class="newContentContainer css-container">
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Edit your card</h2>
       
-        <form class="card-update-form css-form">
+        <form class="card-update-form css-form" data-card-id="${cardResponse.id}">
             
             <label for="headline">Headline</label>
-            <input placeholder="foo" id="headline" type="text" name="textfield" class="css-headline-field" required>
+            <input value="${cardResponse.headline}" placeholder="foo" id="headline" type="text" name="textfield" class="css-headline-field" required>
             <label for="message">Message</label>
-            <input placeholder="bar" id="message" type="text" name="textfield" class="css-message-field" required>
+            <input value="${cardResponse.bodyText}" placeholder="bar" id="message" type="text" name="textfield" class="css-message-field" required>
             <fieldset>
               <legend>Select Character</legend>
               <div class="css-radio">
@@ -449,7 +450,7 @@ function generateCardFormStringEdit(cardResponse) {
 // Function to display Edit card form (Page 1)
 function getAndDisplayCardFormEdit(cardResponse) {
   console.log(cardResponse)
-  const cardForm = generateCardFormStringEdit();
+  const cardForm = generateCardFormStringEdit(cardResponse);
   $('.contentContainer').html(cardForm);
 }
 
@@ -490,13 +491,15 @@ $(function() {
     const headlineInput = $('#headline').val();
     const messageInput = $('#message').val();
     const characterInput = $('input[name="character"]:checked').val();
-    const pageId = $('id').val();
+    const cardId = $('.card-update-form').data("card-id")
     console.log(headlineInput);
     console.log(messageInput);
     console.log(characterInput);
-    console.log(pageId); // this is showing undefined
+    console.log(cardId); // this is showing undefined
     // Do I need to pass in the card id value? the put is showing wrong endpoint
-    editCardById(headlineInput, messageInput, characterInput, displayCard)
+    editCardById(cardId, headlineInput, messageInput, characterInput, function() {
+      displayCard({ id: cardId, headline: headlineInput, bodyText: messageInput, character: characterInput})
+    })
 
   })
 
