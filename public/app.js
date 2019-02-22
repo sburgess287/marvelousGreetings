@@ -244,7 +244,7 @@ function displayCard(cardResponse){
   )
 }
 
-// PROOF of concept, most likely this will be the Display of Card after refactor
+// PROOF of concept
 // change data to helpful word : characterArray
 // function to display default card
 // function displayDefaultCard(data) {
@@ -300,44 +300,6 @@ function generateNoCardsFoundPageString() {
     </div>
   `
 }
-
-// // Note: could delete this function because the card list is dynamically generated.
-// // Function returns hmtl for generating card List (currently hardcoded, 
-// // needs to be updated with list of cards by ID and also connected to user)
-// function generateCardListPageString() {
-//   return `
-//     <!-- Page 4: Saved Cards List -->
-//     <div class="newContentContainer css-container">
-//       <h2>Page 4: Saved Cards</h2>
-//       <button class="css-create-card-button">Go to Create Page</button>
-//       <p></p>
-//       <div class="css-previous-saved-card-container">
-//         <h3>Headline1</h3>
-//         <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
-//         <button class="css-saved-card-button">Go to Card</button>
-//         <button class="css-delete-card-button">Delete</button>
-        
-//       </div>
-//       <div class="css-previous-saved-card-container">
-//         <h3>Headline2</h3>
-//         <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
-//         <!-- update css selector and do I need an edit card for the project requirements? -->
-//         <button class="css-saved-card-button">Edit card?</button>
-//         <button class="css-saved-card-button">Go to Card</button>
-//         <button class="css-delete-card-button">Delete</button>
-        
-//       </div>
-//       <div class="css-previous-saved-card-container">
-//           <h3>Headline3</h3>
-//           <p>First 30 characters: Lorem ipsum dolor sit amet.</p>
-//           <button class="css-saved-card-button">Go to Card</button>
-//           <button class="css-delete-card-button">Delete</button>
-          
-//       </div> 
-//     </div>
-
-//   `
-// }
 
 function getAndDisplayCardList(cardListResponse) {
   
@@ -397,13 +359,33 @@ function getAndDisplayCardList(cardListResponse) {
 // if the cardResponse.character is = name of the character in the array
 // then set checked="checked"
 function setCharacterChecked(cardResponse) {
+  console.log('1st line of setCharacterChecked')
+  console.log(cardResponse);
+
   const characterList = []
+  let character = CHARACTER_LIST.find(function(character) {
+    return character.characterName === cardResponse.character
+  });
+
+  for ( let i = 0; i <= characterList.length; i++) {
+    if ( cardResponse.character === character.characterImage) {
+      console.log('ran the loop');
+    } else {
+
+      console.log('no matches found') //showing no matches found & empty object
+      console.log(characterList);
+    }
+  
+  }
   
 }
 
 // Returns the html for generating the card form on Edit
 function generateCardFormStringEdit(cardResponse) {
   console.log(cardResponse);
+  console.log('about to run setCharacterChecked function')
+  setCharacterChecked(cardResponse);
+
   return `
     <!-- Page 1: fill in card -->
     <div class="newContentContainer css-container">
