@@ -5,6 +5,7 @@
 body {
   width: 100%;
   margin: auto;
+  background: lightblue;
 }
 
 .css-header {
@@ -29,6 +30,12 @@ body {
   text-align: center;
 }
 
+h1 {
+  text-align: center;
+  padding-bottom: 0;
+  font-size: 24pt;
+}
+
 .css-headline-field, .css-message-field {
   width: 100%;
   padding: .75em;
@@ -44,10 +51,12 @@ body {
 /* Fix this for larger viewports, currently taking up entire width */
 .css-create-card-button, .css-saved-card-button, 
 .css-delete-card-button, .css-all-saved-cards-button, 
-.css-edit-card-button, .css-view-card-button {
-  display: inline;
+.css-edit-card-button, .css-view-card-button, .css-go-to-signup-form,
+.css-submit {
+  width: 80%;
   margin: auto;
   font-size: 14pt;
+  background: rgb(218, 228, 222);
 }
 
 /* Experimenting with radio button and form alignment
@@ -97,7 +106,7 @@ body {
 
 .css-previous-saved-card-container {
   border: solid rgb(187, 143, 187) 10px;
-  max-width: 50%;
+  max-width: 100%;
   margin: auto;
 
 }
