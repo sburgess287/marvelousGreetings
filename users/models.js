@@ -6,6 +6,42 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-// create use model to export and use in the authentication strategy
+// create user schema to export and use in the authentication strategy
+const UserSchema = mongoose.Schema({
+  username: {
+    type: String, 
+    required: true, 
+    unique: true
+  },
+  password: {
+    type: String, 
+    required: true
+  },
+  // Should I capture first and last name? not in my design
+  // firstName: {type: String, default: ''},
+  // lastName: {type: String, default: ''}
+});
 
+// is this method needed if I'm not using first and last name?
+UserSchema.methods.serialize = function() {
+  return {
+    username: this.username || '',
+    // firstname: this.firstName || '',
+    // lastName: this.lastName || ''
+  };
+};
+
+// Method returns boolean value if pw is valid
+UserSchema.methods.validatePassword = function(password) {
+  return bcrypt.compare(password, this.password)
+}
+
+// Set how many rounds of salting algorithm should be used
+UserSchema.statics.hashPassword = function(password) {
+  return bcrypt.hash(password, 10);
+}
+
+const User = mongoose.model('User', UserSchema);
+
+// export all methods above for use in app
 module.exports = {User};
