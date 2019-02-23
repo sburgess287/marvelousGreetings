@@ -3,6 +3,11 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
+// Use destructuring assignment so two variables called router have diff names
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth')
 
 mongoose.Promise = global.Promise;
 
@@ -15,10 +20,18 @@ const { Card } = require('./cards/models');
 app.use(express.static('public'));
 app.use(morgan('common'));
 
+// Serve static file
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
 })
 
+// Authentication
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+// Do I need to update these endpoint paths?
+app.use('/cards/users/', usersRouter);
+app.use('/cards/auth/', authRouter);
 
 // GET endpoint for all cards
 app.get("/cards", (req, res) => {
@@ -170,4 +183,3 @@ if (require.main === module) {
 }
 
 module.exports = { app, runServer, closeServer };
-// module.exports = { app };
