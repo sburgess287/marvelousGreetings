@@ -20,8 +20,9 @@ const createAuthToken = function(user) {
 
 // create localAuth variable
 const localAuth = passport.authenticate('local', {session: false});
-router.use(bodyParser.json);
+router.use(bodyParser.json());
 
+// /cards/auth/login
 // user provides username/pw to login
 // Then JWT is created
 // Token is sent back to user, who stores it, uses it for other requests
@@ -37,6 +38,7 @@ router.post('/refresh', jwtAuth, (req,res) => {
   const authToken = createAuthToken(req.user);
   res.json({authToken});
 })
+
 
 
 module.exports = {router};

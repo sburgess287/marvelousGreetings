@@ -8,7 +8,7 @@ const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const { User } = require('../users/models');
 const { JWT_SECRET } = require('../config');
 
-// error says local strategy is not defined because not written yet!
+// create local strategy
 const localStrategy = new LocalStrategy(function(username, password, callback) {
   let user;
   User.findOne({ username: username })

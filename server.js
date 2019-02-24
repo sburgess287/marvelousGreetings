@@ -31,7 +31,7 @@ passport.use(jwtStrategy);
 
 // Do I need to update these endpoint paths?
 app.use('/cards/users/', usersRouter);
-app.use('/cards/auth/', authRouter);
+app.use('/cards/auth', authRouter);
 
 // GET endpoint for all cards
 app.get("/cards", (req, res) => {
@@ -75,6 +75,7 @@ app.get('/cards/:id', (req, res) => {
 
 
 // POST endpoint for cards
+// app.post('/cards/protected', (req, res) => { //fails test! cool!
 app.post('/cards', (req, res) => {
   const requiredFields = ["headline", "bodyText", "character"]
   for (let i = 0; i < requiredFields.length; i++) {

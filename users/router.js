@@ -9,7 +9,7 @@ const router = express.Router();
 
 const jsonParser = bodyParser.json();
 
-// Post to register new user
+// Post to register/sign up a new user
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
@@ -106,6 +106,8 @@ router.post('/', jsonParser, (req, res) => {
           location: 'username'
         });
       }
+      // if there is no existing user, hash the password
+      return User.hashPassword(password);
     })
     .then(hash => {
       return User.create({
@@ -116,11 +118,12 @@ router.post('/', jsonParser, (req, res) => {
       })
     })
     .then(user => {
+      
       return res.status(201).json(user.serialize());
     })
     .catch(err => {
       // forward validation errors to client, otherwise return 500 error
-      if (err.reason === 'ValidationError') {
+      if (err.reason === `ValidationError`) {
         return res.status(err.code).json(err);
       }
       res.status(500).json({code: 500, message: 'Internal server error'});
