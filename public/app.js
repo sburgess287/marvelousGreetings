@@ -43,6 +43,62 @@ const CHARACTER_LIST = [
 
 ]
 
+
+// Function to Post signup Credentials to API
+function postSignupCredsToApi(usernameInput, passwordInput, callback) {
+  const params = {
+    username : usernameInput, //? 
+    password : passwordInput  //?
+  }
+  $.ajax(
+    {
+      url: '/cards/users',
+      data: params,
+      method: 'POST',
+      headers : {
+        "content-type": "application/json",
+      },
+      success : callback,
+      error : function (a,b,c) {
+        console.log("Error message: ", c);
+      }
+    }
+  )
+}
+
+// is function needed to POST to /cards/auth/login to return authToken?
+
+
+
+// Function to Post valid credentials to API (Login to app)
+function loginPostToApi(username, password, callback) {
+  const params = {
+    username,
+    password
+  }
+  $.ajax(
+    {
+      url: '/auth/login', 
+      data: JSON.stringify(params),
+      method : 'POST',
+      headers : {
+        "content-type": "application/json", 
+  
+      },
+      success : callback, 
+      error : function (a,b,c) {
+        console.log("Error message: ", c);
+      }
+    }
+  )
+
+}
+
+
+
+// Function to refresh JWT (not sure where to call this)
+
+
 // Function to Post Card to Api
 function postCardToApi(headlineInput, messageInput, characterInput, callback){
   const params = {
@@ -50,13 +106,16 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
     bodyText : messageInput, 
     character : characterInput
   }
+  const authToken = window.localStorage.getItem("authToken")
+
   $.ajax(
     {
       url : '/cards',
       data : JSON.stringify(params), 
       method : 'POST', 
       headers : {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "authorization" : `Bearer ${authToken}`
       }, 
       success : callback,
       error : function (a,b,c) {
@@ -355,26 +414,35 @@ function getAndDisplayCardList(cardListResponse) {
 
 }
 
-// Function which iterates through the array of characters
+// Function which iterates through the array of characters; in progress
 // if the cardResponse.character is = name of the character in the array
 // then set checked="checked"
 function setCharacterChecked(cardResponse) {
   console.log('1st line of setCharacterChecked')
   console.log(cardResponse);
 
-  const characterList = []
-  let character = CHARACTER_LIST.find(function(character) {
-    return character.characterName === cardResponse.character
-  });
+  const characterListArray = CHARACTER_LIST.map(
+    character => character.characterName)
+    console.log(characterListArray);  // returns list of characters! woo!
+  
 
-  for ( let i = 0; i <= characterList.length; i++) {
-    if ( cardResponse.character === character.characterImage) {
-      console.log('ran the loop');
-    } else {
+  for ( let i = 0; i <= characterListArray.length; i++) {
+    if ( cardResponse.character === characterListArray[i]) {
+      console.log('successfully found match, see below');
+      console.log(cardResponse.character);
+      console.log(characterListArray[i]);
+      // note: fix Jean Grey, which shows up as "JeanGrey" in card response and 
+      // "Jean Grey" in array so doesn't show match
+      // Need to update logic to set value to checked
 
-      console.log('no matches found') //showing no matches found & empty object
-      console.log(characterList);
-    }
+    } 
+    //   else {
+
+    //   console.log('no matches found') //showing no matches found & empty object
+      
+    //   console.log(cardResponse.character); // showing saved character/ok
+    //   console.log(characterListArray[i]); // shows character from char array
+    // }
   
   }
   
@@ -441,11 +509,94 @@ function getAndDisplayCardFormEdit(cardResponse) {
   $('.contentContainer').html(cardForm);
 }
 
+function generateSignUpFormString() {
+  console.log('generateSignUpFormString ran');
+  return `
+    <!-- Sign Up -->
+    <div class="newContentContainer css-container">
+      <h2>Page 6: Sign Up Page</h2>
+      <form class="css-signup-form css-form">
+        <label for="username">Username</label>
+        <input id="username" type="text" name="textfield" class="css-signup-input" required>
+        <label for="password">Password</label>
+        <input id="password" type="text" name="textfield" class="css-pw-signup-input" required>
+        <input type="submit" class="css-submit enter-creds-button" value="Enter new credentials and sign in">
+      </form>   
+    </div>
+  `
+}
+
+function getAndDisplaySignUpForm() {
+  console.log('getAndDisplaySignUpForm ran');
+  const signUpForm = generateSignUpFormString();
+  $('.contentContainer').html(signUpForm);
+};
+
+function generateLoginFormString() {
+  console.log('generateLoginFormString ran');
+  return `
+    <!-- Login -->
+    <div class="newContentContainer css-container">
+      <h2>Page 5: Login Page</h2>
+      <form class="css-login-form css-form login-form">
+        <label for="username">Username</label>
+        <input id="username" type="text" name="textfield" class="css-login-input" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" name="textfield" class="css-pw-input" required>
+        <input type="submit" class="css-submit login-button" value="Login">
+      </form>
+      <button class="css-submit signup-form-button">Go To Signup Form</button>
+    </div>
+  `
+}
+
+function getAndDisplayLoginForm() {
+  console.log('getAndDisplayLoginForm ran');
+  const loginForm = generateLoginFormString();
+  $('.contentContainer').html(loginForm);
+}
 
 $(function() {
+  // Display Login page
+  getAndDisplayLoginForm();
 
-  // Display Card Form Page
-  getAndDisplayCardForm();
+  // Event listener for clicking "Go to signup form" button on the login page
+  // Then shows the signup page
+  $('.contentContainer').on('click', '.signup-form-button', event => {
+    console.log('listening for click to show the signup page')
+    getAndDisplaySignUpForm();
+  })
+
+  // Enter valid credentials to signup page
+  $('.contentContainer').on('submit', '.enter-creds-button', event => {
+    event.preventDefault();
+    console.log('signup submit ran');
+    const usernameInput = $('#username').val();
+    const passwordInput = $('#password').val();
+    console.log(usernameInput);
+    console.log(passwordInput);
+    postSignupCredsToApi(usernameInput, passwordInput, function() {
+      getAndDisplayCardForm();
+    })
+  })
+
+  // Function to login with valid credentials
+  // Display Card Form Page on successful login
+  // Function to refresh JWT, do I put this logic in the login API post?
+  $('.contentContainer').on('submit', '.login-form', event => {
+    event.preventDefault();
+    console.log('login submit ran')
+    const usernameVal = $('#username').val();
+    const passwordVal = $('#password').val();
+    console.log(usernameVal);
+    console.log(passwordVal);
+    loginPostToApi(usernameVal, passwordVal, function(data) { 
+      console.log(data);
+      window.localStorage.setItem("authToken", data.authToken)
+      getAndDisplayCardForm(); 
+    })
+     
+  })
 
   // Listen for click of "Go to Saved Cards" button. 
   // Then get the card list from the GET endpoint, display the Card list.
