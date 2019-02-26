@@ -67,9 +67,9 @@
     background: lightblue;
   } */
 
-  .css-container {
-    /* min-height: 7em; */
-  }
+  /* .css-container {
+    min-height: 7em;
+  } */
 
   /* h1 {
       text-align: center;
@@ -111,13 +111,13 @@
   
   } */
   
-  .css-login-input {
+  /* .css-login-input {
     width: 80%;
   }
   
   .css-pw-input {
     width: 70%;
-  }  
+  }   */
 
 
   /* .css-radio label {

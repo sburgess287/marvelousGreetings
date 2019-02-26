@@ -4,10 +4,12 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const {app, runServer, closeServer } = require('../server');
-const { TEST_DATABASE_URL } = require('../config');
+const { TEST_DATABASE_URL, JWT_SECRET } = require('../config');
 const { Card } = require('../cards/models');
+const { User } = require('../users');
 
 const expect = chai.expect;
 
@@ -68,6 +70,23 @@ describe('First Example test', function() {
 })
 
 describe('Card API resource', function() {
+
+  const username = "testUser"; 
+  const password = "testPass";
+
+  const token = jwt.sign(
+    {
+      user: {
+        username
+      }
+    },
+    JWT_SECRET,
+    {
+      algorithm: 'HS256',
+      subject: username
+    }
+  )
+  
   before(function() {
     return runServer(TEST_DATABASE_URL);
   })
@@ -76,8 +95,21 @@ describe('Card API resource', function() {
     return seedCardData();
   })
 
+  beforeEach(function () {
+    return User.hashPassword(password).then(password =>
+      User.create({
+        username,
+        password,
+      })
+    )
+  })
+
   afterEach(function() {
     return tearDownDb();
+  })
+
+  afterEach(function() {
+    return User.remove({});
   })
 
   after(function() {
@@ -139,11 +171,24 @@ describe('Card API resource', function() {
     })
   })
 
-  // Test POST endpoint
+  // Test POST endpoint (protected) (currently failing, trying to fix)
   describe('POST endpoint', function() {
     // Make a POST request with data
     // prove the response object has correct keys
     // verify ID is returned as well
+    const token = jwt.sign(
+      {
+        user : {
+          username
+        }
+      },
+      JWT_SECRET,
+      {
+        algorithm: 'HS256',
+        subject: username, 
+        expiresIn: '7d'
+      }
+    )
 
     it('should add a new Card', function() {
       const newCard = {
@@ -153,6 +198,8 @@ describe('Card API resource', function() {
       }
 
       return chai.request(app)
+        // .get('/cards') // when uncommented, error says these are not functions
+        // .set('Authorization', `Bearer ${token}`) // sets token for auth ?
         .post('/cards')
         .send(newCard)
         .then(function(res) {

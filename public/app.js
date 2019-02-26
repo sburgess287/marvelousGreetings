@@ -45,15 +45,15 @@ const CHARACTER_LIST = [
 
 
 // Function to Post signup Credentials to API
-function postSignupCredsToApi(usernameInput, passwordInput, callback) {
+function postSignupCredsToApi(username, password, callback) {
   const params = {
-    username : usernameInput, //? 
-    password : passwordInput  //?
+    username,
+    password
   }
   $.ajax(
     {
-      url: '/cards/users',
-      data: params,
+      url: '/users',
+      data: JSON.stringify(params),
       method: 'POST',
       headers : {
         "content-type": "application/json",
@@ -65,9 +65,6 @@ function postSignupCredsToApi(usernameInput, passwordInput, callback) {
     }
   )
 }
-
-// is function needed to POST to /cards/auth/login to return authToken?
-
 
 
 // Function to Post valid credentials to API (Login to app)
@@ -515,11 +512,15 @@ function generateSignUpFormString() {
     <!-- Sign Up -->
     <div class="newContentContainer css-container">
       <h2>Page 6: Sign Up Page</h2>
-      <form class="css-signup-form css-form">
-        <label for="username">Username</label>
-        <input id="username" type="text" name="textfield" class="css-signup-input" required>
-        <label for="password">Password</label>
-        <input id="password" type="text" name="textfield" class="css-pw-signup-input" required>
+      <form class="css-signup-form css-form sign-up-form">
+        <div username-section>
+          <label for="username">Username</label>
+          <input id="username" type="text" name="textfield" class="css-signup-input" required>
+        </div>
+        <div class="password-section">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="textfield" class="css-pw-signup-input" required>
+        </div>
         <input type="submit" class="css-submit enter-creds-button" value="Enter new credentials and sign in">
       </form>   
     </div>
@@ -539,10 +540,14 @@ function generateLoginFormString() {
     <div class="newContentContainer css-container">
       <h2>Page 5: Login Page</h2>
       <form class="css-login-form css-form login-form">
-        <label for="username">Username</label>
-        <input id="username" type="text" name="textfield" class="css-login-input" required>
-        <label for="password">Password</label>
-        <input id="password" type="password" name="textfield" class="css-pw-input" required>
+        <div class="username-section"> 
+          <label for="username">Username</label>
+          <input id="username" type="text" name="textfield" class="css-login-input" required>
+        </div>
+        <div class="password-section">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="textfield" class="css-pw-input" required>
+        </div>
         <input type="submit" class="css-submit login-button" value="Login">
       </form>
       <button class="css-submit signup-form-button">Go To Signup Form</button>
@@ -568,14 +573,16 @@ $(function() {
   })
 
   // Enter valid credentials to signup page
-  $('.contentContainer').on('submit', '.enter-creds-button', event => {
+  $('.contentContainer').on('submit', '.sign-up-form', event => {
     event.preventDefault();
     console.log('signup submit ran');
-    const usernameInput = $('#username').val();
-    const passwordInput = $('#password').val();
-    console.log(usernameInput);
-    console.log(passwordInput);
-    postSignupCredsToApi(usernameInput, passwordInput, function() {
+    const usernameVal = $('#username').val();
+    const passwordVal = $('#password').val();
+    console.log(usernameVal);
+    console.log(passwordVal);
+    postSignupCredsToApi(usernameVal, passwordVal, function(data) {
+      console.log(data);
+      window.localStorage.setItem("authToken", data.authToken)
       getAndDisplayCardForm();
     })
   })
