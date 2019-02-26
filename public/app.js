@@ -256,7 +256,8 @@ function generateCardFormString() {
           <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Go to Card Preview">     
         </form>
         <!-- Move to top of page?  -->
-      <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button> 
+      <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
+      <button class="css-all-saved-cards-button logout-button">Logout</button> 
     </div> 
 
   `;
@@ -286,6 +287,7 @@ function displayCard(cardResponse){
        <!--<h3>Click to Edit or save (not sure I need this text)</h3> -->
        <!-- Move to top of page?  -->
        <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
+       <button class="css-all-saved-cards-button logout-button">Logout</button>
        <!-- Note: the below image will be a canvas element -->
        <div class="css-preview-content-container card" id="screenshot-card" data-card-id="${cardResponse.id}">
          <p>${cardResponse.headline}</p>
@@ -353,6 +355,7 @@ function generateNoCardsFoundPageString() {
   return `
     <div>
       <h2>No Cards Found! Update this page!!!</h2>
+      <button class="css-all-saved-cards-button logout-button">Logout</button>
     </div>
   `
 }
@@ -399,6 +402,7 @@ function getAndDisplayCardList(cardListResponse) {
       <!-- Page 4: Saved Cards List -->
       <div class="newContentContainer css-container">
         <h2>Page 4: Saved Cards</h2>
+        <button class="css-all-saved-cards-button logout-button">Logout</button>
         <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
         <p>Do I need more buttons?</p>
           ${cardList.join('')}
@@ -493,6 +497,7 @@ function generateCardFormStringEdit(cardResponse) {
         </form>
         <!-- Move to top of page?  -->
       <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button> 
+      <button class="css-all-saved-cards-button logout-button">Logout</button>
     </div> 
 
   `;
@@ -511,7 +516,7 @@ function generateSignUpFormString() {
   return `
     <!-- Sign Up -->
     <div class="newContentContainer css-container">
-      <h2>Page 6: Sign Up Page</h2>
+      <h2>Sign Up Page</h2>
       <form class="css-signup-form css-form sign-up-form">
         <div username-section>
           <label for="username">Username</label>
@@ -538,7 +543,7 @@ function generateLoginFormString() {
   return `
     <!-- Login -->
     <div class="newContentContainer css-container">
-      <h2>Page 5: Login Page</h2>
+      <h2>Login Page</h2>
       <form class="css-login-form css-form login-form">
         <div class="username-section"> 
           <label for="username">Username</label>
@@ -695,12 +700,18 @@ $(function() {
     
   })
 
-  // Listent for click on '.js-preview-card-button' to view card from cards list
+  // Listen for click on '.js-preview-card-button' to view card from cards list
   $('.contentContainer').on('click', '.js-preview-card-button', event => {
     console.log('view button clicked on cards list');
     // retreive the card by id
     const card = $(event.currentTarget).closest(".card-container")
     getCardById(card.data("card-id"), displayCard);
+    
+  })
+
+  // Listen for click on '.logout-button' then logs user out, shows login page
+  $('.contentContainer').on('click', '.logout-button', event => {
+    console.log('Logout button clicked');
     
   })
 
