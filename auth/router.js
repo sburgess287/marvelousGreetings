@@ -22,7 +22,6 @@ const createAuthToken = function(user) {
 const localAuth = passport.authenticate('local', {session: false});
 router.use(bodyParser.json());
 
-// /cards/auth/login
 // user provides username/pw to login
 // Then JWT is created
 // Token is sent back to user, who stores it, uses it for other requests

@@ -41,9 +41,12 @@ function tearDownDb(){
 }
 
 describe('First Example test', function() {
+  
   before(function() {
     return runServer(TEST_DATABASE_URL);
   })
+
+  
 
   beforeEach(function(){
     return seedCardData();
@@ -56,6 +59,8 @@ describe('First Example test', function() {
   after(function() {
     return closeServer();
   })
+
+  
 
   it('page exists', function() {
     return chai
@@ -86,13 +91,17 @@ describe('Card API resource', function() {
       subject: username
     }
   )
-  
+   
+  // can I have multiple before steps and after steps?
   before(function() {
     return runServer(TEST_DATABASE_URL);
   })
 
+  
+
   beforeEach(function(){
     return seedCardData();
+    
   })
 
   beforeEach(function () {
@@ -105,17 +114,19 @@ describe('Card API resource', function() {
   })
 
   afterEach(function() {
-    return tearDownDb();
+    return User.remove({})
+
   })
 
   afterEach(function() {
-    return User.remove({});
+    return tearDownDb();
   })
 
   after(function() {
     return closeServer();
   })
 
+  
   // Test GET endpoint
   describe('GET endpoint', function(){
     it('should return all existing cards', function() {
@@ -171,7 +182,7 @@ describe('Card API resource', function() {
     })
   })
 
-  // Test POST endpoint (protected) (currently failing, trying to fix)
+  // Test POST endpoint (protected)
   describe('POST endpoint', function() {
     // Make a POST request with data
     // prove the response object has correct keys
@@ -190,6 +201,7 @@ describe('Card API resource', function() {
       }
     )
 
+  
     it('should add a new Card', function() {
       const newCard = {
         headline: faker.lorem.words(),
@@ -198,9 +210,8 @@ describe('Card API resource', function() {
       }
 
       return chai.request(app)
-        // .get('/cards') // when uncommented, error says these are not functions
-        // .set('Authorization', `Bearer ${token}`) // sets token for auth ?
         .post('/cards')
+        .set('Authorization', `Bearer ${token}`)
         .send(newCard)
         .then(function(res) {
           expect(res).to.have.status(201);
