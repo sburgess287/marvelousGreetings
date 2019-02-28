@@ -39,6 +39,7 @@ describe('Auth endpoints', function () {
   });
 
   // describe('/auth/login', function () {
+
   //   it('should reject requests with no credentials', function() {
   //     return chai 
   //       .request(app)
@@ -78,14 +79,19 @@ describe('Auth endpoints', function () {
   //     return chai
   //       .request(app)
   //       .post('/auth/login')
-  //       .responseType({ username, password: 'someWrongPassword' })
-  //       .then(() => {
+  //       .send({ username, password: 'someWrongPassword' })
+  //       .then(() => 
+  //         expect.fail(null, null, 'Request should not succeed')
+  //       )
+  //       .catch(err => {
   //         if (err instanceof chai.AssertionError) {
   //           throw err;
   //         }
   //         const res = err.response;
   //         expect(res).to.have.status(401)
+
   //       })
+      
   //   })
 
 

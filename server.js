@@ -37,7 +37,7 @@ app.use('/auth/', authRouter);
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 // GET endpoint for all cards
-app.get("/cards", (req, res) => {
+app.get("/cards", jwtAuth, (req, res) => {
   console.log("hello 1st line of get endpoint");
   Card
     .find()
@@ -65,7 +65,7 @@ app.get("/cards", (req, res) => {
 // })
 
 // GET endpoint for retrieving specific card by id
-app.get('/cards/:id', (req, res) => {
+app.get('/cards/:id', jwtAuth, (req, res) => {
   console.log("get cards by id endpoint ran");
   Card 
     .findById(req.params.id)
@@ -103,7 +103,7 @@ app.post('/cards', jwtAuth, (req, res) => {
 })
 
 // DELETE endpoint for deleting specific card
-app.delete('/cards/:id', (req, res) => {
+app.delete('/cards/:id', jwtAuth, (req, res) => {
   Card
     .findByIdAndRemove(req.params.id)
     .then(() => {
@@ -116,7 +116,7 @@ app.delete('/cards/:id', (req, res) => {
 })
 
 // PUT endpoint for editing specific card
-app.put('/cards/:id', (req, res) => {
+app.put('/cards/:id', jwtAuth, (req, res) => {
   // remove the req.body.id and verify test
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({

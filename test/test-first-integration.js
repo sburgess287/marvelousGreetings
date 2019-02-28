@@ -127,8 +127,21 @@ describe('Card API resource', function() {
   })
 
   
-  // Test GET endpoint
+  // Test GET endpoint: should this be per user?
   describe('GET endpoint', function(){
+    const token = jwt.sign(
+      {
+        user : {
+          username
+        }
+      },
+      JWT_SECRET,
+      {
+        algorithm: 'HS256',
+        subject: username, 
+        expiresIn: '7d'
+      }
+    )
     it('should return all existing cards', function() {
       // strategy get all cards
       // verify status and data type
@@ -136,6 +149,7 @@ describe('Card API resource', function() {
       let res;
       return chai.request(app)
         .get('/cards')
+        .set('Authorization', `Bearer ${token}`)
         .then(function(_res) {
           res = _res;
           expect(res).to.have.status(200);
@@ -148,11 +162,25 @@ describe('Card API resource', function() {
     });
 
     it('should return cards with correct fields', function() {
+      const token = jwt.sign(
+        {
+          user : {
+            username
+          }
+        },
+        JWT_SECRET,
+        {
+          algorithm: 'HS256',
+          subject: username, 
+          expiresIn: '7d'
+        }
+      )
       
       // Inspect response for correct keys
       let resCard;
       return chai.request(app)
         .get('/cards')
+        .set('Authorization', `Bearer ${token}`)
         .then(function(res) {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
@@ -228,12 +256,29 @@ describe('Card API resource', function() {
 
   // Test DELETE endpoint
   describe('DELETE endpoint', function() {
+    const token = jwt.sign(
+      {
+        user : {
+          username
+        }
+      },
+      JWT_SECRET,
+      {
+        algorithm: 'HS256',
+        subject: username, 
+        expiresIn: '7d'
+      }
+    )
+    
     // Get card by id
     // Make DELETE request for that id
     // assert response code
     // Verify post with that ID is no longer in the DB
     it('deletes a card by id', function() {
       let savedcard;
+      return chai.request(app)
+        .post('/cards')
+        .set('Authorization', `Bearer ${token}`)
       return Card
         .findOne()
         .then(function(_savedcard) {
@@ -257,6 +302,20 @@ describe('Card API resource', function() {
     // verify the response
     // verify the post in the db is updated correctly
     it('should update/edit the expected fields of the card', function() {
+      const token = jwt.sign(
+        {
+          user : {
+            username
+          }
+        },
+        JWT_SECRET,
+        {
+          algorithm: 'HS256',
+          subject: username, 
+          expiresIn: '7d'
+        }
+      )
+
       const updateCard = {
         headline: "New Headline", 
         bodyText: "Lorem Ipsem Dolores Fundee",
@@ -271,6 +330,7 @@ describe('Card API resource', function() {
           // make request and inspect response and data
           return chai.request(app)
             .put(`/cards/${card.id}`)
+            .set('Authorization', `Bearer ${token}`)
             .send(updateCard);
         })
         .then(function(res) {
