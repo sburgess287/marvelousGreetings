@@ -59,10 +59,6 @@ app.get("/cards", jwtAuth, (req, res) => {
     })
 })
 
-// remove later
-// app.get('/cards', (req, res) => {
-//   res.send("hello");
-// })
 
 // GET endpoint for retrieving specific card by id
 app.get('/cards/:id', jwtAuth, (req, res) => {
@@ -77,8 +73,7 @@ app.get('/cards/:id', jwtAuth, (req, res) => {
 })
 
 
-// POST endpoint for cards: added jwtAuth as argument, and verified in Postman
-// adding jwtAuth fails test! cool! now what?
+// POST endpoint for cards
 app.post('/cards', jwtAuth, (req, res) => {
   const requiredFields = ["headline", "bodyText", "character"]
   for (let i = 0; i < requiredFields.length; i++) {

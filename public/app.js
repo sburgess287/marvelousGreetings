@@ -664,7 +664,7 @@ $(function() {
       // document.body.appendChild(canvas);
       var a = document.createElement('a');
       a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-      a.download = 'somefilename.jpg';
+      a.download = 'marvelousGreetings.jpg';
       // a.download = `${data.headline}`; update the filename later, 
       a.click();
 
