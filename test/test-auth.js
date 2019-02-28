@@ -38,65 +38,57 @@ describe('Auth endpoints', function () {
     return closeServer();
   });
 
-  // describe('/auth/login', function () {
+  describe('/auth/login', function () {
 
-  //   it('should reject requests with no credentials', function() {
-  //     return chai 
-  //       .request(app)
-  //       .post('/auth/login')
-  //       .then(() =>
-  //         // this is showing as a failure; how do I get it to pass?
-  //         expect.fail(null, null, 'Request should not succeed')
-  //       )
-  //       .catch(err => {
-  //         if (err instanceof chai.AssertionError) {
-  //           throw err;
-  //         }
-  //         const res = err.response;
-  //         expect(res).to.have.status(400);
-  //       })
-  //   })
+    it.only('should reject requests with no credentials', function() {
+      return chai 
+        .request(app)
+        .post('/auth/login')
+        .then((res) => {
+          expect(res).to.have.status(400);
+        })
+    })
     
-  //   it('should reject requests with incorrect username', function () {
-  //     return chai
-  //       .request(app)
-  //       .post('/auth/login')
-  //       .send({ username: 'incorrectUsername', password })
-  //       .then(() =>
-  //         // this is showing as a failure; how do I get it to pass?
-  //         expect.fail(null, null, 'Request should not succeed')
-  //       )
-  //       .catch(err => {
-  //         if (err instanceof chai.AssertionError) {
-  //           throw err;
-  //         }
-  //         const res = err.response;
-  //         expect(res).to.have.status(401);
-  //       })
-  //   })
+    it('should reject requests with incorrect username', function () {
+      return chai
+        .request(app)
+        .post('/auth/login')
+        .send({ username: 'incorrectUsername', password })
+        .then(() =>
+          // this is showing as a failure; how do I get it to pass?
+          expect.fail(null, null, 'Request should not succeed')
+        )
+        .catch(err => {
+          if (err instanceof chai.AssertionError) {
+            throw err;
+          }
+          const res = err.response;
+          expect(res).to.have.status(401);
+        })
+    })
 
-  //   it('should reject request with incorrect password', function () {
-  //     return chai
-  //       .request(app)
-  //       .post('/auth/login')
-  //       .send({ username, password: 'someWrongPassword' })
-  //       .then(() => 
-  //         expect.fail(null, null, 'Request should not succeed')
-  //       )
-  //       .catch(err => {
-  //         if (err instanceof chai.AssertionError) {
-  //           throw err;
-  //         }
-  //         const res = err.response;
-  //         expect(res).to.have.status(401)
+    it('should reject request with incorrect password', function () {
+      return chai
+        .request(app)
+        .post('/auth/login')
+        .send({ username, password: 'someWrongPassword' })
+        .then(() => 
+          expect.fail(null, null, 'Request should not succeed')
+        )
+        .catch(err => {
+          if (err instanceof chai.AssertionError) {
+            throw err;
+          }
+          const res = err.response;
+          expect(res).to.have.status(401)
 
-  //       })
+        })
       
-  //   })
+    })
 
 
-  // // the end of /auth/login
-  // })
+  // the end of /auth/login
+  })
 
 
 // the end

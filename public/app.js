@@ -73,6 +73,7 @@ function loginPostToApi(username, password, callback) {
     username,
     password
   }
+
   $.ajax(
     {
       url: '/auth/login', 
@@ -91,9 +92,6 @@ function loginPostToApi(username, password, callback) {
 
 }
 
-
-
-// Function to refresh JWT (not sure where to call this)
 
 
 // Function to Post Card to Api
@@ -127,13 +125,15 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
 // Function to Get all cards from API
 function getCardListFromApi(callback) {
   console.log('getCardListFromAPI ran');
+  const authToken = window.localStorage.getItem("authToken")
 
   $.ajax(
     {
       url : '/cards', 
       method : 'GET', 
       headers : {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "authorization" : `Bearer ${authToken}`
       }, 
       success : callback,
       error : function(a,b,c) {
@@ -149,6 +149,7 @@ function getCardListFromApi(callback) {
 // attempted to get card ID value a different way
 function deleteCardById(cardIdValue, callback) {
   console.log('deleteCardbyID ran');
+  const authToken = window.localStorage.getItem("authToken")
 
   $.ajax(
     {
@@ -156,7 +157,8 @@ function deleteCardById(cardIdValue, callback) {
       // url: `cards/:id`,
       method : 'DELETE',
       headers : {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "authorization" : `Bearer ${authToken}`
       },
       success : callback,
       error : function(a,b,c) {
@@ -168,12 +170,15 @@ function deleteCardById(cardIdValue, callback) {
 
 // Function to Retrieve card by ID (GET) using '/cards/:id' endpoint
 function getCardById(cardIdValue, callback) {
+
+  const authToken = window.localStorage.getItem("authToken")
   $.ajax(
     {
       url : `/cards/${cardIdValue}`, 
       method : 'GET', 
       headers : {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "authorization" : `Bearer ${authToken}`
       }, 
       success : callback,
       error : function(a,b,c) {
@@ -191,6 +196,7 @@ function getCardById(cardIdValue, callback) {
 function editCardById(id, headline, bodyText, character, callback) {
   console.log('editCardbyID ran');
   console.log(id);
+  const authToken = window.localStorage.getItem("authToken")
 
   $.ajax(
     {
@@ -198,7 +204,8 @@ function editCardById(id, headline, bodyText, character, callback) {
       method : 'PUT',
       data: JSON.stringify({ headline, bodyText, character, id, }),
       headers : {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "authorization" : `Bearer ${authToken}`
       },
       success : callback,
       error : function(a,b,c) {
@@ -712,7 +719,9 @@ $(function() {
   // Listen for click on '.logout-button' then logs user out, shows login page
   $('.contentContainer').on('click', '.logout-button', event => {
     console.log('Logout button clicked');
-    
+    window.localStorage.removeItem("authToken")
+    getAndDisplayLoginForm();
+
   })
 
 
