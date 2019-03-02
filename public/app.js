@@ -126,6 +126,7 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
 function getCardListFromApi(callback) {
   console.log('getCardListFromAPI ran');
   const authToken = window.localStorage.getItem("authToken")
+  console.log(authToken);
 
   $.ajax(
     {
@@ -150,6 +151,7 @@ function getCardListFromApi(callback) {
 function deleteCardById(cardIdValue, callback) {
   console.log('deleteCardbyID ran');
   const authToken = window.localStorage.getItem("authToken")
+  console.log(authToken);
 
   $.ajax(
     {
@@ -172,6 +174,8 @@ function deleteCardById(cardIdValue, callback) {
 function getCardById(cardIdValue, callback) {
 
   const authToken = window.localStorage.getItem("authToken")
+  console.log(authToken);
+
   $.ajax(
     {
       url : `/cards/${cardIdValue}`, 
@@ -197,6 +201,7 @@ function editCardById(id, headline, bodyText, character, callback) {
   console.log('editCardbyID ran');
   console.log(id);
   const authToken = window.localStorage.getItem("authToken")
+  console.log(authToken);
 
   $.ajax(
     {
@@ -594,7 +599,10 @@ $(function() {
     console.log(passwordVal);
     postSignupCredsToApi(usernameVal, passwordVal, function(data) {
       console.log(data);
-      window.localStorage.setItem("authToken", data.authToken)
+      loginPostToApi(usernameVal, passwordVal, function(data) {
+        console.log(data)
+        window.localStorage.setItem("authToken", data.authToken)
+      })
       getAndDisplayCardForm();
     })
   })

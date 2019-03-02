@@ -40,7 +40,7 @@ describe('Auth endpoints', function () {
 
   describe('/auth/login', function () {
 
-    it.only('should reject requests with no credentials', function() {
+    it('should reject requests with no credentials', function() {
       return chai 
         .request(app)
         .post('/auth/login')
@@ -54,15 +54,7 @@ describe('Auth endpoints', function () {
         .request(app)
         .post('/auth/login')
         .send({ username: 'incorrectUsername', password })
-        .then(() =>
-          // this is showing as a failure; how do I get it to pass?
-          expect.fail(null, null, 'Request should not succeed')
-        )
-        .catch(err => {
-          if (err instanceof chai.AssertionError) {
-            throw err;
-          }
-          const res = err.response;
+        .then((res) => {
           expect(res).to.have.status(401);
         })
     })
@@ -72,18 +64,9 @@ describe('Auth endpoints', function () {
         .request(app)
         .post('/auth/login')
         .send({ username, password: 'someWrongPassword' })
-        .then(() => 
-          expect.fail(null, null, 'Request should not succeed')
-        )
-        .catch(err => {
-          if (err instanceof chai.AssertionError) {
-            throw err;
-          }
-          const res = err.response;
-          expect(res).to.have.status(401)
-
+        .then((res) => {
+          expect(res).to.have.status(401);
         })
-      
     })
 
 
