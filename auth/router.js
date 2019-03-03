@@ -26,7 +26,6 @@ router.use(bodyParser.json());
 // Then JWT is created
 // Token is sent back to user, who stores it, uses it for other requests
 router.post('/login', localAuth, (req, res) => {
-  console.log('when in doubt print something out')
   const authToken = createAuthToken(req.user.serialize());
   res.json({authToken});
 });

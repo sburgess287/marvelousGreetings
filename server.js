@@ -16,6 +16,7 @@ app.use(express.json());
 
 const { PORT, DATABASE_URL } = require('./config');
 const { Card } = require('./cards/models');
+const { User } = require('./users/models')
 
 app.use(express.static('public'));
 app.use(morgan('common'));
@@ -29,16 +30,15 @@ app.get('/', (req, res) => {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-// Do I need to update these endpoint paths?
 app.use('/users/', usersRouter);
 app.use('/auth/', authRouter);
 
 // Declare jwtAuth to authenticate
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-// GET endpoint for all cards
+// GET endpoint for all cards by that User
 app.get("/cards", jwtAuth, (req, res) => {
-  console.log("hello 1st line of get endpoint");
+  console.log("GET card endpoint ran");
   Card
     .find()
     .then(cards => {
@@ -76,6 +76,7 @@ app.get('/cards/:id', jwtAuth, (req, res) => {
 // POST endpoint for cards
 app.post('/cards', jwtAuth, (req, res) => {
   const requiredFields = ["headline", "bodyText", "character"]
+  // const requiredFields = ["headline", "bodyText", "character", "user_id"]
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -84,11 +85,33 @@ app.post('/cards', jwtAuth, (req, res) => {
       return res.status(400).send(message);
     }
   }
+  // refactor endpoint to find User by id then create the card (currently fails)
+  // User
+  //   .findById(req.body.user_id)
+  //   .then(user => {
+  //     if (user) {
+  //       return Card
+  //         .create({
+  //           headline: req.body.headline,
+  //           bodyText: req.body.bodyText, 
+  //           character: req.body.character,
+  //           username: req.body.user_id // this is not being added to request payload
+  //         })
+  //         .then(card => res.status(201).json(card.serialize()))
+
+  //     }
+  //     else {
+  //       const message = `Author not found`;
+  //       console.error(message);
+  //       return res.status(400).send(message);
+  //     }
+  //   })
   Card
     .create({
       headline: req.body.headline,
       bodyText: req.body.bodyText, 
-      character: req.body.character
+      character: req.body.character,
+      username: req.body.username // this is not being added to request payload
     })
     .then(card => res.status(201).json(card.serialize()))
     .catch(err => {

@@ -22,10 +22,11 @@ const UserSchema = mongoose.Schema({
   // lastName: {type: String, default: ''}
 });
 
-// is this method needed if I'm not using first and last name?
+// return username and id to reference
 UserSchema.methods.serialize = function() {
   return {
     username: this.username || '',
+    id: this.id
     // firstname: this.firstName || '',
     // lastName: this.lastName || ''
   };
