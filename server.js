@@ -37,21 +37,16 @@ app.use('/auth/', authRouter);
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 // GET endpoint for all cards by that User
+// refactor
 app.get("/cards", jwtAuth, (req, res) => {
   console.log("GET card endpoint ran");
   Card
     .find()
+    // .find({"user_id": req.user_id})
+    .where("user_id", req.user.id)
     .then(cards => {
       console.log("got past cards.find line of get endpoint");
       res.json(cards.map(card => card.serialize()))
-    // res.json(cards.map(card => {
-    //   return {
-    //     id: req.body.id,
-    //     headline: req.body.headline,
-    //     bodyText: req.body.bodyText,
-    //     character: req.body.character
-    //   }
-    // }))
   })
     .catch(err => {
       console.err(err);
@@ -75,8 +70,8 @@ app.get('/cards/:id', jwtAuth, (req, res) => {
 
 // POST endpoint for cards
 app.post('/cards', jwtAuth, (req, res) => {
+  // const requiredFields = ["headline", "bodyText", "character"]
   const requiredFields = ["headline", "bodyText", "character"]
-  // const requiredFields = ["headline", "bodyText", "character", "user_id"]
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -85,33 +80,15 @@ app.post('/cards', jwtAuth, (req, res) => {
       return res.status(400).send(message);
     }
   }
-  // refactor endpoint to find User by id then create the card (currently fails)
-  // User
-  //   .findById(req.body.user_id)
-  //   .then(user => {
-  //     if (user) {
-  //       return Card
-  //         .create({
-  //           headline: req.body.headline,
-  //           bodyText: req.body.bodyText, 
-  //           character: req.body.character,
-  //           username: req.body.user_id // this is not being added to request payload
-  //         })
-  //         .then(card => res.status(201).json(card.serialize()))
+ 
 
-  //     }
-  //     else {
-  //       const message = `Author not found`;
-  //       console.error(message);
-  //       return res.status(400).send(message);
-  //     }
-  //   })
+  // This creates cards unassociated to users (refactoring above, delete this later)
   Card
     .create({
       headline: req.body.headline,
       bodyText: req.body.bodyText, 
       character: req.body.character,
-      username: req.body.username // this is not being added to request payload
+      user_id: req.user.id // getting from Bearer token
     })
     .then(card => res.status(201).json(card.serialize()))
     .catch(err => {

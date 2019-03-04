@@ -100,6 +100,7 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
     headline : headlineInput, 
     bodyText : messageInput, 
     character : characterInput
+    
   }
   const authToken = window.localStorage.getItem("authToken")
 

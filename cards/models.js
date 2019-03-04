@@ -12,15 +12,15 @@ const cardSchema = mongoose.Schema({
     headline: { type: String, required: true},
     bodyText: { type: String, required: true},
     character: { type: String, required: true}, 
-    username: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 
 })
 
 // Virtual to create prehook to retrieve author of cards
-cardSchema.pre('find', function(next) {
-    this.populate('user');
-    next();
-})
+// cardSchema.pre('find', function(next) {
+//     this.populate('user');
+//     next();
+// })
 
 // Card instance method to create card object to return
 cardSchema.methods.serialize = function() {
@@ -29,7 +29,7 @@ cardSchema.methods.serialize = function() {
         headline: this.headline, 
         bodyText: this.bodyText, 
         character: this.character,
-        username: this.username
+        user_id: this.user_id
     }
 }
 
