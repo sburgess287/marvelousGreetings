@@ -16,12 +16,6 @@ const cardSchema = mongoose.Schema({
 
 })
 
-// Virtual to create prehook to retrieve author of cards
-// cardSchema.pre('find', function(next) {
-//     this.populate('user');
-//     next();
-// })
-
 // Card instance method to create card object to return
 cardSchema.methods.serialize = function() {
     return {
