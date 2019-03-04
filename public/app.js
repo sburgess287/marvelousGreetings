@@ -438,7 +438,7 @@ function setCharacterChecked(cardResponse) {
     character => character.characterName)
     console.log(characterListArray);  // returns list of characters! woo!
   
-
+  let results = []
   for ( let i = 0; i <= characterListArray.length; i++) {
     if ( cardResponse.character === characterListArray[i]) {
       console.log('successfully found match, see below');
@@ -448,14 +448,10 @@ function setCharacterChecked(cardResponse) {
       // "Jean Grey" in array so doesn't show match
       // Need to update logic to set value to checked
 
-    } 
-    //   else {
+      // results.push($('[name=character]').val([`${cardResponse.character}`]));
+      $(`input:radio[name="character"][value="${cardResponse.character}"]`).prop('checked', true);
 
-    //   console.log('no matches found') //showing no matches found & empty object
-      
-    //   console.log(cardResponse.character); // showing saved character/ok
-    //   console.log(characterListArray[i]); // shows character from char array
-    // }
+    }
   
   }
   
@@ -481,7 +477,7 @@ function generateCardFormStringEdit(cardResponse) {
             <input value="${cardResponse.bodyText}" placeholder="bar" id="message" type="text" name="textfield" class="css-message-field" required>
             <fieldset>
               <legend>Select Character</legend>
-              <div class="css-radio">
+              <div class="css-radio list">
                 <div>
                   <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
                   <label for="ironman">Iron Man</label>
