@@ -37,15 +37,11 @@ app.use('/auth/', authRouter);
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 // GET endpoint for all cards by that User
-// refactor
 app.get("/cards", jwtAuth, (req, res) => {
-  console.log("GET card endpoint ran");
   Card
     .find()
-    // .find({"user_id": req.user_id})
     .where("user_id", req.user.id)
     .then(cards => {
-      console.log("got past cards.find line of get endpoint");
       res.json(cards.map(card => card.serialize()))
   })
     .catch(err => {
@@ -57,7 +53,6 @@ app.get("/cards", jwtAuth, (req, res) => {
 
 // GET endpoint for retrieving specific card by id
 app.get('/cards/:id', jwtAuth, (req, res) => {
-  console.log("get cards by id endpoint ran");
   Card 
     .findById(req.params.id)
     .then(card => res.json(card.serialize()))
@@ -70,7 +65,6 @@ app.get('/cards/:id', jwtAuth, (req, res) => {
 
 // POST endpoint for cards
 app.post('/cards', jwtAuth, (req, res) => {
-  // const requiredFields = ["headline", "bodyText", "character"]
   const requiredFields = ["headline", "bodyText", "character"]
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -81,8 +75,6 @@ app.post('/cards', jwtAuth, (req, res) => {
     }
   }
  
-
-  // This creates cards unassociated to users (refactoring above, delete this later)
   Card
     .create({
       headline: req.body.headline,
@@ -115,7 +107,7 @@ app.put('/cards/:id', jwtAuth, (req, res) => {
   // remove the req.body.id and verify test
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
-      error: `Request path id and request body id values must match req.params.id: ${req.params.id}, req.body.id: ${req.body.id}`
+      error: `Request path id and request body id values must match`
     })
   }
   const updated = {};

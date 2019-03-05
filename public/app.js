@@ -85,6 +85,7 @@ function loginPostToApi(username, password, callback) {
       },
       success : callback, 
       error : function (a,b,c) {
+        // alert(`Error: ${c}`);
         console.log("Error message: ", c);
       }
     }
@@ -148,9 +149,8 @@ function getCardListFromApi(callback) {
 // Function to Delete card by id from API using '/cards/:id' endpoint
 // need to pass in the id of the card to go to correct endpoint and delete
 // error says cardListResponse is undefined
-// attempted to get card ID value a different way
+
 function deleteCardById(cardIdValue, callback) {
-  console.log('deleteCardbyID ran');
   const authToken = window.localStorage.getItem("authToken")
   console.log(authToken);
 
@@ -195,9 +195,6 @@ function getCardById(cardIdValue, callback) {
 }
 
 // Function to Edit card by id (PUT) using '/cards/:id' endpoint
-// need to pass in the id of the card to go to correct endpoint and delete
-// error says cardListResponse is undefined
-// attempted to get card ID value a different way
 function editCardById(id, headline, bodyText, character, callback) {
   console.log('editCardbyID ran');
   console.log(id);
@@ -536,6 +533,10 @@ function generateSignUpFormString() {
           <input id="password" type="password" name="textfield" class="css-pw-signup-input" required>
         </div>
         <input type="submit" class="css-submit enter-creds-button" value="Enter new credentials and sign in">
+        <div>
+          <p role="alert" class="hidden" id="invalid-signup-alert">Invalid signup credentials, 
+          please try again</p>
+        </div>
       </form>   
     </div>
   `
@@ -563,6 +564,10 @@ function generateLoginFormString() {
           <input id="password" type="password" name="textfield" class="css-pw-input" required>
         </div>
         <input type="submit" class="css-submit login-button" value="Login">
+        <div>
+          <p role="alert" class="hidden" id="invalid-login-alert">Invalid login, 
+          please use valid credentials or go to Signup Form</p>
+        </div>
       </form>
       <button class="css-submit signup-form-button">Go To Signup Form</button>
     </div>
@@ -579,6 +584,14 @@ $(function() {
   // Display Login page
   getAndDisplayLoginForm();
 
+  // On page load, get the auth token and if it's valid, load the 
+  // create card page (this way the display card page shows on refresh)
+  let checkToken = window.localStorage.getItem("authToken");
+  if (!(checkToken === undefined)) {
+    getAndDisplayCardForm();
+  }
+  
+
   // Event listener for clicking "Go to signup form" button on the login page
   // Then shows the signup page
   $('.contentContainer').on('click', '.signup-form-button', event => {
@@ -594,6 +607,7 @@ $(function() {
     const passwordVal = $('#password').val();
     console.log(usernameVal);
     console.log(passwordVal);
+    $('#invalid-signup-alert').show();
     postSignupCredsToApi(usernameVal, passwordVal, function(data) {
       console.log(data);
       loginPostToApi(usernameVal, passwordVal, function(data) {
@@ -609,38 +623,30 @@ $(function() {
   // Function to refresh JWT, do I put this logic in the login API post?
   $('.contentContainer').on('submit', '.login-form', event => {
     event.preventDefault();
-    console.log('login submit ran')
     const usernameVal = $('#username').val();
     const passwordVal = $('#password').val();
-    console.log(usernameVal);
-    console.log(passwordVal);
-    loginPostToApi(usernameVal, passwordVal, function(data) { 
-      console.log(data);
+
+    $('#invalid-login-alert').show();
+    loginPostToApi(usernameVal, passwordVal, function(data) {
       window.localStorage.setItem("authToken", data.authToken)
       getAndDisplayCardForm(); 
     })
-     
+
   })
 
   // Listen for click of "Go to Saved Cards" button. 
   // Then get the card list from the GET endpoint, display the Card list.
   $('.contentContainer').on('click', '.js-saved-cards-button', event => {
-    console.log('go to saved cards button clicked');
     getCardListFromApi(getAndDisplayCardList)
-    
   })
 
   // Listen for form submit on '.card-submit-form' and pass to POST API endpoint
   $('.contentContainer').on('submit', '.card-submit-form', event => {
     event.preventDefault();
-    console.log('card submit form success!');
+    
     const headlineInput = $('#headline').val();
     const messageInput = $('#message').val();
     const characterInput = $('input[name="character"]:checked').val();
-    console.log(headlineInput);
-    console.log(messageInput);
-    console.log(characterInput);
-    // post not making it to database and also not showing up on displayNewCard()
     postCardToApi(headlineInput, messageInput, characterInput, displayCard)
 
   })
@@ -649,16 +655,11 @@ $(function() {
   
   $('.contentContainer').on('submit', '.card-update-form', event => {
     event.preventDefault();
-    console.log('card update form success!');
     const headlineInput = $('#headline').val();
     const messageInput = $('#message').val();
     const characterInput = $('input[name="character"]:checked').val();
-    const cardId = $('.card-update-form').data("card-id")
-    console.log(headlineInput);
-    console.log(messageInput);
-    console.log(characterInput);
-    console.log(cardId); // this is showing undefined
-    // Do I need to pass in the card id value? the put is showing wrong endpoint
+    const cardId = $('.card-update-form').data("card-id");
+
     editCardById(cardId, headlineInput, messageInput, characterInput, function() {
       displayCard({ id: cardId, headline: headlineInput, bodyText: messageInput, character: characterInput})
     })
@@ -667,13 +668,11 @@ $(function() {
 
   // Listen for click on '.download-card-btn' then convert html image to canvas and download it
   $('.contentContainer').on('click', '.download-card-btn', event => { 
-    console.log('download card button clicked');
-    // Move this into a separate function; this downloads the card to user machine on preview screen
-    // convertCardAndDownload();
+    
     let x = this.getElementById('screenshot-card');
     // html2canvas(x, { allowTaint: true}).then(canvas => {
     html2canvas(x).then(canvas => {
-      // document.body.appendChild(canvas);
+    
       var a = document.createElement('a');
       a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
       a.download = 'marvelousGreetings.jpg';
@@ -689,14 +688,11 @@ $(function() {
 
   // Listen for click on '.create-card-btn' and load Create page
   $('.contentContainer').on('click', '.js-create-card-btn', event => {
-    console.log('Go to create page button clicked');
     getAndDisplayCardForm();
   })
 
   // Listen for click on '.js-delete-card-button and Delete card
   $('.contentContainer').on('click', '.js-delete-card-button', event => {
-  
-    console.log('Delete button clicked');  
     const card = $(event.currentTarget).closest(".card-container")
     deleteCardById(card.data("card-id"), function(){
       card.remove()
@@ -705,17 +701,14 @@ $(function() {
   
   // Listen for click on '.js-edit-card-button' to go to Edit the card
   $('.contentContainer').on('click', '.js-edit-card-button', event => {
-    console.log('edit button clicked');
     // retrieve the card by id
     const card = $(event.currentTarget).closest(".card-container")
     getCardById(card.data("card-id"), getAndDisplayCardFormEdit);
-    
   })
 
   // Listen for click on '.js-preview-card-button' to view card from cards list
   $('.contentContainer').on('click', '.js-preview-card-button', event => {
-    console.log('view button clicked on cards list');
-    // retreive the card by id
+    // retrieve the card by id
     const card = $(event.currentTarget).closest(".card-container")
     getCardById(card.data("card-id"), displayCard);
     
@@ -725,6 +718,7 @@ $(function() {
   $('.contentContainer').on('click', '.logout-button', event => {
     console.log('Logout button clicked');
     window.localStorage.removeItem("authToken")
+    
     getAndDisplayLoginForm();
 
   })
