@@ -595,23 +595,17 @@ $(function() {
   // Event listener for clicking "Go to signup form" button on the login page
   // Then shows the signup page
   $('.contentContainer').on('click', '.signup-form-button', event => {
-    console.log('listening for click to show the signup page')
     getAndDisplaySignUpForm();
   })
 
   // Enter valid credentials to signup page
   $('.contentContainer').on('submit', '.sign-up-form', event => {
     event.preventDefault();
-    console.log('signup submit ran');
     const usernameVal = $('#username').val();
     const passwordVal = $('#password').val();
-    console.log(usernameVal);
-    console.log(passwordVal);
     $('#invalid-signup-alert').show();
     postSignupCredsToApi(usernameVal, passwordVal, function(data) {
-      console.log(data);
       loginPostToApi(usernameVal, passwordVal, function(data) {
-        console.log(data)
         window.localStorage.setItem("authToken", data.authToken)
       })
       getAndDisplayCardForm();
@@ -716,9 +710,8 @@ $(function() {
 
   // Listen for click on '.logout-button' then logs user out, shows login page
   $('.contentContainer').on('click', '.logout-button', event => {
-    console.log('Logout button clicked');
+
     window.localStorage.removeItem("authToken")
-    
     getAndDisplayLoginForm();
 
   })
