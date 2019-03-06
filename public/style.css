@@ -32,9 +32,9 @@ body {
   background-color: rgb(206, 177, 206);
 }
 
-.css-login-input, .css-pw-input {
+.css-login-input, .css-pw-input, 
+.css-signup-input, .css-pw-signup-input {
   height: 40px;
-
 }
 
 .entry-field {
@@ -91,7 +91,7 @@ h1 {
 .css-submit {
   /* width: 80%; removed to make buttons inline*/ 
   margin: auto;
-  font-size: 14pt;
+  font-size: x-large;
   background: rgb(218, 228, 222);
   
 }
@@ -129,10 +129,12 @@ h1 {
 
 .css-submit, .css-go-to-signup-form {
   margin: auto;
-  display: inline-block;
+  /* // changed from inline-block on the card preview */
+  display: block;
+
   /* width:80%; removed to make buttons inline*/
   margin-top: 2em;
-  font-size: 16pt;
+  /* font-size: 16pt; */
   margin-bottom: 2em;
 }
 
