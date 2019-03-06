@@ -12,7 +12,8 @@ const cardSchema = mongoose.Schema({
     headline: { type: String, required: true},
     bodyText: { type: String, required: true},
     character: { type: String, required: true}, 
-    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    // character_id: { type: String } // remove if not needed for modularizing
 
 })
 
@@ -23,7 +24,8 @@ cardSchema.methods.serialize = function() {
         headline: this.headline, 
         bodyText: this.bodyText, 
         character: this.character,
-        user_id: this.user_id
+        user_id: this.user_id,
+        // character_id: this.character_id, remove if not needed for modularizing
     }
 }
 
