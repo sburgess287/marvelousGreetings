@@ -126,9 +126,8 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
 
 // Function to Get all cards from API
 function getCardListFromApi(callback) {
-  console.log('getCardListFromAPI ran');
+  
   const authToken = window.localStorage.getItem("authToken")
-  console.log(authToken);
 
   $.ajax(
     {
@@ -152,7 +151,6 @@ function getCardListFromApi(callback) {
 
 function deleteCardById(cardIdValue, callback) {
   const authToken = window.localStorage.getItem("authToken")
-  console.log(authToken);
 
   $.ajax(
     {
@@ -175,8 +173,7 @@ function deleteCardById(cardIdValue, callback) {
 function getCardById(cardIdValue, callback) {
 
   const authToken = window.localStorage.getItem("authToken")
-  console.log(authToken);
-
+  
   $.ajax(
     {
       url : `/cards/${cardIdValue}`, 
@@ -223,6 +220,33 @@ function getDefaultCard(callbackFn) {
   setTimeout(function(){ callbackFn(MOCK_CARD.cardStructure)}, 1);
 }
 
+// trying to modularize the radio list form?
+function generateCharacterRadioListForm() {
+  return `
+    <div>
+    <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
+    <label for="ironman">Iron Man</label>
+    </div>
+    <div>
+      <input type="radio" name="character" id="storm" value="Storm">
+      <label for="storm">Storm</label>
+    </div>
+    <div>
+      <input type="radio" name="character" id="wolverine" value="Wolverine">
+      <label for="wolverine">Wolverine</label>
+    </div>
+    <div>
+      <input type="radio" name="character" id="jean-grey" value="Jean Grey">
+      <label for="jean-grey">Jean Grey</label>
+    </div>
+    <div>
+      <input type="radio" name="character" id="thor" value="Thor">
+      <label for="thor">Thor</label>
+    </div>
+  `
+
+}
+
 // Returns the html for generating the card form
 function generateCardFormString() {
   return `
@@ -239,28 +263,27 @@ function generateCardFormString() {
             <input id="message" type="text" name="textfield" class="css-message-field" required>
             <fieldset>
               <legend>Select Character</legend>
-              <div class="css-radio">
-                <div>
-                  <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
-                  <label for="ironman">Iron Man</label>
-                </div>
-                <div>
-                  <input type="radio" name="character" id="storm" value="Storm">
-                  <label for="storm">Storm</label>
-                </div>
-                <div>
-                  <input type="radio" name="character" id="wolverine" value="Wolverine">
-                  <label for="wolverine">Wolverine</label>
-                </div>
-                <div>
-                  <input type="radio" name="character" id="jean-grey" value="Jean Grey">
-                  <label for="jean-grey">Jean Grey</label>
-                </div>
-                <div>
-                  <input type="radio" name="character" id="thor" value="Thor">
-                  <label for="thor">Thor</label>
-                </div>
+              <div class="css-radio character-radio-list">
+              <div>
+              <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
+              <label for="ironman">Iron Man</label>
               </div>
+              <div>
+                <input type="radio" name="character" id="storm" value="Storm">
+                <label for="storm">Storm</label>
+              </div>
+              <div>
+                <input type="radio" name="character" id="wolverine" value="Wolverine">
+                <label for="wolverine">Wolverine</label>
+              </div>
+              <div>
+                <input type="radio" name="character" id="jean-grey" value="Jean Grey">
+                <label for="jean-grey">Jean Grey</label>
+              </div>
+              <div>
+                <input type="radio" name="character" id="thor" value="Thor">
+                <label for="thor">Thor</label>
+              </div> 
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
           <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Go to Card Preview">     
@@ -278,6 +301,7 @@ function generateCardFormString() {
 function getAndDisplayCardForm() {
   const cardForm = generateCardFormString();
   $('.contentContainer').html(cardForm);
+  // $('.character-radio-list').html('hello!') // experiment
 
 }
 
@@ -287,7 +311,7 @@ function displayCard(cardResponse){
   let character = CHARACTER_LIST.find(function(character) {
     return character.characterName === cardResponse.character
   });
-  console.log(cardResponse);
+  
   $('.contentContainer').html(
     
     `
@@ -372,10 +396,10 @@ function generateNoCardsFoundPageString() {
 
 function getAndDisplayCardList(cardListResponse) {
   
-  console.log(cardListResponse);
-  console.log(cardListResponse.length);
+  // console.log(cardListResponse);
+  // console.log(cardListResponse.length);
   
-  // Note: How should I defend against max number of cards to load?
+  
 
 
   // Handle no cards/results found
@@ -442,9 +466,8 @@ function setCharacterChecked(cardResponse) {
       console.log('successfully found match, see below');
       console.log(cardResponse.character);
       console.log(characterListArray[i]);
-      // note: fix Jean Grey, which shows up as "JeanGrey" in card response and 
-      // "Jean Grey" in array so doesn't show match
-      // Need to update logic to set value to checked
+      
+      // how do I create a second event listener on the content container for this?
 
       // results.push($('[name=character]').val([`${cardResponse.character}`]));
       $(`input:radio[name="character"][value="${cardResponse.character}"]`).prop('checked', true);
@@ -457,9 +480,7 @@ function setCharacterChecked(cardResponse) {
 
 // Returns the html for generating the card form on Edit
 function generateCardFormStringEdit(cardResponse) {
-  console.log(cardResponse);
-  console.log('about to run setCharacterChecked function')
-  setCharacterChecked(cardResponse);
+  setCharacterChecked(cardResponse); // this has to be called inside the generate cardformStringEdit
 
   return `
     <!-- Page 1: fill in card -->
@@ -477,7 +498,7 @@ function generateCardFormStringEdit(cardResponse) {
               <legend>Select Character</legend>
               <div class="css-radio list">
                 <div>
-                  <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
+                  <input type="radio" name="character" id="ironman" value="Iron Man">
                   <label for="ironman">Iron Man</label>
                 </div>
                 <div>
@@ -512,13 +533,14 @@ function generateCardFormStringEdit(cardResponse) {
 
 // Function to display Edit card form (Page 1)
 function getAndDisplayCardFormEdit(cardResponse) {
-  console.log(cardResponse)
+  
   const cardForm = generateCardFormStringEdit(cardResponse);
   $('.contentContainer').html(cardForm);
+  
 }
 
 function generateSignUpFormString() {
-  console.log('generateSignUpFormString ran');
+  
   return `
     <!-- Sign Up -->
     <div class="newContentContainer css-container">
@@ -543,13 +565,11 @@ function generateSignUpFormString() {
 }
 
 function getAndDisplaySignUpForm() {
-  console.log('getAndDisplaySignUpForm ran');
   const signUpForm = generateSignUpFormString();
   $('.contentContainer').html(signUpForm);
 };
 
 function generateLoginFormString() {
-  console.log('generateLoginFormString ran');
   return `
     <!-- Login -->
     <div class="newContentContainer css-container">
@@ -575,7 +595,6 @@ function generateLoginFormString() {
 }
 
 function getAndDisplayLoginForm() {
-  console.log('getAndDisplayLoginForm ran');
   const loginForm = generateLoginFormString();
   $('.contentContainer').html(loginForm);
 }
@@ -586,10 +605,12 @@ $(function() {
 
   // On page load, get the auth token and if it's valid, load the 
   // create card page (this way the display card page shows on refresh)
-  let checkToken = window.localStorage.getItem("authToken");
-  if (!(checkToken === undefined)) {
-    getAndDisplayCardForm();
-  }
+  let checkToken = window.localStorage.getItem("authToken"); 
+  if (checkToken === null) {
+    getAndDisplayLoginForm();
+  } else if (!(checkToken === undefined)) {
+    getAndDisplayCardForm(); 
+  } 
   
 
   // Event listener for clicking "Go to signup form" button on the login page
@@ -710,8 +731,7 @@ $(function() {
 
   // Listen for click on '.logout-button' then logs user out, shows login page
   $('.contentContainer').on('click', '.logout-button', event => {
-
-    window.localStorage.removeItem("authToken")
+    window.localStorage.removeItem("authToken");
     getAndDisplayLoginForm();
 
   })
