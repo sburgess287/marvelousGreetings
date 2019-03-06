@@ -56,9 +56,23 @@ h1 {
 
 .css-headline-field, .css-message-field {
   width: 100%;
-  padding: .75em;
+  padding: 1em;
+  font-size: x-large;
+  text-align: center;
+  
+  margin-top: .5em;
+}
+
+.css-headline-field {
+  margin-bottom: .5em;
   
 }
+
+.css-message-field {
+  font-size: large;
+  margin-bottom: 1em;
+}
+
 
 /* .css-login-form {
   border: solid green 10px;
@@ -67,7 +81,7 @@ h1 {
 .css-form, .css-login-form, .css-signup-form {
   width: 80%;
   margin: auto;
-  font-size: 14pt;
+  font-size: x-large;
 }
 
 /* Fix this for larger viewports, currently taking up entire width */
@@ -79,20 +93,30 @@ h1 {
   margin: auto;
   font-size: 14pt;
   background: rgb(218, 228, 222);
+  
 }
 
-/* Experimenting with radio button and form alignment
+/* Experimenting with radio button and form alignment */
 .css-radio {
-  display: inline; */ 
-  /* float: left;
+  /* display: inline; */
+   /* float: left;
   clear: none;
-  
-}*/
+   */
+   padding-top: .5em;
+   padding-bottom: .5em;
 
+}
+
+.radio-text {
+  font-size: x-large;
+}
+
+/* This changes style of downloaded card */
 .css-preview-content-container {
   border: solid rgb(160, 142, 160) 10px;
   margin: auto;
   width: 100%;
+  background-color: lightslategray; 
 }
 
 /* Proof of concept for style.html, can be removed later */
@@ -109,10 +133,11 @@ h1 {
   /* width:80%; removed to make buttons inline*/
   margin-top: 2em;
   font-size: 16pt;
+  margin-bottom: 2em;
 }
 
 .css-all-saved-cards-button {
-  width: 80%;
+  /* width: 80%; */
   /* display: block; */
   /* margin: auto; */
   margin: auto;
@@ -141,6 +166,7 @@ canvas {
   border: solid green 20px;
   margin: auto;
   width:100%;
+  background-color: (82, 110, 36);
 }
 
 .css-footer {

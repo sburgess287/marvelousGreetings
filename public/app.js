@@ -245,23 +245,23 @@ function generateCardFormString() {
               <div class="css-radio character-radio-list">
               <div>
               <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
-              <label for="ironman">Iron Man</label>
+              <label for="ironman" class="radio-text">Iron Man</label>
               </div>
               <div>
                 <input type="radio" name="character" id="storm" value="Storm">
-                <label for="storm">Storm</label>
+                <label for="storm" class="radio-text" >Storm</label>
               </div>
               <div>
                 <input type="radio" name="character" id="wolverine" value="Wolverine">
-                <label for="wolverine">Wolverine</label>
+                <label for="wolverine" class="radio-text">Wolverine</label>
               </div>
               <div>
                 <input type="radio" name="character" id="jean-grey" value="Jean Grey">
-                <label for="jean-grey">Jean Grey</label>
+                <label for="jean-grey" class="radio-text">Jean Grey</label>
               </div>
               <div>
                 <input type="radio" name="character" id="thor" value="Thor">
-                <label for="thor">Thor</label>
+                <label for="thor" class="radio-text">Thor</label>
               </div> 
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
@@ -419,7 +419,7 @@ function getAndDisplayCardList(cardListResponse) {
         <h2>Page 4: Saved Cards</h2>
         <button class="css-all-saved-cards-button logout-button">Logout</button>
         <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
-        <p>Do I need more buttons?</p>
+        <p>Edit, View, or Delete Your Cards!</p>
           ${cardList.join('')}
       </div>
 
