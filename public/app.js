@@ -454,11 +454,11 @@ function getAndDisplayCardList(cardListResponse) {
 // then set checked="checked"
 function setCharacterChecked(cardResponse) {
   console.log('1st line of setCharacterChecked')
-  console.log(cardResponse);
+  // console.log(cardResponse);
 
   const characterListArray = CHARACTER_LIST.map(
     character => character.characterName)
-    console.log(characterListArray);  // returns list of characters! woo!
+    // console.log(characterListArray);  // returns list of characters! woo!
   
   let results = []
   for ( let i = 0; i <= characterListArray.length; i++) {
@@ -470,7 +470,7 @@ function setCharacterChecked(cardResponse) {
       // how do I create a second event listener on the content container for this?
 
       // results.push($('[name=character]').val([`${cardResponse.character}`]));
-      $(`input:radio[name="character"][value="${cardResponse.character}"]`).prop('checked', true);
+      $(`input:radio[name="character"][value="${characterListArray[i]}"]`).prop('checked', true);
 
     }
   
@@ -498,7 +498,7 @@ function generateCardFormStringEdit(cardResponse) {
               <legend>Select Character</legend>
               <div class="css-radio list">
                 <div>
-                  <input type="radio" name="character" id="ironman" value="Iron Man">
+                  <input type="radio" name="character" id="ironman" value="Iron Man" checked>
                   <label for="ironman">Iron Man</label>
                 </div>
                 <div>
