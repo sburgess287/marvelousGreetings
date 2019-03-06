@@ -562,7 +562,7 @@ function generateSignUpFormString() {
           <label for="password">Password</label>
           <input id="password" type="password" name="textfield" class="css-pw-signup-input" required>
         </div>
-        <input type="submit" class="css-submit enter-creds-button" value="Enter New Credentials">
+        <input type="submit" class="css-submit enter-creds-button" value="Click to Enter New Credentials">
         <div>
           <p role="alert" class="hidden" id="invalid-signup-alert">Invalid signup credentials, 
           please try again</p>
@@ -594,7 +594,7 @@ function generateLoginFormString() {
           <label for="password">Password</label>
           <input id="password" type="password" name="textfield" class="css-pw-input" required>
         </div>
-        <input type="submit" class="css-submit login-button" value="Login">
+        <input type="submit" class="css-submit login-button" value="Click to Login">
         <div>
           <p role="alert" class="hidden" id="invalid-login-alert">Invalid login, 
           please use valid credentials or go to Signup Form</p>
