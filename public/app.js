@@ -554,20 +554,23 @@ function generateSignUpFormString() {
     <div class="newContentContainer css-container">
       <h2>Sign Up Page</h2>
       <form class="css-signup-form css-form sign-up-form">
-        <div username-section>
+        <div class="username-section entry-field">
           <label for="username">Username</label>
           <input id="username" type="text" name="textfield" class="css-signup-input" required>
         </div>
-        <div class="password-section">
+        <div class="password-section entry-field">
           <label for="password">Password</label>
           <input id="password" type="password" name="textfield" class="css-pw-signup-input" required>
         </div>
-        <input type="submit" class="css-submit enter-creds-button" value="Enter new credentials and sign in">
+        <input type="submit" class="css-submit enter-creds-button" value="Enter New Credentials">
         <div>
           <p role="alert" class="hidden" id="invalid-signup-alert">Invalid signup credentials, 
           please try again</p>
         </div>
-      </form>   
+      </form>
+    
+      <button class="css-submit go-to-login-button">Go To Login</button>
+
     </div>
   `
 }
@@ -581,13 +584,13 @@ function generateLoginFormString() {
   return `
     <!-- Login -->
     <div class="newContentContainer css-container">
-      <h2>Login Page</h2>
+      <h2>Login</h2>
       <form class="css-login-form css-form login-form">
-        <div class="username-section"> 
+        <div class="username-section entry-field"> 
           <label for="username">Username</label>
           <input id="username" type="text" name="textfield" class="css-login-input" required>
         </div>
-        <div class="password-section">
+        <div class="password-section entry-field">
           <label for="password">Password</label>
           <input id="password" type="password" name="textfield" class="css-pw-input" required>
         </div>
@@ -624,7 +627,15 @@ $(function() {
   // Event listener for clicking "Go to signup form" button on the login page
   // Then shows the signup page
   $('.contentContainer').on('click', '.signup-form-button', event => {
+    
     getAndDisplaySignUpForm();
+  })
+
+  // Event listener for clicking "Go to Login page" button on the signup page
+  // then shows the login page
+  $('.contentContainer').on('click', '.go-to-login-button', event => {
+    
+    getAndDisplayLoginForm();
   })
 
   // Enter valid credentials to signup page

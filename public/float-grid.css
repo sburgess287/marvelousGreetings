@@ -60,22 +60,23 @@
 }
 
 /* Smartphones (portrait and landscape) ----------- */
-/* @media screen and (min-device-width : 320px) and (max-device-width : 480px) { */
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
     /* Styles */
 
   /* body {
     background: lightblue;
   } */
 
-  /* .css-container {
+  .css-container {
     min-height: 7em;
-  } */
+    width:100%;
+  }
 
-  /* h1 {
-      text-align: center;
-      padding-bottom: 0;
+  h1 {
+      
+      
       font-size: 24pt;
-  } */
+  }
 
   /* .css-submit, .css-saved-card-button, .css-delete-card-button, 
   .css-create-card-button, .css-all-saved-cards-button, 
@@ -133,7 +134,7 @@
     text-align: center;
   } */
 
-/* }   */
+}  
 
   /* iPads (landscape) ----------- */
 /* @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {

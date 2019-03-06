@@ -27,18 +27,31 @@ body {
   margin-right: auto;
   text-align: center;
   /* min-height: 600px; */
-  width:100%;
+  /* width:100%; */
+  max-width: 800px;
+  background-color: rgb(206, 177, 206);
+}
+
+.css-login-input, .css-pw-input {
+  height: 40px;
+
+}
+
+.entry-field {
+  padding: 1em;
 }
 
 h2 {
 /* .css-h1, .css-h2 { */
   text-align: center;
+  padding-top: 1.5em;
 }
 
 h1 {
   text-align: center;
   padding-bottom: 0;
-  font-size: 24pt;
+  padding: 1.5em;
+  font-size: 32pt;
 }
 
 .css-headline-field, .css-message-field {
@@ -46,6 +59,10 @@ h1 {
   padding: .75em;
   
 }
+
+/* .css-login-form {
+  border: solid green 10px;
+} */
 
 .css-form, .css-login-form, .css-signup-form {
   width: 80%;
@@ -58,7 +75,7 @@ h1 {
 .css-delete-card-button, .css-all-saved-cards-button, 
 .css-edit-card-button, .css-view-card-button, .css-go-to-signup-form,
 .css-submit {
-  width: 80%;
+  /* width: 80%; removed to make buttons inline*/ 
   margin: auto;
   font-size: 14pt;
   background: rgb(218, 228, 222);
@@ -89,7 +106,7 @@ h1 {
 .css-submit, .css-go-to-signup-form {
   margin: auto;
   display: inline-block;
-  width:100%;
+  /* width:80%; removed to make buttons inline*/
   margin-top: 2em;
   font-size: 16pt;
 }

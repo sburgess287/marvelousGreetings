@@ -143,6 +143,29 @@
             
         
       </div>
+
+      <!-- Sign Up -->
+      <div class="newContentContainer css-container">
+        <h2>Sign Up Page</h2>
+        <form class="css-signup-form css-form sign-up-form">
+          <div username-section>
+            <label for="username">Username</label>
+            <input id="username" type="text" name="textfield" class="css-signup-input" required>
+          </div>
+          <div class="password-section">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="textfield" class="css-pw-signup-input" required>
+          </div>
+          <input type="submit" class="css-submit enter-creds-button" value="Enter New Credentials">
+          <div>
+            <p role="alert" class="hidden" id="invalid-signup-alert">Invalid signup credentials, 
+            please try again</p>
+          </div>
+        </form>
+      
+          <button class="css-submit go-to-login-button">Go To Login</button>
+    
+      </div>
       
     </main>
     <footer class="css-footer" role="contentinfo">
