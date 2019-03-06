@@ -22,22 +22,28 @@ const CHARACTER_LIST = [
   {
     "characterName": "Storm", 
     "characterImage": "../images/storm_portrait_uncanny.jpg",
+    "characterId": "storm", // added this to modularize list, remove if not needed
   },
   {
     "characterName": "Jean Grey", 
     "characterImage": "../images/jean_grey_portrait_uncanny.jpg",
+    "characterId": "jean-grey", // added ?? not sure this is correct strategy
   },
   {
     "characterName": "Iron Man", 
     "characterImage": "../images/iron_man_portrait_uncanny.jpg",
+    
+
   },
   {
     "characterName": "Thor", 
     "characterImage": "../images/thor_portrait_uncanny.jpg",
+    
   },
   {
     "characterName": "Wolverine", 
     "characterImage": "../images/wolverine_portrait_uncanny.jpg",
+    
   },
 
 
@@ -220,33 +226,6 @@ function getDefaultCard(callbackFn) {
   setTimeout(function(){ callbackFn(MOCK_CARD.cardStructure)}, 1);
 }
 
-// trying to modularize the radio list form?
-function generateCharacterRadioListForm() {
-  return `
-    <div>
-    <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
-    <label for="ironman">Iron Man</label>
-    </div>
-    <div>
-      <input type="radio" name="character" id="storm" value="Storm">
-      <label for="storm">Storm</label>
-    </div>
-    <div>
-      <input type="radio" name="character" id="wolverine" value="Wolverine">
-      <label for="wolverine">Wolverine</label>
-    </div>
-    <div>
-      <input type="radio" name="character" id="jean-grey" value="Jean Grey">
-      <label for="jean-grey">Jean Grey</label>
-    </div>
-    <div>
-      <input type="radio" name="character" id="thor" value="Thor">
-      <label for="thor">Thor</label>
-    </div>
-  `
-
-}
-
 // Returns the html for generating the card form
 function generateCardFormString() {
   return `
@@ -384,13 +363,18 @@ function displayCard(cardResponse){
 
 
 // Function which returns no cards found on Card list page
+// maybe add default image?
 // Note: add this to style.html and update here as well
 function generateNoCardsFoundPageString() {
   return `
+  <!-- Page 6: No cards created page -->
+  <div class="newContentContainer css-container">
     <div>
-      <h2>No Cards Found! Update this page!!!</h2>
+      <h2>No Cards Found! Please go to the Create card page to Create new card</h2>
+      <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
       <button class="css-all-saved-cards-button logout-button">Logout</button>
     </div>
+  </div>
   `
 }
 
@@ -399,9 +383,6 @@ function getAndDisplayCardList(cardListResponse) {
   // console.log(cardListResponse);
   // console.log(cardListResponse.length);
   
-  
-
-
   // Handle no cards/results found
   // Note need to update: data-card-id="${cardResponse[i].id}
   if (cardListResponse.length === 0) {
@@ -445,7 +426,32 @@ function getAndDisplayCardList(cardListResponse) {
       `
     );
   }
+}
 
+// update id, value, label, text
+function generateItemElement(item, itemIndex) {
+  return `
+  <div>
+  <input type="radio" name="character" id="${item.id}" value="${item.characterName}" checked="checked">
+  <label for="${item.id}">${item.characterName}</label>
+  </div>
+
+  `
+}
+
+function generateCharacterListItemString(list) {
+  console.log('Generate character list element')
+  const items = CHARACTER_LIST.map((item, index) =>
+    generateItemElement(item, index))
+    return items.push("");
+}
+// trying to modularize the radio list form?
+function renderCharacterRadioListForm() {
+  console.log('`renderCharacterRadioListForm` ran');
+  const characterListItemString = generateCharacterListItemString(CHARACTER_LIST);
+
+  // insert HTML into Dom: child element?
+  $('.contentContainer').html(characterListItemString);
 
 }
 
@@ -454,11 +460,11 @@ function getAndDisplayCardList(cardListResponse) {
 // then set checked="checked"
 function setCharacterChecked(cardResponse) {
   console.log('1st line of setCharacterChecked')
-  // console.log(cardResponse);
+  console.log(cardResponse);
 
   const characterListArray = CHARACTER_LIST.map(
     character => character.characterName)
-    // console.log(characterListArray);  // returns list of characters! woo!
+    console.log(characterListArray);  // returns list of characters! woo!
   
   let results = []
   for ( let i = 0; i <= characterListArray.length; i++) {
@@ -479,9 +485,10 @@ function setCharacterChecked(cardResponse) {
 }
 
 // Returns the html for generating the card form on Edit
-function generateCardFormStringEdit(cardResponse) {
+function generateCardFormStringEdit(cardResponse, list) {
+  console.log(list);
   setCharacterChecked(cardResponse); // this has to be called inside the generate cardformStringEdit
-
+  renderCharacterRadioListForm();
   return `
     <!-- Page 1: fill in card -->
     <div class="newContentContainer css-container">
@@ -496,9 +503,10 @@ function generateCardFormStringEdit(cardResponse) {
             <input value="${cardResponse.bodyText}" placeholder="bar" id="message" type="text" name="textfield" class="css-message-field" required>
             <fieldset>
               <legend>Select Character</legend>
+              
               <div class="css-radio list">
                 <div>
-                  <input type="radio" name="character" id="ironman" value="Iron Man" checked>
+                  <input type="radio" name="character" id="ironman" value="Iron Man">
                   <label for="ironman">Iron Man</label>
                 </div>
                 <div>
