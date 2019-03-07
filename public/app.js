@@ -459,8 +459,8 @@ function getAndDisplayCardList(cardListResponse) {
 // }
 
 // Returns the html for generating the card form on Edit
-function generateCardFormStringEdit(cardResponse, list) {
-  console.log(list);
+function generateCardFormStringEdit(cardResponse) {
+  // console.log(list);
   // setCharacterChecked(cardResponse); // this has to be called inside the generate cardformStringEdit
   // renderCharacterRadioListForm();
 
