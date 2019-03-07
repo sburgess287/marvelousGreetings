@@ -93,7 +93,6 @@ function loginPostToApi(username, password, callback) {
       success : callback, 
       error : function (a,b,c) {
         console.log("Error messag: ", a, b, c);
-        console.log(c)
         $('#invalid-login-alert').text(`${c}: Please try again,
         or go to Signup Form to create your account.`).show();
       }
