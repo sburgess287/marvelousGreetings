@@ -92,8 +92,10 @@ function loginPostToApi(username, password, callback) {
       },
       success : callback, 
       error : function (a,b,c) {
-        // alert(`Error: ${c}`);
-        console.log("Error message: ", c);
+        console.log("Error messag: ", a, b, c);
+        console.log(c)
+        $('#invalid-login-alert').text(`${c}: Please try again,
+        or go to Signup Form to create your account.`).show();
       }
     }
   )
@@ -594,14 +596,12 @@ $(function() {
   // Event listener for clicking "Go to signup form" button on the login page
   // Then shows the signup page
   $('.contentContainer').on('click', '.signup-form-button', event => {
-    
     getAndDisplaySignUpForm();
   })
 
   // Event listener for clicking "Go to Login page" button on the signup page
   // then shows the login page
   $('.contentContainer').on('click', '.go-to-login-button', event => {
-    
     getAndDisplayLoginForm();
   })
 
@@ -628,7 +628,7 @@ $(function() {
     const usernameVal = $('#username').val();
     const passwordVal = $('#password').val();
 
-    $('#invalid-login-alert').show();
+    $('#invalid-login-alert').hide();
     loginPostToApi(usernameVal, passwordVal, function(data) {
       window.localStorage.setItem("authToken", data.authToken)
       getAndDisplayCardForm(); 
