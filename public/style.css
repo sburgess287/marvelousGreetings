@@ -121,7 +121,7 @@ h1 {
 
 /* This changes style of downloaded card */
 .css-preview-content-container {
-  border: solid rgb(160, 142, 160) 10px;
+  border: solid rgb(116, 31, 116) 10px;
   margin: auto;
   width: 100%;
   background-color: lightslategray; 
@@ -162,9 +162,12 @@ h1 {
 } */
 
 .css-previous-saved-card-container {
-  border: solid rgb(187, 143, 187) 10px;
+  border: solid rgb(116, 31, 116) 10px;
   max-width: 100%;
   margin: auto;
+  padding-top:2em;
+  padding-bottom:2em;
+  margin-top:2em;
 
 }
 
