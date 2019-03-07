@@ -5,7 +5,7 @@
 body {
   width: 100%;
   margin: auto;
-  background: lightblue;
+  background: rgb(175, 231, 189);
 }
 
 .hidden {
@@ -15,6 +15,9 @@ body {
 .css-header {
   width:100%;
   margin: auto;
+  background-color: rgb(203, 247, 202);
+  border-top: solid green 3px;
+    
 }
 
 .css-header-image{
@@ -29,12 +32,16 @@ body {
   /* min-height: 600px; */
   /* width:100%; */
   max-width: 800px;
-  background-color: rgb(206, 177, 206);
+  /* background-color: rgb(171, 212, 176); */
+  background-color: rgb(203, 247, 202);
+  /* border: solid green 5px; */
 }
 
 .css-login-input, .css-pw-input, 
 .css-signup-input, .css-pw-signup-input {
   height: 40px;
+  font-size: medium;
+  border: solid rgb(100, 104, 100) 3px; 
 }
 
 .entry-field {
@@ -93,6 +100,7 @@ h1 {
   margin: auto;
   font-size: x-large;
   background: rgb(218, 228, 222);
+  border: solid rgb(100, 104, 100) 3px; 
   
 }
 

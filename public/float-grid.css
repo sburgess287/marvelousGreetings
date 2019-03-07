@@ -68,8 +68,9 @@
   } */
 
   .css-container {
-    min-height: 7em;
+    min-height: .5em;
     width:100%;
+    
   }
 
   h1 {
@@ -85,6 +86,10 @@
     background: rgb(218, 228, 222);
     
   } */
+
+.css-all-saved-cards-button {
+  width: 80%;
+}
 
 /* .css-create-card-button, .css-saved-card-button, 
 .css-delete-card-button,.css-edit-card-button, 
@@ -137,9 +142,11 @@
 }  
 
   /* iPads (landscape) ----------- */
-/* @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
 /* Styles */
-/* } */
+
+
+}
 
  /* iPads (portrait) -----------  */
  /* @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
