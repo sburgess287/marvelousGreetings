@@ -428,62 +428,35 @@ function getAndDisplayCardList(cardListResponse) {
     );
   }
 }
-// attempting to generate list as an object...
-// update id, value, label, text
-function generateItemElement(item, itemIndex) {
-  return `
-  <div>
-  <input type="radio" name="character" id="${item.id}" value="${item.characterName}" checked="checked">
-  <label for="${item.id}">${item.characterName}</label>
-  </div>
 
-  `
-}
-
-function generateCharacterListItemString(list) {
-  console.log('Generate character list element')
-  const items = CHARACTER_LIST.map((item, index) =>
-    generateItemElement(item, index))
-    return items.push("");
-}
-// trying to modularize the character list..
-function renderCharacterRadioListForm() {
-  console.log('`renderCharacterRadioListForm` ran');
-  const characterListItemString = generateCharacterListItemString(CHARACTER_LIST);
-
-  // insert HTML into Dom: child element?
-  $('.contentContainer').html(characterListItemString);
-
-}
-
-// Function which iterates through the array of characters; in progress
+// Function which iterates through the array of characters;
 // if the cardResponse.character is = name of the character in the array
 // then set checked="checked"
-function setCharacterChecked(cardResponse) {
-  console.log('1st line of setCharacterChecked')
-  console.log(cardResponse);
+// function setCharacterChecked(cardResponse) {
+//   console.log('1st line of setCharacterChecked')
+//   console.log(cardResponse);
 
-  const characterListArray = CHARACTER_LIST.map(
-    character => character.characterName)
-    console.log(characterListArray);  // returns list of characters! woo!
+//   const characterListArray = CHARACTER_LIST.map(
+//     character => character.characterName)
+//     console.log(characterListArray);  // returns list of characters! woo!
   
-  let results = []
-  for ( let i = 0; i <= characterListArray.length; i++) {
-    if ( cardResponse.character === characterListArray[i]) {
-      console.log('successfully found match, see below');
-      console.log(cardResponse.character);
-      console.log(characterListArray[i]);
+//   let results = []
+//   for ( let i = 0; i <= characterListArray.length; i++) {
+//     if ( cardResponse.character === characterListArray[i]) {
+//       console.log('successfully found match, see below');
+//       console.log(cardResponse.character);
+//       console.log(characterListArray[i]);
       
-      // how do I create a second event listener on the content container for this?
+//       // how do I create a second event listener on the content container for this?
 
-      // results.push($('[name=character]').val([`${cardResponse.character}`]));
-      $(`input:radio[name="character"][value="${characterListArray[i]}"]`).prop('checked', true);
+//       // results.push($('[name=character]').val([`${cardResponse.character}`]));
+//       $(`input:radio[name="character"][value="${characterListArray[i]}"]`).prop('checked', true);
 
-    }
+//     }
   
-  }
+//   }
   
-}
+// }
 
 // Returns the html for generating the card form on Edit
 function generateCardFormStringEdit(cardResponse, list) {
