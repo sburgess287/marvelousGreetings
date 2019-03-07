@@ -22,18 +22,17 @@ const CHARACTER_LIST = [
   {
     "characterName": "Storm", 
     "characterImage": "../images/storm_portrait_uncanny.jpg",
-    "characterId": "storm", // added this to modularize list, remove if not needed
+    
   },
   {
     "characterName": "Jean Grey", 
     "characterImage": "../images/jean_grey_portrait_uncanny.jpg",
-    "characterId": "jean-grey", // added ?? not sure this is correct strategy
+    
   },
   {
     "characterName": "Iron Man", 
     "characterImage": "../images/iron_man_portrait_uncanny.jpg",
     
-
   },
   {
     "characterName": "Thor", 
@@ -66,7 +65,9 @@ function postSignupCredsToApi(username, password, callback) {
       },
       success : callback,
       error : function (a,b,c) {
-        console.log("Error message: ", c);
+        console.log("Error message: ", a.responseJSON.message, b, c);
+        $('#invalid-signup-alert').text(a.responseJSON.message).show();
+
       }
     }
   )
@@ -427,7 +428,7 @@ function getAndDisplayCardList(cardListResponse) {
     );
   }
 }
-
+// attempting to generate list as an object...
 // update id, value, label, text
 function generateItemElement(item, itemIndex) {
   return `
@@ -445,7 +446,7 @@ function generateCharacterListItemString(list) {
     generateItemElement(item, index))
     return items.push("");
 }
-// trying to modularize the radio list form?
+// trying to modularize the character list..
 function renderCharacterRadioListForm() {
   console.log('`renderCharacterRadioListForm` ran');
   const characterListItemString = generateCharacterListItemString(CHARACTER_LIST);
@@ -487,8 +488,9 @@ function setCharacterChecked(cardResponse) {
 // Returns the html for generating the card form on Edit
 function generateCardFormStringEdit(cardResponse, list) {
   console.log(list);
-  setCharacterChecked(cardResponse); // this has to be called inside the generate cardformStringEdit
-  renderCharacterRadioListForm();
+  // setCharacterChecked(cardResponse); // this has to be called inside the generate cardformStringEdit
+  // renderCharacterRadioListForm();
+
   return `
     <!-- Page 1: fill in card -->
     <div class="newContentContainer css-container">
@@ -505,26 +507,18 @@ function generateCardFormStringEdit(cardResponse, list) {
               <legend>Select Character</legend>
               
               <div class="css-radio list">
-                <div>
-                  <input type="radio" name="character" id="ironman" value="Iron Man">
-                  <label for="ironman">Iron Man</label>
-                </div>
-                <div>
-                  <input type="radio" name="character" id="storm" value="Storm">
-                  <label for="storm">Storm</label>
-                </div>
-                <div>
-                  <input type="radio" name="character" id="wolverine" value="Wolverine">
-                  <label for="wolverine">Wolverine</label>
-                </div>
-                <div>
-                  <input type="radio" name="character" id="jean-grey" value="Jean Grey">
-                  <label for="jean-grey">Jean Grey</label>
-                </div>
-                <div>
-                  <input type="radio" name="character" id="thor" value="Thor">
-                  <label for="thor">Thor</label>
-                </div>
+              ${CHARACTER_LIST.map(character => 
+                `<div>
+                  <input  
+                    type="radio" 
+                    name="character" 
+                    ${cardResponse.character === character.characterName ? "checked" : ""}
+                    id="${character.characterName}" 
+                    value="${character.characterName}">
+                  <label for="${character.characterName}">${character.characterName}</label>
+                </div>`
+              ).join('')}
+                
               </div>
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
@@ -643,8 +637,9 @@ $(function() {
     event.preventDefault();
     const usernameVal = $('#username').val();
     const passwordVal = $('#password').val();
-    $('#invalid-signup-alert').show();
+    $('#invalid-signup-alert').hide();
     postSignupCredsToApi(usernameVal, passwordVal, function(data) {
+
       loginPostToApi(usernameVal, passwordVal, function(data) {
         window.localStorage.setItem("authToken", data.authToken)
       })
