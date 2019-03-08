@@ -5,7 +5,9 @@
 body {
   width: 100%;
   margin: auto;
-  background: rgb(175, 231, 189);
+  /* background: rgb(175, 231, 189); */
+  background: rgb(202, 210, 197);
+  /* background: rgb(90, 23, 198); PURPLE */
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -16,7 +18,8 @@ body {
 .css-header {
   width:100%;
   margin: auto;
-  background-color: rgb(203, 247, 202);
+  /* background-color: rgb(203, 247, 202); */
+  background-color: rgb(90, 23, 198);
   border-top: solid green 3px;
     
 }
@@ -34,8 +37,10 @@ body {
   /* width:100%; */
   max-width: 800px;
   /* background-color: rgb(171, 212, 176); */
-  background-color: rgb(203, 247, 202);
+  /* background-color: rgb(203, 247, 202);  */
   /* border: solid green 5px; */
+  /* background-color: rgb(89, 195, 195); teal */
+  background-color: rgb(235, 235, 235);
 }
 
 .css-login-input, .css-pw-input, 
@@ -67,6 +72,12 @@ h1 {
   /* font-family: 'Rokkitt', serif; */
   /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Cinzel', serif;
+  color: rgb(235, 235, 235)
+}
+
+h3 {
+  font-family: 'Cinzel', serif;
+  font-size: x-large;
 }
 
 .css-headline-field, .css-message-field {
@@ -74,8 +85,9 @@ h1 {
   padding: 1em;
   font-size: x-large;
   text-align: center;
-  
   margin-top: .5em;
+  /* This changes text style for message */
+  /* font-family: 'Rokkitt', serif; */
 }
 
 .css-headline-field {
@@ -133,7 +145,8 @@ h1 {
   border: solid rgb(116, 31, 116) 10px;
   margin: auto;
   width: 100%;
-  background-color: lightslategray; 
+  /* background-color: lightslategray;  */
+  background-color: #ebebeb; 
 }
 
 /* Proof of concept for style.html, can be removed later */
@@ -177,11 +190,13 @@ h1 {
   padding-top:2em;
   padding-bottom:2em;
   margin-top:2em;
+  
 
 }
 
 p {
   font-size: 16pt;
+  /* font-family: 'Rokkitt', serif; */
 }
 
 canvas {
