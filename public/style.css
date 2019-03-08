@@ -6,6 +6,7 @@ body {
   width: 100%;
   margin: auto;
   background: rgb(175, 231, 189);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .hidden {
@@ -41,7 +42,8 @@ body {
 .css-signup-input, .css-pw-signup-input {
   height: 40px;
   font-size: medium;
-  border: solid rgb(100, 104, 100) 3px; 
+  border: solid rgb(100, 104, 100) 3px;
+  font-family: 'Montserrat', sans-serif; 
 }
 
 .entry-field {
@@ -52,6 +54,9 @@ h2 {
 /* .css-h1, .css-h2 { */
   text-align: center;
   padding-top: 1.5em;
+  /* font-family: 'Rokkitt', serif; */
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: 'Cinzel', serif;
 }
 
 h1 {
@@ -59,6 +64,9 @@ h1 {
   padding-bottom: 0;
   padding: 1.5em;
   font-size: 32pt;
+  /* font-family: 'Rokkitt', serif; */
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: 'Cinzel', serif;
 }
 
 .css-headline-field, .css-message-field {
@@ -101,6 +109,7 @@ h1 {
   font-size: x-large;
   background: rgb(218, 228, 222);
   border: solid rgb(100, 104, 100) 3px; 
+  font-family: 'Montserrat', sans-serif;
   
 }
 

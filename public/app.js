@@ -248,10 +248,9 @@ function generateCardFormString() {
                     type="radio" 
                     name="character" 
                     id="${character.characterName}"
-                    value="${character.characterName}" 
-                    required
-                    <label for="${character.characterName}" 
-                    class="radio-text">${character.characterName}</label>
+                    value="${character.characterName}"
+                    required>
+                  <label for="${character.characterName}">${character.characterName}</label>
                 </div>`
                 ).join('')}
               </div>
