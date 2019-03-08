@@ -87,8 +87,7 @@ function loginPostToApi(username, password, callback) {
       data: JSON.stringify(params),
       method : 'POST',
       headers : {
-        "content-type": "application/json", 
-  
+        "content-type": "application/json",
       },
       success : callback, 
       error : function (a,b,c) {
@@ -98,7 +97,6 @@ function loginPostToApi(username, password, callback) {
       }
     }
   )
-
 }
 
 
@@ -126,10 +124,8 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
       error : function (a,b,c) {
         console.log("Error message: ", c);
       }
-
     }
   )
-
 }
 
 // Function to Get all cards from API
@@ -158,12 +154,12 @@ function getCardListFromApi(callback) {
 // error says cardListResponse is undefined
 
 function deleteCardById(cardIdValue, callback) {
+  
   const authToken = window.localStorage.getItem("authToken")
 
   $.ajax(
     {
       url: `cards/${cardIdValue}`,
-      // url: `cards/:id`,
       method : 'DELETE',
       headers : {
         "content-type": "application/json",
@@ -201,10 +197,10 @@ function getCardById(cardIdValue, callback) {
 
 // Function to Edit card by id (PUT) using '/cards/:id' endpoint
 function editCardById(id, headline, bodyText, character, callback) {
-  console.log('editCardbyID ran');
-  console.log(id);
+  // console.log('editCardbyID ran');
+  // console.log(id);
   const authToken = window.localStorage.getItem("authToken")
-  console.log(authToken);
+  // console.log(authToken);
 
   $.ajax(
     {
@@ -245,26 +241,20 @@ function generateCardFormString() {
             <fieldset>
               <legend>Select Character</legend>
               <div class="css-radio character-radio-list">
-              <div>
-              <input type="radio" name="character" id="ironman" value="Iron Man" checked="checked">
-              <label for="ironman" class="radio-text">Iron Man</label>
+              ${CHARACTER_LIST.map(character => 
+                `
+                <div>
+                  <input 
+                    type="radio" 
+                    name="character" 
+                    id="${character.characterName}"
+                    value="${character.characterName}" 
+                    required
+                    <label for="${character.characterName}" 
+                    class="radio-text">${character.characterName}</label>
+                </div>`
+                ).join('')}
               </div>
-              <div>
-                <input type="radio" name="character" id="storm" value="Storm">
-                <label for="storm" class="radio-text" >Storm</label>
-              </div>
-              <div>
-                <input type="radio" name="character" id="wolverine" value="Wolverine">
-                <label for="wolverine" class="radio-text">Wolverine</label>
-              </div>
-              <div>
-                <input type="radio" name="character" id="jean-grey" value="Jean Grey">
-                <label for="jean-grey" class="radio-text">Jean Grey</label>
-              </div>
-              <div>
-                <input type="radio" name="character" id="thor" value="Thor">
-                <label for="thor" class="radio-text">Thor</label>
-              </div> 
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
           <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Go to Card Preview">     
@@ -499,7 +489,8 @@ function generateCardFormStringEdit(cardResponse) {
           <input type="submit" class="js-update-card-button css-submit" data-html2canvas-ignore="true" value="View Updated Card">     
         </form>
         <!-- Move to top of page?  -->
-      <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button> 
+      <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
+      <button class="css-create-card-button js-create-card-btn">Go to Create Page</button> 
       <button class="css-all-saved-cards-button logout-button">Logout</button>
     </div> 
 
