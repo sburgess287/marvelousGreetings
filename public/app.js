@@ -391,7 +391,6 @@ function getAndDisplayCardList(cardListResponse) {
         <h3>${cardListResponse[i].headline}</h3>
         <!-- change this to first 30 characters -->
         <p>${cardListResponse[i].bodyText}</p>
-        <p>${cardListResponse[i].id}</p>
         <p>${cardListResponse[i].character}</p>
         
         <!-- update css selector and do I need an edit card for the project requirements? -->
@@ -420,49 +419,16 @@ function getAndDisplayCardList(cardListResponse) {
   }
 }
 
-// Function which iterates through the array of characters;
-// if the cardResponse.character is = name of the character in the array
-// then set checked="checked"
-// function setCharacterChecked(cardResponse) {
-//   console.log('1st line of setCharacterChecked')
-//   console.log(cardResponse);
-
-//   const characterListArray = CHARACTER_LIST.map(
-//     character => character.characterName)
-//     console.log(characterListArray);  // returns list of characters! woo!
-  
-//   let results = []
-//   for ( let i = 0; i <= characterListArray.length; i++) {
-//     if ( cardResponse.character === characterListArray[i]) {
-//       console.log('successfully found match, see below');
-//       console.log(cardResponse.character);
-//       console.log(characterListArray[i]);
-      
-//       // how do I create a second event listener on the content container for this?
-
-//       // results.push($('[name=character]').val([`${cardResponse.character}`]));
-//       $(`input:radio[name="character"][value="${characterListArray[i]}"]`).prop('checked', true);
-
-//     }
-  
-//   }
-  
-// }
 
 // Returns the html for generating the card form on Edit
 function generateCardFormStringEdit(cardResponse) {
-  // console.log(list);
-  // setCharacterChecked(cardResponse); // this has to be called inside the generate cardformStringEdit
-  // renderCharacterRadioListForm();
-
+ 
   return `
     <!-- Page 1: fill in card -->
     <div class="newContentContainer css-container">
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Edit your card</h2>
-      
         <form class="card-update-form css-form" data-card-id="${cardResponse.id}">
-            
             <label for="headline">Headline</label>
             <input value="${cardResponse.headline}" placeholder="foo" id="headline" type="text" name="textfield" class="css-headline-field" required>
             <label for="message">Message</label>
@@ -495,15 +461,13 @@ function generateCardFormStringEdit(cardResponse) {
     </div> 
 
   `;
-
 }
 
 // Function to display Edit card form (Page 1)
 function getAndDisplayCardFormEdit(cardResponse) {
   
   const cardForm = generateCardFormStringEdit(cardResponse);
-  $('.contentContainer').html(cardForm);
-  
+  $('.contentContainer').html(cardForm); 
 }
 
 function generateSignUpFormString() {
@@ -527,9 +491,7 @@ function generateSignUpFormString() {
           please try again</p>
         </div>
       </form>
-    
       <button class="css-submit go-to-login-button">Go To Login</button>
-
     </div>
   `
 }
@@ -602,7 +564,6 @@ $(function() {
     const passwordVal = $('#password').val();
     $('#invalid-signup-alert').hide();
     postSignupCredsToApi(usernameVal, passwordVal, function(data) {
-
       loginPostToApi(usernameVal, passwordVal, function(data) {
         window.localStorage.setItem("authToken", data.authToken)
       })
@@ -623,7 +584,6 @@ $(function() {
       window.localStorage.setItem("authToken", data.authToken)
       getAndDisplayCardForm(); 
     })
-
   })
 
   // Listen for click of "Go to Saved Cards" button. 
@@ -635,16 +595,13 @@ $(function() {
   // Listen for form submit on '.card-submit-form' and pass to POST API endpoint
   $('.contentContainer').on('submit', '.card-submit-form', event => {
     event.preventDefault();
-    
     const headlineInput = $('#headline').val();
     const messageInput = $('#message').val();
     const characterInput = $('input[name="character"]:checked').val();
     postCardToApi(headlineInput, messageInput, characterInput, displayCard)
-
   })
 
   // Listen for form submit on '.card-update-form' and pass to PUT API endpoint
-  
   $('.contentContainer').on('submit', '.card-update-form', event => {
     event.preventDefault();
     const headlineInput = $('#headline').val();
@@ -658,7 +615,8 @@ $(function() {
 
   })
 
-  // Listen for click on '.download-card-btn' then convert html image to canvas and download it
+  // Listen for click on '.download-card-btn' then convert html image to 
+  // canvas and download it to users machine
   $('.contentContainer').on('click', '.download-card-btn', event => { 
     
     let x = this.getElementById('screenshot-card');
@@ -702,15 +660,13 @@ $(function() {
   $('.contentContainer').on('click', '.js-preview-card-button', event => {
     // retrieve the card by id
     const card = $(event.currentTarget).closest(".card-container")
-    getCardById(card.data("card-id"), displayCard);
-    
+    getCardById(card.data("card-id"), displayCard); 
   })
 
   // Listen for click on '.logout-button' then logs user out, shows login page
   $('.contentContainer').on('click', '.logout-button', event => {
     window.localStorage.removeItem("authToken");
     getAndDisplayLoginForm();
-
   })
 
 
