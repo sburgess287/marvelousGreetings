@@ -93,7 +93,7 @@ function loginPostToApi(username, password, callback) {
       error : function (a,b,c) {
         console.log("Error messag: ", a, b, c);
         $('#invalid-login-alert').text(`${c}: Please try again,
-        or go to Signup Form to create your account.`).show();
+        or Sign Up to create your account.`).show();
       }
     }
   )
@@ -227,17 +227,19 @@ function getDefaultCard(callbackFn) {
 // Returns the html for generating the card form
 function generateCardFormString() {
   return `
-    <!-- Page 1: fill in card -->
-    <div class="newContentContainer css-container"></div>
+    <!-- Page 1: fill in card-->
+    <div class="newContentContainer"></div>
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
-      <h2 class="css-h2" >Page 1: Fill in the headline, message, and choose a character!</h2>
+      <h2 class="css-h2" >Create your Marvel-ous Greeting!</h2>
+      <h3>Fill in the headline and message, then choose a character!</h3>
+      
       <img class="css-header-image" src="http://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55/landscape_medium.jpg" alt="Iron Man">
         <form class="card-submit-form css-form">
             
             <label for="headline">Headline</label>
-            <input id="headline" type="text" name="textfield" class="css-headline-field" required>
+            <input id="headline" type="text" name="textfield" class="css-headline-field" required maxlength="250">
             <label for="message">Message</label>
-            <input id="message" type="text" name="textfield" class="css-message-field" required>
+            <input id="message" type="text" name="textfield" class="css-message-field" required maxlength="350">
             <fieldset>
               <legend>Select Character</legend>
               <div class="css-radio character-radio-list">
@@ -286,10 +288,9 @@ function displayCard(cardResponse){
     
     `
      <!-- Page 2: Preview/Edit card -->
-     <div class="newContentContainer css-container">
-       <h2>Page 2: Card Preview</h2>
-       <!--<h3>Click to Edit or save (not sure I need this text)</h3> -->
-       <!-- Move to top of page?  -->
+     <div class="newContentContainer">
+       <h2>Card Preview</h2>
+       <h3>Click Save to save image to your machine, and view your saved cards list</h3>
        <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
        <button class="css-all-saved-cards-button logout-button">Logout</button>
        <!-- Note: the below image will be a canvas element -->
@@ -359,7 +360,7 @@ function displayCard(cardResponse){
 function generateNoCardsFoundPageString() {
   return `
   <!-- Page 6: No cards created page -->
-  <div class="newContentContainer css-container">
+  <div class="newContentContainer">
     <div>
       <h2>No Cards Found! Please go to the Create card page to Create new card</h2>
       <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
@@ -405,7 +406,7 @@ function getAndDisplayCardList(cardListResponse) {
     $('.contentContainer').html(
       `
       <!-- Page 4: Saved Cards List -->
-      <div class="newContentContainer css-container">
+      <div class="newContentContainer">
         <h2>Page 4: Saved Cards</h2>
         <button class="css-all-saved-cards-button logout-button">Logout</button>
         <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
@@ -423,8 +424,8 @@ function getAndDisplayCardList(cardListResponse) {
 function generateCardFormStringEdit(cardResponse) {
  
   return `
-    <!-- Page 1: fill in card -->
-    <div class="newContentContainer css-container">
+    <!-- Edit card-->
+    <div class="newContentContainer">
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Edit your card</h2>
         <form class="card-update-form css-form" data-card-id="${cardResponse.id}">
@@ -473,9 +474,9 @@ function generateSignUpFormString() {
   
   return `
     <!-- Sign Up -->
-    <div class="newContentContainer css-container">
-      <h2>Sign Up Page</h2>
-      <form class="css-signup-form css-form sign-up-form">
+    <div class="newContentContainer">
+      <h2>Sign Up For Your Account</h2>
+      <form class="css-signup-form sign-up-form">
         <div class="username-section entry-field">
           <label for="username">Username</label>
           <input id="username" type="text" name="textfield" class="css-signup-input" required>
@@ -484,13 +485,13 @@ function generateSignUpFormString() {
           <label for="password">Password</label>
           <input id="password" type="password" name="textfield" class="css-pw-signup-input" required>
         </div>
-        <input type="submit" class="css-submit enter-creds-button" value="Click to Enter New Credentials">
+        <input type="submit" class="css-submit enter-creds-button" value="Enter Credentials">
         <div>
           <p role="alert" class="hidden" id="invalid-signup-alert">Invalid signup credentials, 
           please try again</p>
         </div>
       </form>
-      <button class="css-submit go-to-login-button">Go To Login</button>
+      <button class="css-submit go-to-login-button">Go To Sign In</button>
     </div>
   `
 }
@@ -503,9 +504,9 @@ function getAndDisplaySignUpForm() {
 function generateLoginFormString() {
   return `
     <!-- Login -->
-    <div class="newContentContainer css-container">
-      <h2>Login</h2>
-      <form class="css-login-form css-form login-form">
+    <div class="newContentContainer">
+      <h2>Sign into Your Account</h2>
+      <form class="css-login-form login-form">
         <div class="username-section entry-field"> 
           <label for="username">Username</label>
           <input id="username" type="text" name="textfield" class="css-login-input" required>
@@ -514,13 +515,13 @@ function generateLoginFormString() {
           <label for="password">Password</label>
           <input id="password" type="password" name="textfield" class="css-pw-input" required>
         </div>
-        <input type="submit" class="css-submit login-button" value="Click to Login">
+        <input type="submit" class="css-submit login-button" value="Sign In">
         <div>
           <p role="alert" class="hidden" id="invalid-login-alert">Invalid login, 
           please use valid credentials or go to Signup Form</p>
         </div>
       </form>
-      <button class="css-submit signup-form-button">Go To Signup Form</button>
+      <button class="css-submit signup-form-button">Sign Up</button>
     </div>
   `
 }

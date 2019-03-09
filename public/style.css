@@ -41,6 +41,8 @@ body {
   /* border: solid green 5px; */
   /* background-color: rgb(89, 195, 195); teal */
   background-color: rgb(235, 235, 235);
+  padding-bottom: 1em;
+  border: solid green 5px;
 }
 
 .css-login-input, .css-pw-input, 
@@ -62,6 +64,7 @@ h2 {
   /* font-family: 'Rokkitt', serif; */
   /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Cinzel', serif;
+  font-weight: bold;
 }
 
 h1 {
@@ -72,12 +75,13 @@ h1 {
   /* font-family: 'Rokkitt', serif; */
   /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Cinzel', serif;
-  color: rgb(235, 235, 235)
+  color: rgb(235, 235, 235);
+  font-weight: normal;
 }
 
 h3 {
   font-family: 'Cinzel', serif;
-  font-size: x-large;
+  /* font-size: x-large; */
 }
 
 .css-headline-field, .css-message-field {
@@ -101,14 +105,20 @@ h3 {
 }
 
 
-/* .css-login-form {
+.css-login-form, .css-signup-form {
   border: solid green 10px;
-} */
+}
 
 .css-form, .css-login-form, .css-signup-form {
   width: 80%;
   margin: auto;
   font-size: x-large;
+  
+}
+
+
+.css-form {
+  padding-top: 2em;
 }
 
 /* Fix this for larger viewports, currently taking up entire width */
@@ -147,6 +157,7 @@ h3 {
   width: 100%;
   /* background-color: lightslategray;  */
   background-color: #ebebeb; 
+  margin-top: 2em;
 }
 
 /* Proof of concept for style.html, can be removed later */
