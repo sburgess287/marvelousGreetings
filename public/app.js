@@ -407,10 +407,10 @@ function getAndDisplayCardList(cardListResponse) {
       `
       <!-- Page 4: Saved Cards List -->
       <div class="newContentContainer">
-        <h2>Page 4: Saved Cards</h2>
+        <h2>Your Saved Cards</h2>
         <button class="css-all-saved-cards-button logout-button">Logout</button>
         <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
-        <p>Edit, View, or Delete Your Cards!</p>
+        <h3>Edit, View, or Delete Your Cards!</h3>
           ${cardList.join('')}
       </div>
 
