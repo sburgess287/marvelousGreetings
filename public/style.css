@@ -9,6 +9,7 @@ body {
   background: rgb(202, 210, 197);
   /* background: rgb(90, 23, 198); PURPLE */
   font-family: 'Montserrat', sans-serif;
+  
 }
 
 .hidden {
@@ -114,7 +115,6 @@ h3 {
   width: 80%;
   margin: auto;
   font-size: x-large;
-  
 }
 
 
@@ -122,7 +122,7 @@ h3 {
   padding-top: 2em;
 }
 
-/* Fix this for larger viewports, currently taking up entire width */
+
 .css-create-card-button, .css-saved-card-button, 
 .css-delete-card-button, .css-all-saved-cards-button, 
 .css-edit-card-button, .css-view-card-button, .css-go-to-signup-form,
@@ -130,8 +130,8 @@ h3 {
   /* width: 80%; removed to make buttons inline*/ 
   margin: auto;
   font-size: x-large;
-  background: rgb(218, 228, 222);
-  border: solid rgb(100, 104, 100) 3px; 
+  /* background: rgb(218, 228, 222); */
+  border: solid rgb(32, 44, 32) 3px; 
   font-family: 'Montserrat', sans-serif;
   
 }
@@ -161,7 +161,6 @@ h3 {
   margin-top: 2em;
 }
 
-/* Proof of concept for style.html, can be removed later */
 .css-saved-card-container {
   border: solid green 10px;
   margin: auto;
@@ -171,29 +170,15 @@ h3 {
 
 .css-submit, .css-go-to-signup-form {
   margin: auto;
-  /* // changed from inline-block on the card preview */
   display: block;
-
-  /* width:80%; removed to make buttons inline*/
   margin-top: 2em;
-  /* font-size: 16pt; */
   margin-bottom: 2em;
 }
 
 .css-all-saved-cards-button {
-  /* width: 80%; */
-  /* display: block; */
-  /* margin: auto; */
   margin: auto;
   display: inherit;
-  font-size: 16pt;
-
 }
-/* input {
-  width: 75%;
-  display: inline-block;
-  
-} */
 
 .css-previous-saved-card-container {
   border: solid rgb(116, 31, 116) 10px;
@@ -203,7 +188,6 @@ h3 {
   padding-bottom:2em;
   margin-top:2em;
   
-
 }
 
 p {
@@ -222,10 +206,10 @@ canvas {
   text-align: center;
 }
 
-/* Button */
+/* Button color, box shadow, hover actions */
 button, .css-submit {
-  color: rgba(55, 38, 105, 0.6);
-  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+  color: rgba(8, 3, 24, 0.6);
+  box-shadow: rgba(72, 62, 100, 0.4) 0 0px 0px 2px inset;
   border-radius: 4px;
 }
 
