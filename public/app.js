@@ -20,30 +20,69 @@ const MOCK_CARD = {
 // for each card reference the object in the array with character/image
 const CHARACTER_LIST = [
   {
-    "characterName": "Storm", 
-    "characterImage": "../images/storm_portrait_uncanny.jpg",
+    "characterName": "Black Panther", 
+    "characterImage": "../images/black_panther_portrait_uncanny.jpg",
     
   },
+  
   {
-    "characterName": "Jean Grey", 
-    "characterImage": "../images/jean_grey_portrait_uncanny.jpg",
+    "characterName": "Captain America", 
+    "characterImage": "../images/captain_america_portrait_uncanny.jpg",
     
   },
+
+  {
+    "characterName": "Captain Marvel", 
+    "characterImage": "../images/captain_marvel_portrait_uncanny.jpg",
+    
+  },
+
+  {
+    "characterName": "Deadpool", 
+    "characterImage": "../images/deadpool_portrait_uncanny.jpg",
+    
+  },
+
   {
     "characterName": "Iron Man", 
     "characterImage": "../images/iron_man_portrait_uncanny.jpg",
     
   },
+
+  {
+    "characterName": "Jean Grey", 
+    "characterImage": "../images/jean_grey_portrait_uncanny.jpg",
+    
+  },
+
+  {
+    "characterName": "Loki", 
+    "characterImage": "../images/loki_portrait_uncanny.jpg",
+    
+  },
+
+  {
+    "characterName": "Storm", 
+    "characterImage": "../images/storm_portrait_uncanny.jpg",
+    
+  },
+
   {
     "characterName": "Thor", 
     "characterImage": "../images/thor_portrait_uncanny.jpg",
     
   },
+
   {
     "characterName": "Wolverine", 
     "characterImage": "../images/wolverine_portrait_uncanny.jpg",
     
   },
+
+
+
+
+
 
 
 ]
@@ -290,15 +329,15 @@ function displayCard(cardResponse){
      <!-- Page 2: Preview/Edit card -->
      <div class="newContentContainer">
        <h2>Card Preview</h2>
-       <h3>Click Save to save image to your machine, and view your saved cards list</h3>
+       <h3>Click Save to save image to your machine, then send to a friend!</h3>
        <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
        <button class="css-all-saved-cards-button logout-button">Logout</button>
        <!-- Note: the below image will be a canvas element -->
        <div class="css-preview-content-container card" id="screenshot-card" data-card-id="${cardResponse.id}">
          <p>${cardResponse.headline}</p>
          <p>${cardResponse.bodyText}</p> 
-         <img src=${character.characterImage} alt="image of ${cardResponse.character}>
-         <p>"Data provided by Marvel. © 2014 Marvel"</p>
+         <img src=${character.characterImage} alt="image of ${cardResponse.character}">
+         <a href="http://marvel.com" target="_blank">Data provided by Marvel. © 2019 MARVEL</a>
          <input type="submit" class="test download-card-btn css-submit" data-html2canvas-ignore="true" value="Save">
  
        </div>
@@ -430,9 +469,9 @@ function generateCardFormStringEdit(cardResponse) {
       <h2 class="css-h2" >Edit your card</h2>
         <form class="card-update-form css-form" data-card-id="${cardResponse.id}">
             <label for="headline">Headline</label>
-            <input value="${cardResponse.headline}" placeholder="foo" id="headline" type="text" name="textfield" class="css-headline-field" required>
+            <input value="${cardResponse.headline}" placeholder="Add new headline" id="headline" type="text" name="textfield" class="css-headline-field" required>
             <label for="message">Message</label>
-            <input value="${cardResponse.bodyText}" placeholder="bar" id="message" type="text" name="textfield" class="css-message-field" required>
+            <input value="${cardResponse.bodyText}" placeholder="Add new message" id="message" type="text" name="textfield" class="css-message-field" required>
             <fieldset>
               <legend>Select Character</legend>
               

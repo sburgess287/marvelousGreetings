@@ -2,14 +2,23 @@
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+}
+
 body {
   width: 100%;
   margin: auto;
   /* background: rgb(175, 231, 189); */
-  background: rgb(202, 210, 197);
+  /* background: rgb(202, 210, 197); */
+  background: rgba(212, 212, 199, 0.5);
   /* background: rgb(90, 23, 198); PURPLE */
   font-family: 'Montserrat', sans-serif;
-  
+  background-image: 
+  linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5)),
+  url("http://i.annihil.us/u/prod/marvel/i/mg/d/90/526547f509313.jpg");
+  /* background-position: center; */
+  background-repeat: no-repeat;
 }
 
 .hidden {
@@ -52,6 +61,7 @@ body {
   font-size: medium;
   border: solid rgb(100, 104, 100) 3px;
   font-family: 'Montserrat', sans-serif; 
+  border-radius: 4px;
 }
 
 .entry-field {
@@ -123,6 +133,7 @@ h3 {
 }
 
 
+
 .css-create-card-button, .css-saved-card-button, 
 .css-delete-card-button, .css-all-saved-cards-button, 
 .css-edit-card-button, .css-view-card-button, .css-go-to-signup-form,
@@ -134,6 +145,10 @@ h3 {
   border: solid rgb(32, 44, 32) 3px; 
   font-family: 'Montserrat', sans-serif;
   
+}
+
+fieldset {
+  border:  rgb(88, 42, 186) 3px solid;
 }
 
 /* Experimenting with radio button and form alignment */
@@ -153,7 +168,8 @@ h3 {
 
 /* This changes style of downloaded card */
 .css-preview-content-container {
-  border: solid rgb(116, 31, 116) 10px;
+  border: solid rgb(37, 36, 37) 10px;
+  /* border: solid rgb(116, 31, 116) 10px; */
   margin: auto;
   width: 100%;
   /* background-color: lightslategray;  */
@@ -181,7 +197,8 @@ h3 {
 }
 
 .css-previous-saved-card-container {
-  border: solid rgb(116, 31, 116) 10px;
+  /* border: solid rgb(116, 31, 116) 10px; */
+  border: solid rgb(37, 36, 37) 5px;
   max-width: 100%;
   margin: auto;
   padding-top:2em;
@@ -192,6 +209,7 @@ h3 {
 
 p {
   font-size: 16pt;
+  
   /* font-family: 'Rokkitt', serif; */
 }
 
@@ -204,6 +222,7 @@ canvas {
 
 .css-footer {
   text-align: center;
+  background: beige;
 }
 
 /* Button color, box shadow, hover actions */
@@ -217,4 +236,10 @@ button:hover {
   color: rgba(255, 255, 255, 0.85);
   box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
   border-radius: 4px;
+}
+
+/* Link color to Marvel */
+a {
+  color:  rgb(88, 42, 186);
+  display: block
 }
