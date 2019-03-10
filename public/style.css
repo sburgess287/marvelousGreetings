@@ -90,6 +90,7 @@ h3 {
   font-size: x-large;
   text-align: center;
   margin-top: .5em;
+  border: solid rgb(88, 42, 186) 3px;
   /* This changes text style for message */
   /* font-family: 'Rokkitt', serif; */
 }
