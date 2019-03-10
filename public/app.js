@@ -432,7 +432,7 @@ function getAndDisplayCardList(cardListResponse) {
         <p>${cardListResponse[i].bodyText}</p>
         <p>${cardListResponse[i].character}</p>
         
-        <!-- update css selector and do I need an edit card for the project requirements? -->
+        <!-- Buttons for card operations -->
         <button class="css-edit-card-button js-edit-card-button">Edit</button>
         <button class="css-view-card-button js-preview-card-button">View</button>
         <button class="css-delete-card-button js-delete-card-button">Delete</button> 
@@ -445,6 +445,12 @@ function getAndDisplayCardList(cardListResponse) {
     $('.contentContainer').html(
       `
       <!-- Page 4: Saved Cards List -->
+      <!-- Button experiment -->
+      <div>
+        <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
+        <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
+        <button class="css-all-saved-cards-button logout-button">Logout</button>
+      </div>
       <div class="newContentContainer">
         <h2>Your Saved Cards</h2>
         <button class="css-all-saved-cards-button logout-button">Logout</button>
