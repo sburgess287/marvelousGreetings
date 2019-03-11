@@ -300,7 +300,7 @@ function generateCardFormString() {
           <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Go to Card Preview">     
         </form>
         <!-- Move to top of page?  -->
-      <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
+      <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards List</button>
       <button class="css-all-saved-cards-button logout-button">Logout</button> 
     </div> 
 
@@ -330,7 +330,7 @@ function displayCard(cardResponse){
      <div class="newContentContainer">
        <h2>Card Preview</h2>
        <h3>Click Save to save image to your machine, then send to a friend!</h3>
-       <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
+       <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards List</button>
        <button class="css-all-saved-cards-button logout-button">Logout</button>
        <!-- Note: the below image will be a canvas element -->
        <div class="css-preview-content-container card" id="screenshot-card" data-card-id="${cardResponse.id}">
@@ -402,7 +402,7 @@ function generateNoCardsFoundPageString() {
   <div class="newContentContainer">
     <div>
       <h2>No Cards Found! Please go to the Create card page to Create new card</h2>
-      <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
+      <button class="css-create-card-button js-create-card-btn">Create New Card</button>
       <button class="css-all-saved-cards-button logout-button">Logout</button>
     </div>
   </div>
@@ -447,14 +447,14 @@ function getAndDisplayCardList(cardListResponse) {
       <!-- Page 4: Saved Cards List -->
       <!-- Button experiment -->
       <div>
-        <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
-        <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
+        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards List</button>
+        <button class="css-create-card-button js-create-card-btn">Create New Card</button>
         <button class="css-all-saved-cards-button logout-button">Logout</button>
       </div>
       <div class="newContentContainer">
         <h2>Your Saved Cards</h2>
         <button class="css-all-saved-cards-button logout-button">Logout</button>
-        <button class="css-create-card-button js-create-card-btn">Go to Create Page</button>
+        <button class="css-create-card-button js-create-card-btn">Create New Card</button>
         <h3>Edit, View, or Delete Your Cards!</h3>
           ${cardList.join('')}
       </div>
@@ -500,8 +500,8 @@ function generateCardFormStringEdit(cardResponse) {
           <input type="submit" class="js-update-card-button css-submit" data-html2canvas-ignore="true" value="View Updated Card">     
         </form>
         <!-- Move to top of page?  -->
-      <button class="css-all-saved-cards-button js-saved-cards-button">Go to Saved Cards</button>
-      <button class="css-create-card-button js-create-card-btn">Go to Create Page</button> 
+      <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards List</button>
+      <button class="css-create-card-button js-create-card-btn">Create New Card</button> 
       <button class="css-all-saved-cards-button logout-button">Logout</button>
     </div> 
 
@@ -631,7 +631,7 @@ $(function() {
     })
   })
 
-  // Listen for click of "Go to Saved Cards" button. 
+  // Listen for click of "Saved Cards List" button. 
   // Then get the card list from the GET endpoint, display the Card list.
   $('.contentContainer').on('click', '.js-saved-cards-button', event => {
     getCardListFromApi(getAndDisplayCardList)

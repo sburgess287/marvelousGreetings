@@ -62,6 +62,7 @@ body {
   border: solid rgb(100, 104, 100) 3px;
   font-family: 'Montserrat', sans-serif; 
   border-radius: 4px;
+  padding: 0 1em 0 1em;
 }
 
 .entry-field {
@@ -144,6 +145,8 @@ h3 {
   /* background: rgb(218, 228, 222); */
   border: solid rgb(32, 44, 32) 3px; 
   font-family: 'Montserrat', sans-serif;
+  display: inline;
+  padding: 0 1em 0 1em;
   
 }
 
@@ -193,7 +196,7 @@ fieldset {
 
 .css-all-saved-cards-button {
   margin: auto;
-  display: inherit;
+  display: inline;
 }
 
 .css-previous-saved-card-container {
