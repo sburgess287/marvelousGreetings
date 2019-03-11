@@ -669,9 +669,14 @@ $(function() {
     html2canvas(x).then(canvas => {
     
       var a = document.createElement('a');
-      a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-      a.download = 'marvelousGreetings.jpg';
-      // a.download = `${data.headline}`; update the filename later, 
+      // Previous jpeg saving
+      // a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+      // a.download = 'marvelousGreetings.jpg';
+
+      // trying to save to PNG to fix IOS download
+      a.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      a.download = 'marvelousGreetings.png';
+      
       a.click();
 
     })
