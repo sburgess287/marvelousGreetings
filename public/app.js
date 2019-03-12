@@ -521,6 +521,16 @@ function generateSignUpFormString() {
     <!-- Sign Up -->
     <div class="newContentContainer">
       <h2>Sign Up For Your Account</h2>
+      <img class="signup-image" 
+        src="../images/loki_landscape_medium.jpg" 
+        alt="Loki">
+      <img class="signup-image" 
+      src="../images/storm_landscape_medium.jpg" 
+      alt="Storm">
+      <img class="signup-image" 
+      src="../images/deadpool_landscape_medium.jpg" 
+      alt="Deadpool">
+      <h3 class="login-h3">Sign up for your Account, and start Creating!</h3>
       <form class="css-signup-form sign-up-form">
         <div class="username-section entry-field">
           <label for="username">Username</label>
@@ -551,6 +561,17 @@ function generateLoginFormString() {
     <!-- Login -->
     <div class="newContentContainer">
       <h2>Sign into Your Account</h2>
+      <img class="login-image" 
+        src="../images/iron_man_landscape_medium.jpg" 
+        alt="Iron Man">
+      <img class="login-image" 
+      src="../images/captain_marvel_landscape_medium.jpg" 
+      alt="Captain Marvel">
+      <img class="login-image" 
+      src="../images/black_panther_landscape_medium.jpg" 
+      alt="Iron Man">
+      <h3 class="login-h3">Sign In to Create Customized Greetings cards with your
+      favorite Marvel Superheroes and Supervillians!</h3>
       <form class="css-login-form login-form">
         <div class="username-section entry-field"> 
           <label for="username">Username</label>

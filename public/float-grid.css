@@ -66,24 +66,34 @@
   body {
     background: 
       linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5));
-
   }
 
   .css-container {
     min-height: .5em;
-    width:100%;
-    
+    width:100%;  
   }
 
-  h1 {
-      
-      
-      font-size: 24pt;
+  h1 {      
+    font-size: 24pt;
   }
 
-.css-all-saved-cards-button {
-  width: 80%;
-}
+  .login-image, .signup-image {
+    border: solid 2px;
+  }
+  
+  .login-h3 {
+    /* font-family: 'Cinzel', serif; */
+    padding: 1.5em;
+  }
+
+  .css-login-form, .css-signup-form {
+    border: solid green 5px;
+    padding-top: 1.5em;
+  }
+
+  .css-all-saved-cards-button {
+    width: 80%;
+  }
 
 
   canvas {

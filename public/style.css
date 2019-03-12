@@ -15,14 +15,24 @@ body {
   /* background: rgb(90, 23, 198); PURPLE */
   font-family: 'Montserrat', sans-serif;
   background-image: 
-  linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5)),
-  url("http://i.annihil.us/u/prod/marvel/i/mg/d/90/526547f509313.jpg");
+  linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5));
+  /* url("http://i.annihil.us/u/prod/marvel/i/mg/6/80/5269608c1be7a.jpg"); */
   /* background-position: center; */
   background-repeat: no-repeat;
+  /* background-size: 100% 100%; */
 }
 
 .hidden {
   display: none;
+}
+
+.login-image, .signup-image {
+  border: solid 5px;
+}
+
+.login-h3 {
+  font-family: 'Cinzel', serif;
+  padding: .5em 3.5em .5em 3.5em;
 }
 
 .css-header {
@@ -120,6 +130,7 @@ h3 {
 
 .css-login-form, .css-signup-form {
   border: solid green 10px;
+  padding-top: 1.5em;
 }
 
 .css-form, .css-login-form, .css-signup-form {
