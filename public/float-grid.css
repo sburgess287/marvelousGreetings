@@ -66,6 +66,7 @@
   body {
     background: 
       linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5));
+    min-height: 900px;
   }
 
   .css-container {
@@ -95,6 +96,24 @@
     width: 80%;
   }
 
+  /* This makes navbar stick to bottom of page */
+  .navbar {
+    background: rgb(196, 196, 211);
+    /* overflow: visible;
+    position: fixed;
+    bottom: 0; */
+    /* top: 250px; */
+    width: 100%;
+    padding: .5em;
+  }
+
+
+  .css-create-card-cta, .css-cta {
+    font-size: x-large;
+    padding: .5em .5em .5em .5em;
+
+
+  }
 
   canvas {
     border: solid green 2px;

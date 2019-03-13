@@ -266,7 +266,13 @@ function getDefaultCard(callbackFn) {
 // Returns the html for generating the card form
 function generateCardFormString() {
   return `
-    <!-- Page 1: fill in card-->
+    <!-- Page 1: Create Card-->
+    <!-- Navigation Buttons -->
+      <div class="navbar">
+        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
+        <button class="css-create-card-button js-create-card-btn">Create Card</button>
+        <button class="css-all-saved-cards-button logout-button">Logout</button>
+      </div>
     <div class="newContentContainer"></div>
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Create your Marvel-ous Greeting!</h2>
@@ -297,11 +303,11 @@ function generateCardFormString() {
               </div>
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
-          <input type="submit" class="form-submit-btn css-submit" data-html2canvas-ignore="true" value="Go to Card Preview">     
-        </form>
-        <!-- Move to top of page?  -->
-      <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards List</button>
-      <button class="css-all-saved-cards-button logout-button">Logout</button> 
+          <input type="submit" 
+            class="form-submit-btn css-cta" 
+            data-html2canvas-ignore="true" 
+            value="Go to Card Preview">     
+        </form> 
     </div> 
 
   `;
@@ -327,19 +333,25 @@ function displayCard(cardResponse){
     
     `
      <!-- Page 2: Preview/Edit card -->
+     <!-- Navigation Buttons -->
+      <div class="navbar">
+        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
+        <button class="css-create-card-button js-create-card-btn">Create Card</button>
+        <button class="css-all-saved-cards-button logout-button">Logout</button>
+      </div>
      <div class="newContentContainer">
        <h2>Card Preview</h2>
        <h3>Click Save to save image to your machine, then send to a friend!</h3>
-       <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards List</button>
-       <button class="css-all-saved-cards-button logout-button">Logout</button>
        <!-- Note: the below image will be a canvas element -->
        <div class="css-preview-content-container card" id="screenshot-card" data-card-id="${cardResponse.id}">
          <p>${cardResponse.headline}</p>
          <p>${cardResponse.bodyText}</p> 
          <img src=${character.characterImage} alt="image of ${cardResponse.character}">
          <a href="http://marvel.com" target="_blank">Data provided by Marvel. © 2019 MARVEL</a>
-         <input type="submit" class="test download-card-btn css-submit" data-html2canvas-ignore="true" value="Save">
- 
+         <input type="submit" 
+          class="test download-card-btn css-cta" 
+          data-html2canvas-ignore="true" 
+          value="Save">
        </div>
      </div>
    `
@@ -399,11 +411,19 @@ function displayCard(cardResponse){
 function generateNoCardsFoundPageString() {
   return `
   <!-- Page 6: No cards created page -->
+  <!-- Navigation Buttons -->
+      <div class="navbar">
+        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
+        <button class="css-create-card-button js-create-card-btn">Create Card</button>
+        <button class="css-all-saved-cards-button logout-button">Logout</button>
+      </div>
+
   <div class="newContentContainer">
     <div>
-      <h2>No Cards Found! Please go to the Create card page to Create new card</h2>
-      <button class="css-create-card-button js-create-card-btn">Create New Card</button>
-      <button class="css-all-saved-cards-button logout-button">Logout</button>
+      <h2>No Cards Found!</h2>
+      <p> Please go to the Create card page to Create new card</p>
+      <button class="css-create-card-cta js-create-card-btn">Create New Card</button>
+      
     </div>
   </div>
   `
@@ -445,16 +465,14 @@ function getAndDisplayCardList(cardListResponse) {
     $('.contentContainer').html(
       `
       <!-- Page 4: Saved Cards List -->
-      <!-- Button experiment -->
-      <div>
-        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards List</button>
-        <button class="css-create-card-button js-create-card-btn">Create New Card</button>
+      <!-- Navigation Buttons -->
+      <div class="navbar">
+        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
+        <button class="css-create-card-button js-create-card-btn">Create Card</button>
         <button class="css-all-saved-cards-button logout-button">Logout</button>
       </div>
       <div class="newContentContainer">
         <h2>Your Saved Cards</h2>
-        <button class="css-all-saved-cards-button logout-button">Logout</button>
-        <button class="css-create-card-button js-create-card-btn">Create New Card</button>
         <h3>Edit, View, or Delete Your Cards!</h3>
           ${cardList.join('')}
       </div>
@@ -471,6 +489,12 @@ function generateCardFormStringEdit(cardResponse) {
   return `
     <!-- Edit card-->
     <div class="newContentContainer">
+    <!-- Navigation Buttons -->
+      <div class="navbar">
+        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
+        <button class="css-create-card-button js-create-card-btn">Create Card</button>
+        <button class="css-all-saved-cards-button logout-button">Logout</button>
+      </div>
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Edit your card</h2>
         <form class="card-update-form css-form" data-card-id="${cardResponse.id}">
@@ -497,12 +521,8 @@ function generateCardFormStringEdit(cardResponse) {
               </div>
             </fieldset>
           <!-- Clicking submit saves the card to db for user and also shows card to user to download -->
-          <input type="submit" class="js-update-card-button css-submit" data-html2canvas-ignore="true" value="View Updated Card">     
+          <input type="submit" class="js-update-card-button css-cta" data-html2canvas-ignore="true" value="View Updated Card">     
         </form>
-        <!-- Move to top of page?  -->
-      <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards List</button>
-      <button class="css-create-card-button js-create-card-btn">Create New Card</button> 
-      <button class="css-all-saved-cards-button logout-button">Logout</button>
     </div> 
 
   `;

@@ -41,12 +41,24 @@ body {
   /* background-color: rgb(203, 247, 202); */
   background-color: rgb(90, 23, 198);
   border-top: solid green 3px;
-    
+  /* position: fixed; */
 }
 
-.css-header-image{
+/* .css-header-image {
   margin: auto;
   display: inherit;
+} */
+
+.navbar {
+  background: rgb(196, 196, 211);
+  
+  overflow: visible;
+  position: relative;
+  
+  /* bottom: 0; */
+  /* top: 250px; */
+  width: 100%;
+
 }
 
 .css-container {
@@ -92,7 +104,7 @@ h2 {
 h1 {
   text-align: center;
   padding-bottom: 0;
-  padding: 1.5em;
+  /* padding: 1.5em; */
   font-size: 32pt;
   /* font-family: 'Rokkitt', serif; */
   /* font-family: 'Montserrat', sans-serif; */
@@ -144,7 +156,25 @@ h3 {
   padding-top: 2em;
 }
 
+.css-create-card-cta, .css-cta {
+  margin: auto;
+  font-size: xx-large;
+  background: rgb(236, 238, 93);
+  border: solid rgb(32, 44, 32) 3px; 
+  font-family: 'Montserrat', sans-serif;
+  /* display: inline; */
+  padding: .5em 2em .5em 2em;
 
+  /* margin: auto; */
+  display: block;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  color: rgba(8, 3, 24, 0.6);
+  box-shadow: rgba(72, 62, 100, 0.4) 0 0px 0px 2px inset;
+  border-radius: 4px;
+
+
+}
 
 .css-create-card-button, .css-saved-card-button, 
 .css-delete-card-button, .css-all-saved-cards-button, 
@@ -240,6 +270,7 @@ canvas {
 }
 
 /* Button color, box shadow, hover actions */
+/* button { */
 button, .css-submit {
   color: rgba(8, 3, 24, 0.6);
   box-shadow: rgba(72, 62, 100, 0.4) 0 0px 0px 2px inset;
