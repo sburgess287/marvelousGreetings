@@ -58,6 +58,7 @@ body {
   /* bottom: 0; */
   /* top: 250px; */
   width: 100%;
+  padding: 1em 0 1em 0;
 
 }
 
@@ -104,7 +105,7 @@ h2 {
 h1 {
   text-align: center;
   padding-bottom: 0;
-  /* padding: 1.5em; */
+  padding: 1.5em;
   font-size: 32pt;
   /* font-family: 'Rokkitt', serif; */
   /* font-family: 'Montserrat', sans-serif; */
@@ -180,15 +181,12 @@ h3 {
 .css-delete-card-button, .css-all-saved-cards-button, 
 .css-edit-card-button, .css-view-card-button, .css-go-to-signup-form,
 .css-submit {
-  /* width: 80%; removed to make buttons inline*/ 
   margin: auto;
   font-size: x-large;
-  /* background: rgb(218, 228, 222); */
   border: solid rgb(32, 44, 32) 3px; 
   font-family: 'Montserrat', sans-serif;
   display: inline;
   padding: 0 1em 0 1em;
-  
 }
 
 fieldset {
