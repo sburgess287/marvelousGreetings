@@ -51,7 +51,7 @@ body {
 
 .navbar {
   background: rgb(196, 196, 211);
-  
+  text-align: center;
   overflow: visible;
   position: relative;
   
@@ -186,7 +186,7 @@ h3 {
   border: solid rgb(32, 44, 32) 3px; 
   font-family: 'Montserrat', sans-serif;
   display: inline;
-  padding: 0 1em 0 1em;
+  padding: .5em 1em .5em 1em;
 }
 
 fieldset {
@@ -270,14 +270,14 @@ canvas {
 /* Button color, box shadow, hover actions */
 /* button { */
 button, .css-submit {
-  color: rgba(8, 3, 24, 0.6);
-  box-shadow: rgba(72, 62, 100, 0.4) 0 0px 0px 2px inset;
+  color: rgb(88, 42, 186);
+  box-shadow: rgba(98, 88, 126, 0.4) 0 0px 0px 2px inset;
   border-radius: 4px;
 }
 
 button:hover {
-  color: rgba(255, 255, 255, 0.85);
-  box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
+  color: rgba(0, 5, 5, 0.85);
+  box-shadow: rgb(90, 23, 198) 0 0px 0px 4px inset;
   border-radius: 4px;
 }
 

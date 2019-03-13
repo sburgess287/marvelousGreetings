@@ -92,16 +92,18 @@
     padding-top: 1.5em;
   }
 
-  .css-all-saved-cards-button {
+  .css-all-saved-cards-button, .css-create-card-button {
     width: 80%;
+    padding: 0 1em 0 1em;
+    margin: .25em;
   }
 
-  /* This makes navbar stick to bottom of page */
+  /* This makes navbar stick to bottom of page, but covers footer */
   .navbar {
-    background: rgb(196, 196, 211);
-    /* overflow: visible;
+    background: rgb(219, 219, 224);
+    overflow: visible;
     position: fixed;
-    bottom: 0; */
+    bottom: 0;
     /* top: 250px; */
     width: 100%;
     padding: .5em;

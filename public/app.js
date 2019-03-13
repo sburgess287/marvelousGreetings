@@ -267,12 +267,6 @@ function getDefaultCard(callbackFn) {
 function generateCardFormString() {
   return `
     <!-- Page 1: Create Card-->
-    <!-- Navigation Buttons -->
-      <div class="navbar">
-        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
-        <button class="css-create-card-button js-create-card-btn">Create Card</button>
-        <button class="css-all-saved-cards-button logout-button">Logout</button>
-      </div>
     <div class="newContentContainer"></div>
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Create your Marvel-ous Greeting!</h2>
@@ -316,6 +310,7 @@ function generateCardFormString() {
 
 // Function to display Create card form (Page 1)
 function getAndDisplayCardForm() {
+  $('.js-navbar').show();
   const cardForm = generateCardFormString();
   $('.contentContainer').html(cardForm);
   // $('.character-radio-list').html('hello!') // experiment
@@ -333,12 +328,6 @@ function displayCard(cardResponse){
     
     `
      <!-- Page 2: Preview/Edit card -->
-     <!-- Navigation Buttons -->
-      <div class="navbar">
-        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
-        <button class="css-create-card-button js-create-card-btn">Create Card</button>
-        <button class="css-all-saved-cards-button logout-button">Logout</button>
-      </div>
      <div class="newContentContainer">
        <h2>Card Preview</h2>
        <h3>Click Save to save image to your machine, then send to a friend!</h3>
@@ -411,13 +400,6 @@ function displayCard(cardResponse){
 function generateNoCardsFoundPageString() {
   return `
   <!-- Page 6: No cards created page -->
-  <!-- Navigation Buttons -->
-      <div class="navbar">
-        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
-        <button class="css-create-card-button js-create-card-btn">Create Card</button>
-        <button class="css-all-saved-cards-button logout-button">Logout</button>
-      </div>
-
   <div class="newContentContainer">
     <div>
       <h2>No Cards Found!</h2>
@@ -465,12 +447,6 @@ function getAndDisplayCardList(cardListResponse) {
     $('.contentContainer').html(
       `
       <!-- Page 4: Saved Cards List -->
-      <!-- Navigation Buttons -->
-      <div class="navbar">
-        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
-        <button class="css-create-card-button js-create-card-btn">Create Card</button>
-        <button class="css-all-saved-cards-button logout-button">Logout</button>
-      </div>
       <div class="newContentContainer">
         <h2>Your Saved Cards</h2>
         <h3>Edit, View, or Delete Your Cards!</h3>
@@ -489,12 +465,6 @@ function generateCardFormStringEdit(cardResponse) {
   return `
     <!-- Edit card-->
     <div class="newContentContainer">
-    <!-- Navigation Buttons -->
-      <div class="navbar">
-        <button class="css-all-saved-cards-button js-saved-cards-button">Saved Cards</button>
-        <button class="css-create-card-button js-create-card-btn">Create Card</button>
-        <button class="css-all-saved-cards-button logout-button">Logout</button>
-      </div>
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Edit your card</h2>
         <form class="card-update-form css-form" data-card-id="${cardResponse.id}">
@@ -613,6 +583,7 @@ function generateLoginFormString() {
 }
 
 function getAndDisplayLoginForm() {
+  $('.js-navbar').hide();
   const loginForm = generateLoginFormString();
   $('.contentContainer').html(loginForm);
 }
@@ -634,12 +605,14 @@ $(function() {
   // Event listener for clicking "Go to signup form" button on the login page
   // Then shows the signup page
   $('.contentContainer').on('click', '.signup-form-button', event => {
+    $('.js-navbar').hide();
     getAndDisplaySignUpForm();
   })
 
   // Event listener for clicking "Go to Login page" button on the signup page
   // then shows the login page
   $('.contentContainer').on('click', '.go-to-login-button', event => {
+    $('.js-navbar').hide();
     getAndDisplayLoginForm();
   })
 
@@ -665,7 +638,7 @@ $(function() {
     const usernameVal = $('#username').val();
     const passwordVal = $('#password').val();
 
-    $('#invalid-login-alert').hide();
+    
     loginPostToApi(usernameVal, passwordVal, function(data) {
       window.localStorage.setItem("authToken", data.authToken)
       getAndDisplayCardForm(); 
@@ -675,6 +648,11 @@ $(function() {
   // Listen for click of "Saved Cards List" button. 
   // Then get the card list from the GET endpoint, display the Card list.
   $('.contentContainer').on('click', '.js-saved-cards-button', event => {
+    getCardListFromApi(getAndDisplayCardList)
+  })
+
+  // Show Saved cards list: Duplicate of event listener above
+  $('.js-navbar').on('click', '.js-saved-cards-button', event => {
     getCardListFromApi(getAndDisplayCardList)
   })
 
@@ -732,6 +710,11 @@ $(function() {
     getAndDisplayCardForm();
   })
 
+  // Create page: duplicate of event listener above when moving button to navbar
+  $('.js-navbar').on('click', '.js-create-card-btn', event => {
+    getAndDisplayCardForm();
+  })
+
   // Listen for click on '.js-delete-card-button and Delete card
   $('.contentContainer').on('click', '.js-delete-card-button', event => {
     const card = $(event.currentTarget).closest(".card-container")
@@ -760,5 +743,12 @@ $(function() {
     getAndDisplayLoginForm();
   })
 
+  // Listen for click on '.logout-button' then logs user out, shows login page
+  $('.js-navbar').on('click', '.logout-button', event => {
+    $('.js-navbar').hide();
+    window.localStorage.removeItem("authToken");
+    getAndDisplayLoginForm();
+    // hide navbar
+  })
 
 });
