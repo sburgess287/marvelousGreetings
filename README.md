@@ -7,12 +7,11 @@ cards including our favorite Marvel Superheroes and SuperVillians!
 https://pacific-fortress-64692.herokuapp.com/
 
 ### Motivation
-The late Stan Lee and the Marvel Universe are really inspiring to me. The first
-Marvel arc of movies motivated to make my first ever 5-year plan, because if Iron
-Man had a 5 year plan, then I needed one too!
+The late Stan Lee and the Marvel Universe are really inspiring to me. I love the 
+characters, the inclusivity, and the fact I will never know all the stories (because
+there are so many!)
 Sharing the enthusiasm and energy of the Marvel Superheroes and Supervillians
-seemed like a worthy challenge. I hope "Marvel-ous Greetings" is fun to use 
-and share!
+seemed like a worthy challenge, and I'm excited to see some cards!
 
 ### API
 The Marvel API is credited for all images used.
