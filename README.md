@@ -11,9 +11,7 @@ Username: testuser1
 Password: Super1234!
 
 ### Motivation
-The late Stan Lee and the Marvel Universe are really inspiring to me. I love the 
-characters, the inclusivity, and the fact I will never know all the stories (because
-there are so many!)
+The late Stan Lee and the entire Marvel Universe are really inspiring to me. I love the characters, the inclusivity, and the fact I will never know all the stories (because there are so many!)
 Sharing the enthusiasm and energy of the Marvel Superheroes and Supervillians
 seemed like a worthy challenge, and I'm excited to see some cards!
 
