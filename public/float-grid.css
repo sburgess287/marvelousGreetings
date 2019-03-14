@@ -98,7 +98,6 @@
     margin: .25em;
   }
 
-  /* This makes navbar stick to bottom of page, but covers footer */
   .navbar {
     background: rgb(219, 219, 224);
     overflow: visible;
@@ -106,12 +105,9 @@
     padding: .5em;
   }
 
-
   .css-create-card-cta, .css-cta {
     font-size: x-large;
     padding: .5em .5em .5em .5em;
-
-
   }
 
   canvas {
@@ -123,34 +119,6 @@
     display: block;
 
   }
-
-  /* .css-previous-saved-card-container {
-    border: solid rgb(187, 143, 187) 10px;
-    max-width: 100%;
-  
-  } */
-  
-  /* .css-login-input {
-    width: 80%;
-  }
-  
-  .css-pw-input {
-    width: 70%;
-  }   */
-
-
-  /* .css-radio label {
-    display: block;
-  } */
-
-  /*h2 {
-    padding-top: 0;
-    font-size: 16pt;
-  }
-
-  h3 {
-    text-align: center;
-  } */
 
 }  
 

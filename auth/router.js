@@ -1,4 +1,4 @@
-// auth/router.js
+// Authentication router
 
 'use strict'
 const express = require('express');

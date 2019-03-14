@@ -1,4 +1,4 @@
-// auth/strategies.js
+// Authentication strategies
 'use strict'
 
 const { Strategy: LocalStrategy } = require('passport-local');
@@ -8,7 +8,7 @@ const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const { User } = require('../users/models');
 const { JWT_SECRET } = require('../config');
 
-// create local strategy
+// create Local strategy
 const localStrategy = new LocalStrategy(function(username, password, callback) {
   let user;
   User.findOne({ username: username })

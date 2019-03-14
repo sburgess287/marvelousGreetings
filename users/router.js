@@ -1,4 +1,4 @@
-// users/router.js
+// Users router
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');

@@ -1,4 +1,4 @@
-// users/models.js
+// Users models
 
 'use strict';
 const bcrypt = require('bcryptjs');
@@ -14,7 +14,7 @@ const UserSchema = mongoose.Schema({
     unique: true
   },
   password: {
-    type: String, 
+    type: String,
     required: true
   },
   
