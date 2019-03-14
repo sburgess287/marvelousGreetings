@@ -1,12 +1,22 @@
 # Marvel-ous Greetings
 
-Marvel-ous Greetings is a quick fun way to easily create and edit greetings 
-cards with our favorite Marvel Superheroes and SuperVillians!
+Marvel-ous Greetings is an exciting and fun way to easily create greetings 
+cards including our favorite Marvel Superheroes and SuperVillians!
 
 ## Link to Marvel-ous Greetings
 https://pacific-fortress-64692.herokuapp.com/
 
 ### Motivation
+The late Stan Lee and the Marvel Universe are really inspiring to me. The first
+Marvel arc of movies motivated to make my first ever 5-year plan, because if Iron
+Man had a 5 year plan, then I needed one too!
+Sharing the enthusiasm and energy of the Marvel Superheroes and Supervillians
+seemed like a worthy challenge. I hope "Marvel-ous Greetings" is fun to use 
+and share!
+
+### API
+The Marvel API is credited for all images used.
+https://developer.marvel.com/
 
 
 ### Technology
@@ -35,7 +45,7 @@ they have written.
 
 ### Screenshots
 
-#### Login
+#### Sign In
 ![Sign In Page ](/public/images/Login.png "Sign In with Credentials")
 
 #### Sign Up
