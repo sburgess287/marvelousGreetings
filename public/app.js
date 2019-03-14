@@ -1,23 +1,5 @@
-// create mock data of json array
-// default card
 
-const MOCK_CARD = {
-  "cardStructure" : [
-    {
-      "id": "1234567", 
-      "headline": "Happy Valentine's Day", 
-      "bodyText": "Always Bring the Thunder",
-      "character": "Storm", // references the array I need to write
-     // "signature": "Love, Joe",  // added this because a card should have a signature
-     // "publishedAt": 1470011976609 // added in case I want to order cards chronologically per account
-      // "image": "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_uncanny.jpg"
-     // "image": "http://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55/portrait_uncanny.jpg"
-    }
-  ]
-}
-
-
-// for each card reference the object in the array with character/image
+// Character List Array: reference the object in the array with character/image
 const CHARACTER_LIST = [
   {
     "characterName": "Black Panther", 
@@ -79,12 +61,6 @@ const CHARACTER_LIST = [
     
   },
 
-
-
-
-
-
-
 ]
 
 
@@ -140,7 +116,7 @@ function loginPostToApi(username, password, callback) {
 
 
 
-// Function to Post Card to Api
+// Function to Post Card to Api, and associate with logged in user
 function postCardToApi(headlineInput, messageInput, characterInput, callback){
   const params = {
     headline : headlineInput, 
@@ -167,7 +143,7 @@ function postCardToApi(headlineInput, messageInput, characterInput, callback){
   )
 }
 
-// Function to Get all cards from API
+// Function to Get all cards from API, per authorized user
 function getCardListFromApi(callback) {
   
   const authToken = window.localStorage.getItem("authToken")
@@ -189,8 +165,6 @@ function getCardListFromApi(callback) {
 }
 
 // Function to Delete card by id from API using '/cards/:id' endpoint
-// need to pass in the id of the card to go to correct endpoint and delete
-// error says cardListResponse is undefined
 
 function deleteCardById(cardIdValue, callback) {
   
@@ -231,15 +205,12 @@ function getCardById(cardIdValue, callback) {
       }
     }
   )
-
 }
 
 // Function to Edit card by id (PUT) using '/cards/:id' endpoint
 function editCardById(id, headline, bodyText, character, callback) {
-  // console.log('editCardbyID ran');
-  // console.log(id);
+
   const authToken = window.localStorage.getItem("authToken")
-  // console.log(authToken);
 
   $.ajax(
     {
@@ -258,12 +229,7 @@ function editCardById(id, headline, bodyText, character, callback) {
   )
 }
 
-// create function that returns mock data (to verify update in browser)
-function getDefaultCard(callbackFn) {
-  setTimeout(function(){ callbackFn(MOCK_CARD.cardStructure)}, 1);
-}
-
-// Returns the html for generating the card form
+// Returns the html for Create Card form
 function generateCardFormString() {
   return `
     <!-- Page 1: Create Card-->
@@ -271,10 +237,8 @@ function generateCardFormString() {
     <!-- <div class="contentContainer css-container" id="screenshot-card"> -->
       <h2 class="css-h2" >Create your Marvel-ous Greeting!</h2>
       <h3>Fill in the headline and message, then choose a character!</h3>
-      
       <img class="css-header-image" src="http://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55/landscape_medium.jpg" alt="Iron Man">
         <form class="card-submit-form css-form">
-            
             <label for="headline">Headline</label>
             <input id="headline" type="text" name="textfield" class="css-headline-field" required maxlength="250">
             <label for="message">Message</label>
@@ -303,8 +267,8 @@ function generateCardFormString() {
             value="Go to Card Preview">     
         </form> 
     </div> 
-
-  `;
+  `
+  ;
 
 }
 
@@ -313,13 +277,13 @@ function getAndDisplayCardForm() {
   $('.js-navbar').show();
   const cardForm = generateCardFormString();
   $('.contentContainer').html(cardForm);
-  // $('.character-radio-list').html('hello!') // experiment
-
+  
 }
 
 // Function to show Card Preview (Page 2)
 function displayCard(cardResponse){
-
+  // Find the character match from response to the CHARACTER_LIST array, then
+  // populate the card with the correct image and alt text
   let character = CHARACTER_LIST.find(function(character) {
     return character.characterName === cardResponse.character
   });
@@ -347,56 +311,7 @@ function displayCard(cardResponse){
   )
 }
 
-// PROOF of concept
-// change data to helpful word : characterArray
-// function to display default card
-// function displayDefaultCard(data) {
-//   // put into own function for findCharacter()
-//   for (index in data) { // adapt for showing list of cards? currently only 1 item in array
-//     let character = CHARACTER_LIST.find(function(character) {
-//       return character.characterName === data[index].character
-//     });
-//     // $('body').append(
-//     $('.contentContainer').append(  // I will have to change this to update html inside .contentContainer
-//       '<p>' + data[index].headline + '</p>',
-//       '<p>' + data[index].bodyText+ '</p>',
-      
-//       `<img src="`+ character.characterImage + `">`, 
-//       '<p>Inspired by ' + character.characterName + '</p>',
-//       '<p>"Data provided by Marvel. © 2014 Marvel"</p>',  // link to image, later
-//       // added data-html2canvas-ignore="true" so button is not copied in screenshot
-//       '<button class="test" data-html2canvas-ignore="true">Click to screenshot</button>'
-
-//     )
-//   }
-// }
-
-// // function to get the card and display the card
-// function getAndDisplayCard() {
-//   getDefaultCard(displayDefaultCard);
-// }
-
-// function to convert html image to canvas and download it (come back to this)
-// function convertCardAndDownload(data) {
-//   // Move this into a separate function; this downloads the card to user machine on preview screen
-//   let x = this.getElementById('screenshot-card');
-//   // html2canvas(x, { allowTaint: true}).then(canvas => {
-//   html2canvas(x).then(canvas => {
-//     // document.body.appendChild(canvas);
-//     var a = document.createElement('a');
-//     a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-//     // a.download = 'somefilename.jpg';
-//     a.download = `${data.headline}`;  
-//     a.click();
-
-//   })
-
-// }
-
-
 // Function which returns no cards found on Card list page
-// maybe add default image?
-// Note: add this to style.html and update here as well
 function generateNoCardsFoundPageString() {
   return `
   <!-- Page 6: No cards created page -->
@@ -405,19 +320,13 @@ function generateNoCardsFoundPageString() {
       <h2>No Cards Found!</h2>
       <p> Please go to the Create card page to Create new card</p>
       <button class="css-create-card-cta js-create-card-btn">Create New Card</button>
-      
     </div>
   </div>
   `
 }
 
 function getAndDisplayCardList(cardListResponse) {
-  
-  // console.log(cardListResponse);
-  // console.log(cardListResponse.length);
-  
-  // Handle no cards/results found
-  // Note need to update: data-card-id="${cardResponse[i].id}
+  // Handles no cards found by showing "No Cards Found" page
   if (cardListResponse.length === 0) {
     const noCardsFoundPage = generateNoCardsFoundPageString();
     $('.contentContainer').html(noCardsFoundPage);
@@ -433,7 +342,6 @@ function getAndDisplayCardList(cardListResponse) {
         <!-- change this to first 30 characters -->
         <p>${cardListResponse[i].bodyText}</p>
         <p>${cardListResponse[i].character}</p>
-        
         <!-- Buttons for card operations -->
         <button class="css-edit-card-button js-edit-card-button">Edit</button>
         <button class="css-view-card-button js-preview-card-button">View</button>
@@ -630,15 +538,12 @@ $(function() {
     })
   })
 
-  // Function to login with valid credentials
-  // Display Card Form Page on successful login
-  // Function to refresh JWT, do I put this logic in the login API post?
+  // On submit of Login button, verify valid credentials
+  // Display Create Card Page on successful login
   $('.contentContainer').on('submit', '.login-form', event => {
     event.preventDefault();
     const usernameVal = $('#username').val();
     const passwordVal = $('#password').val();
-
-    
     loginPostToApi(usernameVal, passwordVal, function(data) {
       window.localStorage.setItem("authToken", data.authToken)
       getAndDisplayCardForm(); 
@@ -647,11 +552,6 @@ $(function() {
 
   // Listen for click of "Saved Cards List" button. 
   // Then get the card list from the GET endpoint, display the Card list.
-  $('.contentContainer').on('click', '.js-saved-cards-button', event => {
-    getCardListFromApi(getAndDisplayCardList)
-  })
-
-  // Show Saved cards list: Duplicate of event listener above
   $('.js-navbar').on('click', '.js-saved-cards-button', event => {
     getCardListFromApi(getAndDisplayCardList)
   })
@@ -684,20 +584,12 @@ $(function() {
   $('.contentContainer').on('click', '.download-card-btn', event => { 
     
     let x = this.getElementById('screenshot-card');
-    // html2canvas(x, { allowTaint: true}).then(canvas => {
     html2canvas(x).then(canvas => {
-    
       var a = document.createElement('a');
-      // Previous jpeg saving
-      // a.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-      // a.download = 'marvelousGreetings.jpg';
-
-      // trying to save to PNG to fix IOS download
-      a.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-      a.download = 'marvelousGreetings.png';
-      
+      a.href = canvas.toDataURL("image/jpeg")
+      a.download = 'marvelousGreetings.jpg';
+      document.body.appendChild(a);
       a.click();
-
     })
       .then(() => {
         // After downloading card, navigates to Cards List page (Page 3)
@@ -705,12 +597,12 @@ $(function() {
       })
   })
 
-  // Listen for click on '.create-card-btn' and load Create page
+  // On "no card found" page, listen for click on "Create Card" button
   $('.contentContainer').on('click', '.js-create-card-btn', event => {
     getAndDisplayCardForm();
   })
 
-  // Create page: duplicate of event listener above when moving button to navbar
+  // Listens for click on "Create Card" button in navbar, shows Create form
   $('.js-navbar').on('click', '.js-create-card-btn', event => {
     getAndDisplayCardForm();
   })
@@ -738,17 +630,10 @@ $(function() {
   })
 
   // Listen for click on '.logout-button' then logs user out, shows login page
-  $('.contentContainer').on('click', '.logout-button', event => {
-    window.localStorage.removeItem("authToken");
-    getAndDisplayLoginForm();
-  })
-
-  // Listen for click on '.logout-button' then logs user out, shows login page
   $('.js-navbar').on('click', '.logout-button', event => {
     $('.js-navbar').hide();
     window.localStorage.removeItem("authToken");
     getAndDisplayLoginForm();
-    // hide navbar
   })
 
 });

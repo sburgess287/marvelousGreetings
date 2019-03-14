@@ -93,11 +93,8 @@ body {
 }
 
 h2 {
-/* .css-h1, .css-h2 { */
   text-align: center;
   padding-top: 1.5em;
-  /* font-family: 'Rokkitt', serif; */
-  /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Cinzel', serif;
   font-weight: bold;
 }
@@ -105,10 +102,8 @@ h2 {
 h1 {
   text-align: center;
   padding-bottom: 0;
-  padding: 1.5em;
+  padding: .5em;
   font-size: 32pt;
-  /* font-family: 'Rokkitt', serif; */
-  /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Cinzel', serif;
   color: rgb(235, 235, 235);
   font-weight: normal;

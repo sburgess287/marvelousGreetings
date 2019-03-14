@@ -102,9 +102,6 @@
   .navbar {
     background: rgb(219, 219, 224);
     overflow: visible;
-    position: fixed;
-    bottom: 0;
-    /* top: 250px; */
     width: 100%;
     padding: .5em;
   }
