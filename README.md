@@ -20,9 +20,17 @@ https://pacific-fortress-64692.herokuapp.com/
 
 
 ### Summary
-- one
-- two 
-- three
+- User is brought to the Sign in page, where she can log in with valid 
+credentials.
+- Otherwise she has the option to use the test user account to try it out, or 
+Navigate to the Sign Up page.
+- Upon sign in, the user may start creating her first card, by adding a headline, message, and choosing a character.
+- Clicking the "Go to Card Preview" shows the user their card, including the 
+character image and text. 
+- Click "Save" to save the card to the user's machine, and then view a list of cards 
+they have written. 
+- The user may Edit, View, or Delete their cards from the Saved cards page. 
+- At any time in the app, the user may use the navigation bar to Create a Card, go to Saved Cards, or Logout.
 - Marvel-ous Greetings may be enjoyed on any viewport size; mobile, tablet, desktop.
 
 ### Screenshots
