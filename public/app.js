@@ -408,11 +408,11 @@ function generateCardFormStringEdit(cardResponse) {
 
 // Function to display Edit card form (Page 1)
 function getAndDisplayCardFormEdit(cardResponse) {
-  
   const cardForm = generateCardFormStringEdit(cardResponse);
   $('.contentContainer').html(cardForm); 
 }
 
+// Returns html for Sign Up Form
 function generateSignUpFormString() {
   
   return `
@@ -449,11 +449,13 @@ function generateSignUpFormString() {
   `
 }
 
+// Display the Sign Up Form
 function getAndDisplaySignUpForm() {
   const signUpForm = generateSignUpFormString();
   $('.contentContainer').html(signUpForm);
 };
 
+// Returns html for Login form
 function generateLoginFormString() {
   return `
     <!-- Login -->
@@ -485,11 +487,15 @@ function generateLoginFormString() {
           please use valid credentials or go to Signup Form</p>
         </div>
       </form>
+      <p class="footer-text">Try it out first! </p>
+      <p class="footer-text">User: testuser1</p>
+      <p class="footer-text">PW: Super1234!</p>
       <button class="css-submit signup-form-button">Sign Up</button>
     </div>
   `
 }
 
+// Display Login Form
 function getAndDisplayLoginForm() {
   $('.js-navbar').hide();
   const loginForm = generateLoginFormString();
@@ -509,7 +515,6 @@ $(function() {
     getAndDisplayCardForm(); 
   } 
   
-
   // Event listener for clicking "Go to signup form" button on the login page
   // Then shows the signup page
   $('.contentContainer').on('click', '.signup-form-button', event => {
