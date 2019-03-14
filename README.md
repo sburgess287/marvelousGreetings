@@ -6,6 +6,10 @@ cards including our favorite Marvel Superheroes and SuperVillians!
 ## Link to Marvel-ous Greetings
 https://pacific-fortress-64692.herokuapp.com/
 
+## Test account
+Username: testuser1
+Password: Super1234!
+
 ### Motivation
 The late Stan Lee and the Marvel Universe are really inspiring to me. I love the 
 characters, the inclusivity, and the fact I will never know all the stories (because
@@ -26,6 +30,7 @@ https://developer.marvel.com/
 - Node.js
 - Express
 - MongoDb
+- Heroku
 
 
 ### Summary
