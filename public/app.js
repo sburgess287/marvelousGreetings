@@ -300,7 +300,7 @@ function displayCard(cardResponse){
          <p>${cardResponse.headline}</p>
          <p>${cardResponse.bodyText}</p> 
          <img src=${character.characterImage} alt="image of ${cardResponse.character}">
-         <a href="http://marvel.com" target="_blank">Data provided by Marvel. © 2019 MARVEL</a>
+         <a href="http://marvel.com" target="_blank">Data provided by Marvel. © 2014 Marvel</a>
          <input type="submit" 
           class="test download-card-btn css-cta" 
           data-html2canvas-ignore="true" 
