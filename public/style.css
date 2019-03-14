@@ -98,6 +98,7 @@ h3 {
   text-align: center;
   margin-top: .5em;
   border: solid rgb(88, 42, 186) 3px;
+  word-wrap: break-word;
 }
 
 .css-headline-field {
