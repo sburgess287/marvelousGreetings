@@ -92,12 +92,9 @@ describe('Card API resource', function() {
     }
   )
    
-  // can I have multiple before steps and after steps?
   before(function() {
     return runServer(TEST_DATABASE_URL);
   })
-
-  
 
   beforeEach(function(){
     return seedCardData();
@@ -127,7 +124,7 @@ describe('Card API resource', function() {
   })
 
   
-  // Test GET endpoint: should this be per user?
+  // Test GET endpoint: test per user
   describe('GET endpoint', function(){
     const token = jwt.sign(
       {
@@ -143,7 +140,7 @@ describe('Card API resource', function() {
       }
     )
     it('should return all existing cards', function() {
-      // strategy get all cards
+      // strategy get all cards for a user
       // verify status and data type
       // prove number cards is equal to number in db
       let res;
@@ -195,13 +192,10 @@ describe('Card API resource', function() {
 
           // set resCard to 1st card in array
           resCard = res.body[0];
-          // console.log(resCard);
           return Card.findById(resCard.id);
         })
         // verify the id of the response is same as 1st in database
         .then(function(card) {
-          //console.log(resCard.headline);
-          //console.log(card.headline);
           expect(resCard.id).to.equal(card.id);
           expect(resCard.headline).to.equal(card.headline);
           expect(resCard.bodyText).to.equal(card.bodyText);
@@ -210,7 +204,7 @@ describe('Card API resource', function() {
     })
   })
 
-  // Test POST endpoint (protected)
+  // Test POST endpoint (protected per user)
   describe('POST endpoint', function() {
     // Make a POST request with data
     // prove the response object has correct keys
@@ -254,7 +248,7 @@ describe('Card API resource', function() {
     })
   })
 
-  // Test DELETE endpoint
+  // Test DELETE endpoint (per user)
   describe('DELETE endpoint', function() {
     const token = jwt.sign(
       {
@@ -295,7 +289,7 @@ describe('Card API resource', function() {
     })
   })
 
-  // Test PUT endpoint
+  // Test PUT endpoint (per user)
   describe('PUT endpoint', function () {
     // get existing card from the db
     // make PUT request to update the card

@@ -17,9 +17,7 @@ const UserSchema = mongoose.Schema({
     type: String, 
     required: true
   },
-  // Should I capture first and last name? not in my design
-  // firstName: {type: String, default: ''},
-  // lastName: {type: String, default: ''}
+  
 });
 
 // return username and id to reference
@@ -27,8 +25,6 @@ UserSchema.methods.serialize = function() {
   return {
     username: this.username || '',
     id: this.id
-    // firstname: this.firstName || '',
-    // lastName: this.lastName || ''
   };
 };
 

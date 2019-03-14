@@ -167,9 +167,6 @@ function closeServer() {
 }
 
 if (require.main === module) {
-  // app.listen(process.env.PORT || 8080, function() {
-  //   console.info(`App listening on ${this.address().port}`);
-  // });
   runServer().catch(err => console.error(err));
 }
 

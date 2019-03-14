@@ -24,8 +24,7 @@ router.post('/', jsonParser, (req, res) => {
   }
 
   const stringFields = ['username', 'password'];
-  // do I need firstName/lastName?
-  // const stringFields = ['username', 'password', 'firstName', 'lastName'];
+  
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
   );
@@ -87,13 +86,8 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  // same question about first/lastname
-  // let {username, password, firstName = '', lastName = ''} = req.body;
+  
   let {username, password} = req.body;
-
-  // firstName = firstName.trim();
-  // lastName = lastName.trim();
-
   return User.find({username})
     .count()
     .then(count => {
@@ -113,8 +107,6 @@ router.post('/', jsonParser, (req, res) => {
       return User.create({
         username, 
         password: hash, // set PW to hashed value
-        // firstName,
-        // lastName
       })
     })
     .then(user => {
