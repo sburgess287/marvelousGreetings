@@ -28,19 +28,19 @@ https://pacific-fortress-64692.herokuapp.com/
 ### Screenshots
 
 #### Login
-![Sign In Page ](/images/Login.png "Sign In with Credentials")
+![Sign In Page ](/public/images/Login.png "Sign In with Credentials")
 
 #### Sign Up
-![Sign Up](/images/SignUp.png "Sign Up for an Account")
+![Sign Up](/public/images/SignUp.png "Sign Up for an Account")
 
 #### Create Card
-![Create Card](/images/CreateCard.png "Create Your Greeting")
+![Create Card](/public/images/CreateCard.png "Create Your Greeting")
 
 #### Preview and Save
-![Save Card](/images/PreviewSaveCard.png "Preview and Save Greeting")
+![Save Card](/public/images/PreviewSaveCard.png "Preview and Save Greeting")
 
 #### Results
-![Card List](/images/SavedCardsList.png "View Your Saved Cards")
+![Card List](/public/images/SavedCardsList.png "View Your Saved Cards")
 
 
 ### Next Steps
