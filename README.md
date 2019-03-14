@@ -1,7 +1,7 @@
 # Marvel-ous Greetings
 
-Marvel-ous Greetings is an exciting and fun way to easily create greetings 
-cards including our favorite Marvel Superheroes and SuperVillians!
+Marvel-ous Greetings is an exciting and fun way to easily create and save
+greetings cards, while including our favorite Marvel Superheroes and Supervillians!
 
 ## Link to Marvel-ous Greetings
 https://pacific-fortress-64692.herokuapp.com/
